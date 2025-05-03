@@ -1,6 +1,7 @@
 import Header from '@/components/Header'
 import './globals.css'
 import { Open_Sans, Bebas_Neue } from 'next/font/google'
+import Footer from '@/components/Footer'
 
 const openSans = Open_Sans({
   subsets: ['latin'],
@@ -21,11 +22,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <link href="https://fonts.googleapis.com/css2?family=Cal+Sans&display=swap" rel="stylesheet" />
       </head>
-      <body className="font-open bg-[var(--background)] text-[var(--foreground)] flex flex-col">
+      <body className="font-open bg-[var(--background)] text-[var(--foreground)] flex flex-col min-h-screen">
         <Header />
-        <div className="max-w-[1200px] mx-auto px-4 flex flex-col gap-y-4 min-h-screen">
+
+        <main className="flex-1 w-full max-w-[1280px] mx-auto px-4">
           {children}
-        </div>
+        </main>
+
+        <Footer />
       </body>
     </html>
   )
