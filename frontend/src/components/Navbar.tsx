@@ -7,7 +7,7 @@ interface NavbarProps {
 
 export default function Navbar({flag}: NavbarProps) {
     return (
-        <div className="w-full flex flex-col">
+        <div className="w-full flex flex-col max-w-[1280px] mx-auto">
             <div className="flex items-center justify-between h-16 px-4">
                 <Image src={'/images/internsy-logo.svg'} alt={"internsy-logo"} width={120} height={30}/>
                 <div className="hidden lg:flex gap-x-4 font-bold text-[16px] text-[#4B5563]">
