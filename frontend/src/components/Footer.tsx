@@ -5,7 +5,7 @@ import { FaXTwitter } from "react-icons/fa6";
 
 export default function Footer() {
     return ( 
-        <div className="flex flex-col w-full">
+        <div className="flex flex-col w-full border-t-[1px] border-gray-300 ">
             <div className="flex justify-center items-center w-full h-[100px] py-20">
                 <Image src={"/images/internsy-logo.svg"} alt={""} width={200} height={100} />
 
@@ -15,33 +15,43 @@ export default function Footer() {
 
             <div className="grid grid-cols-2 gap-y-4 p-4 text-sm">
                 <div className="flex flex-col gap-y-2">
-                    <h4 className="font-bold">Internsy</h4>
+                    <h4 className="font-bold text-primary-dark">Internsy.co</h4>
                     <a href="">Hakkımızda</a>
-                    <a href="">Ödüller</a>
-                    <a href="">Blog</a>
-                    <a href="">Araştırma</a>
-                    <a href="">İletişim</a>
-                    <a href="">Rehberler</a>
+                    <a href="">Topluluk</a>
+                    <a href="">Şirketler</a>
+                    <a href="">Mülakatlar</a>
+                    <a href="">Staj İlanları</a>
+                    <a href="">Kariyer Rehberi</a>
+                </div>
+                <div className="flex flex-col gap-y-2 ">
+                    <h4 className="font-bold  text-primary-dark">Özellikleri Keşfet</h4>
+                    <a href="">CV Oluşturucu</a>
+                    <a href="">AI Destekli Ön Yazı</a>
+                    <a href="">Mülakat Deneylimleri</a>
+                    <a href="">Topluluklara Katıl</a>
+                    <a href="">Eğitim Önerileri</a>
                 </div>
                 <div className="flex flex-col gap-y-2">
-                    <h4 className="font-bold">İşverenler</h4>
+                    <h4 className="font-bold  text-primary-dark">Kullanım Bilgisi</h4>
+                    <a href="">Topluluk Kuralları</a>
+                    <a href="">Gizlilik ve Güvenlik</a>
+                    <a href="">Sıkça Sorulan Sorular (SSS)</a>
+                    <a href="">Çerez Politikası</a>
+                    <a href="">Mesafeli Satış Sözleşmesi</a>
+                    <a href="">Teslimat ve İade Şartları</a>
+                </div>
+                <div className="flex flex-col gap-y-2 ">
+                    <h4 className="font-bold  text-primary-dark">İşverenler</h4>
                     <a href="">Ücretsiz İşveren Ol</a>
-                    <a href="">Hesap</a>
-                    <a href="">İşveren Merkezi</a>
+                    <a href="">Şirket Profili Oluştur</a>
+                    <a href="">Veri ve Platform</a>
+                    <a href="">Fiyatlandırma</a>
+                    <a href="">Marka İşbirliği</a>
                 </div>
                 <div className="flex flex-col gap-y-2">
-                    <h4 className="font-bold">Bilgi</h4>
-                    <a href="">Yardım</a>
-                    <a href="">Rehber Yolu</a>
-                    <a href="">Kullanım Şartları</a>
-                    <a href="">Gizlilik ve Reklam Tercihleri</a>
-                    <a href="">Bilgilerimi Satma veya Paylaşma</a>
-                    <a href="">Koruma</a>
-                </div>
-                <div className="flex flex-col gap-y-2">
-                    <h4 className="font-bold">Bizimle Çalış</h4>
-                    <a href="">Reklam verenler</a>
-                    <a href="">Kariylerler</a>
+                    <h4 className="font-bold  text-primary-dark">Bize Ulaşın</h4>
+                    <a href="">İletişim Formu</a>
+                    <a href="">community@internsy.com</a>
                 </div>
             </div>
 
