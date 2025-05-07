@@ -50,9 +50,8 @@ export default function sirketlerPage() {
                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
                                 Placeat tenetur eum quae exercitationem laborum atque magnam ratione reiciendis neque. Explicabo...</p>
                             <div className='flex items-baseline gap-x-4 mt-2'>
-                                <div className='flex items-baseline justify-start gap-x-2 font-semibold text-lg text-black'>4.9K <span className='text-sm text-primary'>jobs</span></div>
-                                <div className='flex items-baseline justify-start gap-x-2 font-semibold text-lg text-black'>62.8K <span className='text-sm text-primary'>reviews</span></div>
-                                <div className='flex items-baseline justify-start gap-x-2 font-semibold text-lg text-black'>122.4K <span className='text-sm text-primary'>salaries</span></div>
+                                <div className='flex items-baseline justify-start gap-x-2 font-semibold text-lg text-black'>15<span className='text-sm text-primary'>Staj İlanı</span></div>
+                                <div className='flex items-baseline justify-start gap-x-2 font-semibold text-lg text-black'>62<span className='text-sm text-primary'>Görüşler</span></div>
                             </div>
                         </div>
                     </div>

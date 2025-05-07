@@ -7,7 +7,6 @@ import SortDropdown from '@/components/company-page/SortDropdown'
 import RatingStars from '@/components/company-page/RatingStars'
 import CompanyTabs from '@/components/company-page/CompanyTabs'
 import MulakatlarSection from '@/components/company-page/MulakatlarSection'
-import OverviewSection from '@/components/company-page/OverviewSection'
 
 export default function Sirket() {
   return (
@@ -33,40 +32,7 @@ export default function Sirket() {
         {/* Tıklanabilir Sekmeler */}
         <CompanyTabs />
       </div>
-
-      {/* Genel Bilgiler Alanı */}
-      <OverviewSection />
-
-      {/* Alan Bazlı Filtre */}
-      <div className='flex flex-col gap-y-4 p-4 border-b border-gray-300 text-sm'>
-        <h3 className='text-xl font-bold'>Staj yapılan alana göre görüşler</h3>
-        <div className="w-full flex bg-[#f4f4f4] rounded-full px-4 py-2 items-center gap-x-2">
-          <Search />
-          <input className="bg-transparent focus:outline-none w-full text-sm text-gray-800 placeholder:text-gray-500" type="text" placeholder="Staj Yapılan Alan" />
-          <Settings2 />
-        </div>
-        <div className="flex items-center justify-between text-gray-600">
-          <SortDropdown />
-        </div>
-      </div>
-
-      {/* Görüşler */}
-      <div className='flex flex-col'>
-        {Array.from({ length: 5 }).map((_, index) => (
-          <CompanyPost key={index} />
-        ))}
-      </div>
-
-      {/* Pagination */}
-      <div className='flex items-center justify-between p-6'>
-        <span>Geri</span>
-        {Array.from({ length: 5 }).map((_, index) => (
-          <span key={index}>{index}</span>
-        ))}
-        <span>İleri</span>
-      </div>
-
-      {/* <MulakatlarSection /> */}
-    </div>
-  )
+    <MulakatlarSection />
+</div>
+)
 }
