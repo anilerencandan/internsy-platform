@@ -1,4 +1,4 @@
-import TopicPost from '@/components/blog/TopicPost'
+import TopicPost from '@/components/kariyer-rehberi/TopicPost'
 import { Funnel, Search, Star } from 'lucide-react'
 import React from 'react'
 

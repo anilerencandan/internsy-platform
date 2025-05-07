@@ -14,7 +14,7 @@ export default function CompanyTabs() {
   const path = usePathname()
 
   return (
-    <div className='flex overflow-x-auto scrollbar-hide gap-x-4 px-4 border-b'>
+    <div className='flex overflow-x-auto scrollbar-hide justify-between px-4 border-b'>
       {tabs.map((tab) => (
         <Link
           key={tab.href}
