@@ -17,13 +17,13 @@ export default function ContinueWithSection() {
   };
 
   return (
-    <div className="w-full overflow-hidden relative px-4">
+    <div className="w-full overflow-hidden relative px-4 inset-0 ">
       <div
         className={`flex transition-transform duration-500 ease-in-out`}
         style={{ transform: `translateX(-${step * 100}%)` }}
       >
         {/* === 1. Adım: Sosyal Login + Email === */}
-        <div className="min-w-full px-4 flex flex-col gap-y-2 justify-center items-center pt-4 pb-24">
+        <div className="min-w-full px-4 flex flex-col gap-y-2 justify-center items-center pt-4 pb-24 sm:pb-4">
           <p className="text-xs text-center text-black">
             Devam Ederken{" "}
             <a href="" className="underline text-primary font-bold">
@@ -61,11 +61,13 @@ export default function ContinueWithSection() {
           </div>
 
           <ContinueWithCard name="Email" onClick={handleEmailContinue} />
+          <p className="text-sm text-gray-600 flex items-center gap-x-1">Hesabın yok mu? 
+           <a href="/signup" className="text-primary underline">Hemen Kayit Ol</a></p>  
         </div>
 
         {/* === 2. Adım: Sonraki Section (şifre girme/kod ekranı vs) === */}
         <div className="min-w-full px-4 flex flex-col gap-y-1.5 items-center pt-4 pb-24">
-          <h2 className="text-xl font-semibold mb-2">Welcome back to Glassdoor</h2>
+          <h2 className="text-xl font-semibold mb-2">Internsy'e Hoşgeldin</h2>
           <div className="flex flex-col gap-y-2 items-center justify-center text-sm w-full max-w-[500px]">
             <p>Sign in with your Google account as</p>
             <p><strong>{email}</strong></p>

@@ -2,7 +2,7 @@ import { MessageSquareText } from "lucide-react";
 
 export default function AboutUsSection() {
     return (
-        <div className="px-4 flex flex-col gap-y-12  justify-center items-center text-black border-t-[1px] border-gray-300 py-12">
+        <div className="px-4 flex flex-col gap-y-12  justify-center items-center text-black border-gray-300 py-12 w-full">
             <div className="flex flex-col gap-y-4 items-center justify-center text-sm w-full max-w-[500px]">
               <h2 className="text-2xl text-black font-semibold">Internsy ile Yolculuğa Çık</h2>
               <p className="text-center text-sm">
@@ -10,7 +10,7 @@ export default function AboutUsSection() {
               </p>
 
             </div>
-            <div className="w-full grid grid-cols-2 grid-rows-2 gap-x-4 gap-y-6">
+            <div className="w-full grid grid-cols-2 lg:grid-cols-4  grid-rows-2 lg:grid-rows-1 gap-x-4 gap-y-6">
                 <div className="flex flex-col gap-y-2 items-center justify-center text-sm ">
                   <div className="p-3 border-[2px] border-black rounded-full "><MessageSquareText size={36} /></div>
                   <span className="text-center">Topluluklarına Katıl</span>

@@ -8,65 +8,10 @@ import RatingStars from '@/components/company-page/RatingStars'
 import CompanyTabs from '@/components/company-page/CompanyTabs'
 import MulakatlarSection from '@/components/company-page/MulakatlarSection'
 import OverviewSection from '@/components/company-page/OverviewSection'
+import StajIlan from '@/components/company-page/StajIlanCard'
 
 export default function Sirket() {
   return (
-    <div className='page'>
-      {/* Banner + Şirket Bilgileri */}
-      <div className='flex flex-col gap-y-6'>
-        <div className='relative min-h-[96px]'>
-          <Image src={'/images/google-kapak.jpeg'} fill className='object-cover object-center' alt={'google-kapak'} />
-          <div className='absolute -bottom-4 left-4 bg-white border border-gray-300 rounded-md overflow-hidden'>
-            <FaGoogle className='p-2' size={48} />
-          </div>
-        </div>
-
-        <div className='flex flex-col gap-y-1 px-4'>
-          <h3 className='text-2xl font-semibold'>Google</h3>
-          <h4 className='text-sm text-gray-700 flex gap-x-2 items-center'><CircleCheck size={16} /> Onaylı Şirket</h4>
-          <div className='grid grid-cols-2 items-center gap-x-4 text-sm font-semibold py-4'>
-            <button className='border border-black p-2 rounded-lg'>Takip Et</button>
-            <button className='border border-black p-2 rounded-lg text-white bg-black'>Görüş Ekle</button>
-          </div>
-        </div>
-
-        {/* Tıklanabilir Sekmeler */}
-        <CompanyTabs />
-      </div>
-
-      {/* Genel Bilgiler Alanı */}
-      <OverviewSection />
-
-      {/* Alan Bazlı Filtre */}
-      <div className='flex flex-col gap-y-4 p-4 border-b border-gray-300 text-sm'>
-        <h3 className='text-xl font-bold'>Staj yapılan alana göre görüşler</h3>
-        <div className="w-full flex bg-[#f4f4f4] rounded-full px-4 py-2 items-center gap-x-2">
-          <Search />
-          <input className="bg-transparent focus:outline-none w-full text-sm text-gray-800 placeholder:text-gray-500" type="text" placeholder="Staj Yapılan Alan" />
-          <Settings2 />
-        </div>
-        <div className="flex items-center justify-between text-gray-600">
-          <SortDropdown />
-        </div>
-      </div>
-
-      {/* Görüşler */}
-      <div className='flex flex-col'>
-        {Array.from({ length: 5 }).map((_, index) => (
-          <CompanyPost key={index} />
-        ))}
-      </div>
-
-      {/* Pagination */}
-      <div className='flex items-center justify-between p-6'>
-        <span>Geri</span>
-        {Array.from({ length: 5 }).map((_, index) => (
-          <span key={index}>{index}</span>
-        ))}
-        <span>İleri</span>
-      </div>
-
-      {/* <MulakatlarSection /> */}
-    </div>
-  )
+    <OverviewSection/>
+  ) 
 }

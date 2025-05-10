@@ -4,8 +4,8 @@ import RatingStars from './RatingStars'
 
 export default function OverviewSection() {
   return (
-<>
-      <div className='flex flex-col gap-y-2 p-4 text-sm font-semibold border-b border-gray-300'>
+    <>
+      <div className='flex flex-col gap-y-2  text-sm font-semibold border-b border-gray-300 pb-4'>
         <div className='flex flex-col gap-y-2  text-sm font-semibold border-b border-gray-300 pb-2'>
             <h1 className='text-2xl font-bold'>Google Görüşleri</h1>
             <RatingStars value={4.4} />
@@ -23,7 +23,6 @@ export default function OverviewSection() {
         <p>Kuruluş: 1998</p>
         <p>Gelir: $10+ Milyar [USD]</p>
       </div>
-
-</>
+    </>
     )
 }

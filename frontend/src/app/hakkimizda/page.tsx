@@ -6,13 +6,13 @@ import Link from "next/link"
 export default function AboutPage() {
   return (
     <main className="page">
-      <div className="flex flex-col gap-y-6">
+      <div className="flex flex-col">
 
         {/* Sekmeli Navigasyon */}
         <AboutTabs />
 
         {/* Main Content Section */}
-        <div className="flex flex-col gap-y-4 bg-white p-6 rounded-lg shadow-md border border-gray-200">
+        <div className="flex flex-col gap-y-6 bg-white p-6 shadow-md border border-gray-200">
           <div className="space-y-6">
             <h1 className="text-3xl md:text-4xl font-bold text-gray-900">Biz Kimiz?</h1>
             <p className="text-gray-700">

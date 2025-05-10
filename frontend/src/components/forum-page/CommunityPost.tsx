@@ -2,18 +2,19 @@ import { Ellipsis, Forward, Heart, MessageCircle, MessageCircleHeart } from 'luc
 import Image from 'next/image'
 import React from 'react'
 import { FaShare } from 'react-icons/fa'
+import { Button } from '../ui/button'
 
 export default function CommunityPost() {
   return (
-    <div className='flex flex-col justify-center w-screen border-b-[1px] border-b-gray-300 '>
+    <div className='flex flex-col justify-center border-b-[1px] border-b-gray-300 '>
       <div className='flex flex-col gap-y-4 p-4 w-full'>
         <div className='flex items-center justify-between'>
-          <a className='text-xs'>Diğer Toplulukları Keşfet</a>
-          <a className='bg-[#f2f4f5] rounded-[8px] text-xs font-semibold py-1 px-2'>Topluluğu Takip Et</a>
+          <a className='text-xs text-gray-400'>Diğer Toplulukları Keşfet</a>
+          <Button  className='bg-[#f2f4f5] rounded-[8px] text-xs font-semibold py-1 px-2 text-black hover:text-white'>Topluluğu Takip Et</Button>
         </div>
         <div className='flex items-center justify-between '>
           <div className='flex items-center  gap-x-2'>
-            <span className='relative w-8 h-8 rounded-full overflow-hidden'><Image src={'/images/avatar.jpg'} alt={'avartar'} fill className='object-cover'/></span>
+            <span className='relative w-8 h-8 rounded-full overflow-hidden shrink-0'><Image src={'/images/avatar.jpg'} alt={'avartar'} fill className='object-cover'/></span>
             <div className='flex w-full flex-col'>
               <h3 className='text-sm font-semibold'>Yapay Zeka</h3>
               <h4 className='text-xs truncate whitespace-nowrap overflow-hidden text-gray-700'>Senior Marketing Communications Specials</h4>

@@ -22,10 +22,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <link href="https://fonts.googleapis.com/css2?family=Cal+Sans&display=swap" rel="stylesheet" />
       </head>
-      <body className="font-open bg-[var(--background)] text-[var(--foreground)] flex flex-col min-h-screen">
+      <body className="font-open bg-[var(--background)] text-[var(--foreground)] flex flex-col min-h-screen ">
         <Header />
 
-        <main className="flex-1 w-full ">
+        <main className="w-full ">
           {children}
         </main>
 
