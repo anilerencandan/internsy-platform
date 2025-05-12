@@ -1,22 +1,17 @@
-import Image from "next/image"
 import {
   Search,
   MapPin,
   MoreHorizontal,
   ThumbsUp,
-  MessageSquare,
   Share2,
   X,
   Info,
   ChevronDown,
   ChevronRight,
-  Bell,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Avatar } from "@/components/ui/avatar"
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
 export default function Home() {
   return (
@@ -26,18 +21,16 @@ export default function Home() {
           {/* Interview Content */}
           <div>
             <div className="flex justify-between items-center mb-4">
-              <h2 className="text-2xl font-bold">Microsoft interview questions</h2>
-              <span className="text-sm text-gray-500">Updated May 6, 2025</span>
+              <h2 className="text-2xl font-bold">Google Mülakat Soruları</h2>
+              <span className="text-sm text-gray-500">Mayıs 6, 2025 tarihinde güncellendi</span>
             </div>
-
-            <h3 className="text-xl font-semibold mb-4">Interviews at Microsoft</h3>
 
             {/* Difficulty Rating */}
             <div className="mb-6">
               <div className="flex items-baseline gap-2 mb-2">
                 <span className="text-5xl font-bold">3.1</span>
                 <div className="flex items-center">
-                  <span className="text-lg text-gray-600">/5 difficulty</span>
+                  <span className="text-lg text-gray-600">/5 zorluk seviyesi</span>
                   <Info className="h-4 w-4 text-gray-400 ml-1" />
                 </div>
               </div>
@@ -45,7 +38,7 @@ export default function Home() {
               {/* Interview Experience */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                 <div>
-                  <h4 className="text-lg font-semibold mb-3">Interview experience</h4>
+                  <h4 className="text-lg font-semibold mb-3">Mülakat Deneyimi</h4>
                   <div className="flex items-center mb-2">
                     <div className="w-full max-w-xs">
                       <div className="flex h-4 overflow-hidden rounded-full">
@@ -57,86 +50,17 @@ export default function Home() {
                     <div className="ml-4 flex gap-6">
                       <div className="flex items-center">
                         <span className="text-green-500 font-semibold">67%</span>
-                        <span className="ml-1 text-sm">Positive</span>
+                        <span className="ml-1 text-sm">Pozitif</span>
                       </div>
                       <div className="flex items-center">
                         <span className="text-red-500 font-semibold">13%</span>
-                        <span className="ml-1 text-sm">Negative</span>
+                        <span className="ml-1 text-sm">Negatif</span>
                       </div>
                     </div>
                   </div>
                 </div>
-
-                <div>
-                  <h4 className="text-lg font-semibold mb-3">How others got an interview</h4>
-                  <div className="space-y-2">
-                    <div className="flex items-center">
-                      <span className="w-24 text-sm">40%</span>
-                      <span className="w-32 text-sm">Applied online</span>
-                      <div className="w-full max-w-xs">
-                        <div className="h-2 bg-gray-200 rounded-full">
-                          <div className="h-2 bg-gray-600 rounded-full" style={{ width: "40%" }}></div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="flex items-center">
-                      <span className="w-24 text-sm">27%</span>
-                      <span className="w-32 text-sm">Campus Recruiting</span>
-                      <div className="w-full max-w-xs">
-                        <div className="h-2 bg-gray-200 rounded-full">
-                          <div className="h-2 bg-gray-600 rounded-full" style={{ width: "27%" }}></div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="flex items-center">
-                      <span className="w-24 text-sm">14%</span>
-                      <span className="w-32 text-sm">Recruiter</span>
-                      <div className="w-full max-w-xs">
-                        <div className="h-2 bg-gray-200 rounded-full">
-                          <div className="h-2 bg-gray-600 rounded-full" style={{ width: "14%" }}></div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="flex items-center">
-                      <span className="w-24 text-sm">13%</span>
-                      <span className="w-32 text-sm">Employee Referral</span>
-                      <div className="w-full max-w-xs">
-                        <div className="h-2 bg-gray-200 rounded-full">
-                          <div className="h-2 bg-gray-600 rounded-full" style={{ width: "13%" }}></div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="flex items-center">
-                      <span className="w-24 text-sm">3%</span>
-                      <span className="w-32 text-sm">In Person</span>
-                      <div className="w-full max-w-xs">
-                        <div className="h-2 bg-gray-200 rounded-full">
-                          <div className="h-2 bg-gray-600 rounded-full" style={{ width: "3%" }}></div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="flex items-center">
-                      <span className="w-24 text-sm">2%</span>
-                      <span className="w-32 text-sm">Staffing Agency</span>
-                      <div className="w-full max-w-xs">
-                        <div className="h-2 bg-gray-200 rounded-full">
-                          <div className="h-2 bg-gray-600 rounded-full" style={{ width: "2%" }}></div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="flex items-center">
-                      <span className="w-24 text-sm">2%</span>
-                      <span className="w-32 text-sm">Other</span>
-                      <div className="w-full max-w-xs">
-                        <div className="h-2 bg-gray-200 rounded-full">
-                          <div className="h-2 bg-gray-600 rounded-full" style={{ width: "2%" }}></div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+              </div>  
+            </div>    
 
             {/* Top Jobs */}
             <div className="mb-8">
