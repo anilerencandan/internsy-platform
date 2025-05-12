@@ -8,7 +8,7 @@ export default function MaaslarPost() {
         <p className='font-bold text-lg'>3</p>
         <div className='flex items-center gap-x-1'>
             {Array.from({length: 5}, (_, index) => (
-                <Star size={12} fill='black'/>
+                <Star key={index} size={12} fill='black'/>
             ))}
         </div>
     </div>

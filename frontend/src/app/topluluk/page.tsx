@@ -1,9 +1,5 @@
 import CommunityPost from '@/components/forum-page/CommunityPost'
 import React from 'react'
-import Image from 'next/image'  
-import { ChevronDown, MessagesSquare, Plus } from 'lucide-react'
-import AnonimDropdown from '@/components/forum-page/AnonimDropdown'
-import { Button } from '@/components/ui/button'
 import PostEkleSection from '@/components/topluluk-page/PostEkleSection'
 import SeninIcinTopluluklarCard from '@/components/topluluk-page/SeninIcinTopluluklarCard'
 
@@ -16,10 +12,10 @@ export default function forumPage() {
       
       <div className='lg:col-span-6 sm:col-span-8 col-span-1 sm:border border-gray-300 sm:rounded-xl'>
         {Array.from({ length: 10 }, (_, index) => (
-          <CommunityPost />
+          <CommunityPost key={index} />
         ))}
       </div>
-      
+
       <div className='lg:col-span-3 flex flex-col sticky top-4 h-fit'>
         <SeninIcinTopluluklarCard />
       </div>

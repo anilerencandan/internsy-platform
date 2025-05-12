@@ -1,4 +1,4 @@
-import { Ellipsis, Forward, Heart, MessageCircle, MessageCircleHeart } from 'lucide-react'
+import { Ellipsis, Heart, MessageCircle } from 'lucide-react'
 import Image from 'next/image'
 import React from 'react'
 import { FaShare } from 'react-icons/fa'

@@ -1,5 +1,5 @@
 'use client'
-import { ChevronRight, Edit, Star } from 'lucide-react'
+import { ChevronRight, Star } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import React from 'react'
@@ -12,8 +12,8 @@ const tabs = [
   ]
   
 
-export default function page() {
-      const path = usePathname()
+export default function Page() {
+      const Path = usePathname()
     
   return (
     <div className='bg-gray-100'>
@@ -24,7 +24,7 @@ export default function page() {
                 key={tab.href}
                 href={tab.href}
                 className={` text-center flex flex-col justify-end gap-y-1 font-semibold text-sm pb-3 ${
-                    path === tab.href ? "text-primary border-b-2 border-primary" : "text-gray-700 border-b-2 border-white"
+                    Path === tab.href ? "text-primary border-b-2 border-primary" : "text-gray-700 border-b-2 border-white"
                 }`}
                 >
                 {tab.label}
@@ -40,7 +40,7 @@ export default function page() {
                     <h1 className='text-xl font-bold p-4'>Katkılarım</h1>
 
                     {Array.from({ length: 5 }).map((_, index) => (
-                        <div className='flex flex-col gap-y-4 p-4 border-b border-gray-300'>
+                        <div key={index} className='flex flex-col gap-y-4 p-4 border-b border-gray-300'>
                         <div className='flex items-center justify-between '> 
                             <div className='flex items-center gap-x-2 font-semibold '>
                                 <Star size={20} fill='black' />

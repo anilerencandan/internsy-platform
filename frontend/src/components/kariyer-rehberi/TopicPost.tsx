@@ -1,7 +1,5 @@
-import { Star } from 'lucide-react'
 import React from 'react'
-import { Button } from "@/components/ui/button"
-import { ArrowLeft, Bookmark, Heart, MessageCircle, MoreHorizontal, Search, Share2, ThumbsUp } from "lucide-react"
+import { ThumbsUp } from "lucide-react"
 
 
 export default function TopicPost() {

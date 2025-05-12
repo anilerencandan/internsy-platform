@@ -1,8 +1,6 @@
 import AboutUsSection from "@/components/landing-page/AboutUsSection";
 import ContinueWithSection from "@/components/landing-page/ContinueWithSection";
 import StartYourSearchSection from "@/components/landing-page/StartYourSearchSection";
-import { MessageSquareText } from "lucide-react";
-import { FaApple, FaGoogle, FaLinkedin } from "react-icons/fa";
 
 export default function LandingPage() {
   return (

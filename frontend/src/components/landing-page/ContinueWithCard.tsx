@@ -1,5 +1,4 @@
 import React from "react";
-import { FaApple, FaGoogle, FaLinkedin } from "react-icons/fa";
 
 interface ContinueWithCardProps {
     name: string;

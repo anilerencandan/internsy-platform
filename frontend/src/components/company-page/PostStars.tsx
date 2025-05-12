@@ -6,7 +6,7 @@ import { Star } from "lucide-react";
 
 // Dinamik import — SSR dışı kullanım için
 const Rating = dynamic(
-  () => import("react-rating") as Promise<{ default: ComponentType<any> }>,
+  () => import("react-rating") as Promise<{ default: ComponentType<Record<string, unknown>> }>,
   { ssr: false }
 );
 

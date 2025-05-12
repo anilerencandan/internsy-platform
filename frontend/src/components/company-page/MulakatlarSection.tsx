@@ -1,5 +1,5 @@
 import MaaslarPost from '@/components/maaslar-page/MaaslarPost'
-import { Building, Flag, Forward, Star } from 'lucide-react'
+import { Star } from 'lucide-react'
 import React from 'react'
 
 export default function MaaslarSection() {

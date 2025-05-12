@@ -1,6 +1,5 @@
 import { Settings2, Star } from 'lucide-react'
 import React from 'react'
-import Image from 'next/image'
 import { FaGoogle } from 'react-icons/fa'
 import Link from 'next/link'
 import FilterSection from '@/components/sirketler-page/FilterSection'
@@ -45,7 +44,7 @@ export default function sirketlerPage() {
 
             <div className=' flex flex-col gap-y-12 '>
                 {Array.from({ length: 12 }, (_, index) => (
-                    <Link href={'/sirket'} className='flex flex-col gap-y-4'>
+                    <Link key={index} href={'/sirket'} className='flex flex-col gap-y-4'>
                         <div className='flex items-center gap-x-2'>
                             <FaGoogle size={48} className='border-[1.5px] border-gray-400 rounded-sm p-2' />
                             <p className='font-semibold'>Google</p>
