@@ -2,7 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
-import { ChevronDown, Ellipsis, HeartHandshake, MapPin } from "lucide-react";
+import { Ellipsis, HeartHandshake } from "lucide-react";
 import { FaShare } from "react-icons/fa";
 import SubratingBox from "@/components/company-page/SubratingBox";
 import PostStars from "@/components/company-page/PostStars"; // yeni eklenen bileşen

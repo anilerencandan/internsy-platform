@@ -1,4 +1,4 @@
-import { SquareArrowOutUpRight, Star } from 'lucide-react'
+import { SquareArrowOutUpRight } from 'lucide-react'
 import React from 'react'
 import RatingStars from './RatingStars'
 
