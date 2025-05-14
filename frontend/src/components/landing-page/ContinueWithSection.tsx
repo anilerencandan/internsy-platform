@@ -67,7 +67,7 @@ export default function ContinueWithSection() {
 
         {/* === 2. Adım: Sonraki Section (şifre girme/kod ekranı vs) === */}
         <div className="min-w-full px-4 flex flex-col gap-y-1.5 items-center pt-4 pb-24">
-          <h2 className="text-xl font-semibold mb-2">Internsy'e Hoşgeldin</h2>
+          <h2 className="text-xl font-semibold mb-2">Internsy&apos;e Hoşgeldin</h2>
           <div className="flex flex-col gap-y-2 items-center justify-center text-sm w-full max-w-[500px]">
             <p>Sign in with your Google account as</p>
             <p><strong>{email}</strong></p>

@@ -90,7 +90,7 @@ export default function Home() {
               <div className="flex items-center">
                 <Info className="h-5 w-5 text-blue-500 mr-2" />
                 <span className="text-sm">
-                  Your trust is our top concern, so companies can't alter or remove interviews.
+                  Your trust is our top concern, so companies cant alter or remove interviews.
                 </span>
               </div>
               <button className="text-gray-500 hover:text-gray-700">

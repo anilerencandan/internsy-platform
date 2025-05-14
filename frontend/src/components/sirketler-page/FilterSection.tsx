@@ -31,7 +31,7 @@ export default function FilterSection() {
                 <h2 className='text-lg font-semibold'>Şirket puanına göre filtrele</h2>
                 <div className='flex items-center text-sm text-primary gap-x-2'>
                     {Array.from({ length: 5 }, (_, index) => (
-                        <Star size={16} fill='blue' className='text-primary' />
+                        <Star key={index} size={16} fill='blue' className='text-primary' />
                     ))} ve üstü
                 </div>
             </div></>

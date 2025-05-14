@@ -1,7 +1,5 @@
 import Image from "next/image"
-import { FaGoogle } from "react-icons/fa"
 import AboutTabs from "@/components/hakkimizda-page/AboutBar" // 📥 İMPORT BURADA
-import Link from "next/link"
 
 export default function AboutPage() {
   return (

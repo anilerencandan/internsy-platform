@@ -1,5 +1,4 @@
 'use client'
-import { ChevronRight, Edit, Star } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import React from 'react'
@@ -12,7 +11,7 @@ const tabs = [
   ]
   
 
-export default function page() {
+export default function Page() {
       const path = usePathname()
     
   return (

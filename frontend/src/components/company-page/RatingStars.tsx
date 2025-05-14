@@ -5,7 +5,7 @@ import { Star } from 'lucide-react';
 import type { ComponentType } from 'react';
 
 const ratingImport = () =>
-  import('react-rating') as Promise<{ default: ComponentType<any> }>;
+  import("react-rating") as Promise<{ default: ComponentType<Record<string, unknown>> }>;
 
 const Rating = dynamic(ratingImport, { ssr: false });
 

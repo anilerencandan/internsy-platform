@@ -1,9 +1,8 @@
 import { Settings2, Star } from 'lucide-react'
 import React from 'react'
-import Image from 'next/image'
 import { FaGoogle } from 'react-icons/fa'
 import { Input } from "@/components/ui/input"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { Tabs, TabsContent } from "@/components/ui/tabs"
 import { Search } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
@@ -64,7 +63,7 @@ export default function sirketlerPage() {
 
             <div className='flex flex-col gap-y-12'>
                 {Array.from({ length: 12 }, (_, index) => (
-                    <div className='flex flex-col gap-y-4'>
+                    <div key={index} className='flex flex-col gap-y-4'>
                         <div className='flex items-center gap-x-2'>
                             <FaGoogle size={48} className='border-[1.5px] border-gray-400 rounded-sm p-2' />
                             <p className='font-semibold'>Google</p>

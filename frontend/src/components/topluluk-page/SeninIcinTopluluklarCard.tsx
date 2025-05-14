@@ -11,7 +11,7 @@ export default function SeninIcinTopluluklarCard() {
           <a href="" className='text-primary font-semibold'>Toplulukları Keşfet</a>
 
           {Array.from({ length: 4 }, (_, index) => (
-            <div className='flex gap-x-2 py-4 border-b-[1px] border-b-gray-300 w-full'>
+            <div key={index} className='flex gap-x-2 py-4 border-b-[1px] border-b-gray-300 w-full'>
             <div className='hidden xl:flex flex-col items-center text-sm font-bold gap-y-1 overflow-hidden shrink-0 text-gray-400'> 
               <Image src={'/images/avatar.jpg'} alt={'avatar'} width={32} height={32} className='w-8 h-8 rounded-full ' />
               2M
