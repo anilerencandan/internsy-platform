@@ -1,19 +1,20 @@
 import Image from "next/image"
 import AboutTabs from "@/components/hakkimizda-page/AboutBar" // 📥 İMPORT BURADA
 import Link from "next/link"
+import { Button } from "@/components/ui/button"
 
 export default function AboutPage() {
   return (
-    <main className="page">
-      <div className="flex flex-col">
+    <main className="page-content px-4 py-6">
+      <div className="flex flex-col gap-y-6">
 
         {/* Sekmeli Navigasyon */}
-        <AboutTabs />
+        {/* <AboutTabs /> */}
 
         {/* Main Content Section */}
-        <div className="flex flex-col gap-y-6 bg-white p-6 shadow-md border border-gray-200">
-          <div className="space-y-6">
-            <h1 className="text-3xl md:text-4xl font-bold text-gray-900">Biz Kimiz?</h1>
+        <div className="flex flex-col  gap-y-6 bg-white px-6 pb-6 ">
+          <div className="flex flex-col space-y-6 items-center">
+            <h1 className="text-5xl md:text-4xl font-bold text-primary">Biz Kimiz?</h1>
             <p className="text-gray-700">
             Internsy, öğrenciler ve yeni mezunlar için staj ve kariyer yolculuğunu daha şeffaf, adil ve erişilebilir hale getirmeyi amaçlayan bir topluluk platformudur.
             Amacımız, staj sürecinin belirsizliklerini ortadan kaldırmak, doğru bilgiye ulaşmayı kolaylaştırmak ve öğrencilerin birbiriyle dayanışma içinde öğrenebileceği bir alan yaratmak.
@@ -28,6 +29,18 @@ export default function AboutPage() {
               className="max-w-full h-auto"
             />
           </div>
+        </div>
+
+        {/* Vision Mision Section */}
+        <div className="flex flex-col gap-y-4 p-6 py-12  bg-gray-100 rounded-lg ">
+          <h2 className="text-2xl font-bold">Misyonumuz</h2>
+          <p className="text-gray-800">Öğrencilerin ve yeni mezunların staj ve kariyer yolculuklarında karşılaştıkları belirsizlikleri ortadan kaldırmak. Gerçek deneyimlere, şeffaf bilgilere ve destekleyici bir topluluğa ulaşmalarını sağlamak. İlk adımlarında yalnız olmadıklarını hissettirmek.</p>
+        </div>
+
+
+        <div className="flex flex-col gap-y-4 p-6 py-12  bg-gray-100 rounded-lg ">
+          <h2 className="text-2xl font-bold">Misyonumuz</h2>
+          <p className="text-gray-800">Öğrencilerin ve yeni mezunların staj ve kariyer yolculuklarında karşılaştıkları belirsizlikleri ortadan kaldırmak. Gerçek deneyimlere, şeffaf bilgilere ve destekleyici bir topluluğa ulaşmalarını sağlamak. İlk adımlarında yalnız olmadıklarını hissettirmek.</p>
         </div>
 
         {/* What We Do Section */}
@@ -166,6 +179,72 @@ export default function AboutPage() {
             </div> {/* What We Do Section Grid kapandı */}
         </div> {/* What We Do Section tamamlandı */}
 
+        {/* Hikayemiz Section */}
+        <div className="flex flex-col gap-y-6 p-6 py-12">
+          <h3 className="text-2xl font-bold">Hikayemiz</h3>
+          <p>Internsy, 2023 yılında bir grup üniversite öğrencisi tarafından, staj ve iş arama sürecindeki zorlukları çözmek amacıyla kuruldu. Kendi deneyimlerimizden yola çıkarak, bu süreci daha şeffaf, erişilebilir ve verimli hale getirmeyi amaçladık.</p>
+          <p>Başlangıçta küçük bir topluluk olarak başladık, ancak kısa sürede binlerce öğrenci ve onlarca şirketin buluşma noktası haline geldik. Bugün, yapay zeka destekli araçlarımız, kapsamlı şirket değerlendirmeleri ve aktif topluluğumuzla Türkiye'nin önde gelen staj ve kariyer platformlarından biri olarak hizmet veriyoruz.</p>
+        </div>
+
+        <div className="flex flex-col gap-y-6 p-6 py-12">
+          <h3 className="text-2xl font-bold">Ekibimiz</h3>
+          <div className="grid grid-cols-3 gap-x-12">
+            <div className="flex flex-col gap-y-4 items-center">
+              <div className="w-36 h-36  rounded-full bg-gray-200"/>
+              <p className="font-bold text-lg">Onur Er</p>
+              <p>CEO Bitch</p>
+            </div>
+            <div className="flex flex-col items-center gap-y-4">
+              <div className="w-36 h-36  rounded-full bg-gray-200"/>
+              <p className="font-bold text-lg">Onur Er</p>
+              <p>CEO Bitch</p>
+            </div>
+            <div className="flex flex-col items-center gap-y-4">
+              <div className="w-36 h-36  rounded-full bg-gray-200"/>
+              <p className="font-bold text-lg">Onur Er</p>
+              <p>CEO Bitch</p>
+            </div>
+          </div>
+
+            
+        </div>
+
+        {/* Degerlerimiz Section */}
+        <div className="flex flex-col gap-y-4">
+          <h3 className="text-2xl font-bold">Degerlerimiz</h3>
+          <div className="flex flex-col gap-y-12">
+
+            <div className="flex items-center gap-x-4">
+              <p className=" flex items-center justify-center w-10 h-10 shrink-0 text-lg text-primary bg-blue-100 rounded-full font-bold  ">1</p>
+              <div className="flex flex-col gap-y-1">
+                <h3 className="text-lg font-semibold">Degerlerimiz</h3>
+                <p>Platformumuzda paylaşılan tüm bilgilerin doğru ve güncel olmasını sağlıyoruz.</p>
+                
+              </div>
+            </div>
+            <div className="flex items-center gap-x-4">
+              <p className=" flex items-center justify-center w-10 h-10 shrink-0 text-lg text-primary bg-blue-100 rounded-full font-bold  ">2</p>
+              <div className="flex flex-col gap-y-1">
+                <h3 className="text-lg font-semibold">Erişebilirlik</h3>
+                <p>Kariyer fırsatlarına erişimde eşitliği savunuyor, platformumuzu herkes için kullanılabilir kılıyoruz.</p>
+                
+              </div>
+            </div>
+            <div className="flex items-center gap-x-4">
+              <p className=" flex items-center justify-center w-10 h-10 shrink-0 text-lg text-primary bg-blue-100 rounded-full font-bold  ">3</p>
+              <div className="flex flex-col gap-y-1">
+                <h3 className="text-lg font-semibold">Yenilikçilik</h3>
+                <p>Sürekli olarak platformumuzu geliştiriyor, en son teknolojileri kullanarak kullanıcı deneyimini iyileştiriyoruz.</p>
+                
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+
+
 
         <div className="flex flex-col gap-y-4 bg-white p-6 rounded-lg shadow-md border border-gray-200">
           <div className="space-y-6">
@@ -199,6 +278,14 @@ export default function AboutPage() {
                 <span className="font-medium text-black">Topluluk olmak</span>, yalnız olmadığını hatırlatır, güç verir.
                 </li>
             </ul>
+        </div>
+
+        {/* Bize Katilin Section */}
+        <div className="flex flex-col items-center gap-y-6 rounded-lg px-8 py-16 bg-blue-50 text-lg">
+          <h3 className="text-2xl font-bold">Bize Katılın</h3>
+          <p className="text-center px-6">Internsy ailesinin bir parçası olmak ve kariyer yolculuğunuzda bir adım öne geçmek için hemen üye olun.</p>
+          <Button className="px-4 py-2 bg-primary text-lg">Üye Ol</Button>
+
         </div>
 
       </div> {/* Main div kapatıldı */}

@@ -53,7 +53,7 @@ export default function ContinueWithSection() {
             <input
               type="email"
               id="email"
-              className="px-4 py-2 bg-transparent focus:outline-none w-full text-sm text-gray-800 placeholder:text-gray-500 border-[1px] border-gray-400 rounded-[8px]"
+              className="focus:ring-2 focus:ring-primary px-4 py-2 bg-transparent focus:outline-none w-full text-sm text-gray-800 placeholder:text-gray-500 border-[1px] border-gray-400 rounded-[8px]"
               placeholder="ornek@mail.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}

@@ -10,11 +10,11 @@ import { Separator } from "@/components/ui/separator"
 
 export default function BlogPostPage() {
   return (
-    <div className="max-w-4xl mx-auto bg-white">
+    <div className="page-content mx-auto bg-white">
 
       {/* Back Navigation */}
       <div className="p-4 border-b">
-        <Link href="/blog" className="flex items-center gap-2 text-blue-600 hover:underline">
+        <Link href="/kariyer-rehberi/egitimler" className="flex items-center gap-2 text-blue-600 hover:underline">
           <ArrowLeft className="w-4 h-4" />
           <span>Geri dön</span>
         </Link>

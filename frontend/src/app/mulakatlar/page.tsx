@@ -9,7 +9,7 @@ export default function MulakatlarPage() {
     <main className="page-content  xl:px-0 sm:px-4 px-0 sm:pt-4">
 
       <div className="container mx-auto px-4 py-6">
-        <div className="max-w-4xl mx-auto">
+        <div className=" mx-auto">
           <div className="text-center mb-8">
             <h1 className="text-3xl font-bold mb-4">Şirket Mülakat Deneyimleri</h1>
             <p className="text-gray-600 mb-6">

@@ -1,6 +1,6 @@
-import { ThumbsUp, MessageSquare, Share2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
+import InterviewExperiencePost from "./InterviewExperience"
 
 // Örnek mülakat deneyimleri
 const interviewExperiences = [
@@ -116,91 +116,7 @@ export default function InterviewExperiences({ company }: { company: string }) {
 
       <div className="space-y-6">
         {interviewExperiences.map((experience) => (
-          <div key={experience.id} className="bg-white rounded-lg border border-gray-200 p-4">
-            <div className="flex justify-between items-start mb-3">
-              <h4 className="text-lg font-medium">{experience.position} Mülakatı</h4>
-              <div className="text-sm text-gray-500">{experience.date}</div>
-            </div>
-
-            <div className="flex flex-wrap gap-2 mb-4">
-              <Badge
-                variant={experience.experience === "Pozitif" ? "outline" : "secondary"}
-                className={
-                  experience.experience === "Pozitif"
-                    ? "bg-green-50 text-green-600 border-green-100"
-                    : experience.experience === "Nötr"
-                      ? "bg-gray-50 text-gray-600"
-                      : "bg-red-50 text-red-600 border-red-100"
-                }
-              >
-                {experience.experience} deneyim
-              </Badge>
-              <Badge
-                variant={
-                  experience.difficulty === "Kolay"
-                    ? "outline"
-                    : experience.difficulty === "Orta"
-                      ? "secondary"
-                      : "destructive"
-                }
-                className={
-                  experience.difficulty === "Kolay"
-                    ? "bg-green-50 text-green-600 border-green-100"
-                    : experience.difficulty === "Orta"
-                      ? "bg-yellow-50 text-yellow-600 border-yellow-100"
-                      : "bg-red-50 text-red-600 border-red-100"
-                }
-              >
-                {experience.difficulty} zorluk
-              </Badge>
-              <Badge
-                variant={experience.offer ? "outline" : "destructive"}
-                className={
-                  experience.offer
-                    ? "bg-green-50 text-green-600 border-green-100"
-                    : "bg-red-50 text-red-600 border-red-100"
-                }
-              >
-                {experience.offer ? "Teklif alındı" : "Teklif alınmadı"}
-              </Badge>
-            </div>
-
-            <div className="mb-4">
-              <p className="text-gray-700">{experience.content}</p>
-            </div>
-
-            <div className="mb-4">
-              <h5 className="font-medium mb-2">Mülakat Soruları</h5>    
-              <div className="space-y-3">
-                {experience.questions.map((q, index) => (
-                  <div key={index} className="bg-gray-50 rounded-lg p-3">
-                    <p className="font-medium mb-1">
-                      Soru {index + 1}: {q.question}
-                    </p>
-                    <p className="text-gray-600 text-sm">Cevap: {q.answer}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="flex items-center gap-4 pt-2 border-t border-gray-100">
-              <Button variant="ghost" size="sm" className="text-gray-600">
-                <ThumbsUp className="h-4 w-4 mr-1" />
-                <span>{experience.likes}</span>
-              </Button>
-              <Button variant="ghost" size="sm" className="text-gray-600">
-                <MessageSquare className="h-4 w-4 mr-1" />
-                <span>{experience.comments} Yorum</span>
-              </Button>
-              <Button variant="ghost" size="sm" className="text-gray-600">
-                <Share2 className="h-4 w-4 mr-1" />
-                <span>Paylaş</span>
-              </Button>
-              {/* <Button variant="outline" size="sm" className="ml-auto">
-                Yorum Yap
-              </Button> */}
-            </div>
-          </div>
+                <InterviewExperiencePost experience={experience} />
         ))}
 
         <div className="flex justify-center">

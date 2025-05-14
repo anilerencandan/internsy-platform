@@ -6,7 +6,7 @@ import { Button } from '../ui/button'
 
 export default function CommunityPost() {
   return (
-    <div className='flex flex-col justify-center border-b-[1px] border-b-gray-300 '>
+    <div className='flex flex-col justify-center border-b-[1px] border-b-gray-300 hover:bg-gray-50 '>
       <div className='flex flex-col gap-y-4 p-4 w-full'>
         <div className='flex items-center justify-between'>
           <a className='text-xs text-gray-400'>Diğer Toplulukları Keşfet</a>
@@ -22,22 +22,30 @@ export default function CommunityPost() {
           </div>
           <div className='flex items-center gap-x-2 h-full'>
             <p className='text-xs flex'>1h</p>
-            <Ellipsis size={20} />
+            <span className='hover:bg-gray-100 p-2 rounded-full'><Ellipsis size={20} /></span>
           </div>
         </div>
 
-        <p className='text-sm'>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laudantium eius itaque blanditiis nostrum consequuntur exercitationem illum, obcaecati voluptates, totam atque corporis ipsam quaerat aspernatur enim! Corporis, quidem inventore... <a href="" className='underline'>read more</a>
+        <p className='text-sm'>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laudantium eius itaque blanditiis nostrum consequuntur exercitationem illum, obcaecati voluptates, totam atque corporis ipsam quaerat aspernatur enim! Corporis, quidem inventore... <a href="" className='underline hover:text-primary'>read more</a>
         </p>
 
         <div className='flex justify-between items-center text-xs font-semibold'>
           <div className='grid grid-cols-3 items-center gap-x-4 w-full  text-gray-700'>
-            <div className='flex justify-center w-full gap-x-2 items-center '>
-              <Heart fill='white' className='text-primary'  size={20} />
-              1000
-              Beğen
+            <div className='flex items-center w-full justify-center'>
+              <span className='flex justify-center w-fit  py-2 gap-x-2 items-center rounded-lg '>
+                <Heart fill='white' className='text-primary hover:fill-primary duration-200'  size={20} />
+                1000
+                Beğen
+              </span>
+
             </div>
-            <div className='flex justify-center w-full gap-x-2 items-center '><MessageCircle size={20} /> 777B Yorum</div> 
-            <div className='flex justify-center w-full gap-x-2 items-center '><FaShare  size={20}/> Paylaş</div>
+            <div className='flex items-center w-full justify-center'>
+              <span className='flex justify-center  gap-x-2 items-center group rounded-lg  py-2 w-fit '><MessageCircle className='hover:fill-primary duration-200  hover:text-primary' size={20} /> 777B Yorum</span> 
+            </div>
+            <div className='flex items-center w-full justify-center'>
+                <span className='flex justify-center  gap-x-2 items-center group rounded-lg  py-2 w-fit '><FaShare  className='hover:fill-primary duration-200  hover:text-primary' size={20}/> Paylaş</span>
+
+            </div>
           </div>
         </div>
       </div>

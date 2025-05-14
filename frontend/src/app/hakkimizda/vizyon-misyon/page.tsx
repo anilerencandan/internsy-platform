@@ -3,14 +3,14 @@ import AboutTabs from "@/components/hakkimizda-page/AboutBar" // 📥 İMPORT BU
 
 export default function AboutPage() {
   return (
-    <main className="page">
-      <div className="flex flex-col">
+    <main className="page-content">
+      <div className="flex flex-col gap-y-6">
 
         {/* Sekmeli Navigasyon */}
         <AboutTabs />
 
         {/* Vizyon */}
-        <div className="flex flex-col gap-y-6 bg-white p-6   border border-gray-200">
+        <div className="flex flex-col gap-y-6 bg-white p-6   border border-gray-200 rounded-lg">
           <div className="space-y-6">
             <h1 className="text-3xl md:text-4xl font-bold text-gray-900">Vizyonumuz</h1>
             <p className="text-gray-700">
@@ -30,7 +30,7 @@ export default function AboutPage() {
         </div>
 
         {/* Misyon */}
-        <div className="flex flex-col gap-y-6 bg-white p-6   border border-gray-200">
+        <div className="flex flex-col gap-y-6 bg-white p-6   border border-gray-200 rounded-lg">
           <div className="space-y-6">
             <h1 className="text-3xl md:text-4xl font-bold text-gray-900">Misyonumuz</h1>
             <p className="text-gray-700">

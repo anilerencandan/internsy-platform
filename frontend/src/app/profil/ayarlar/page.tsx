@@ -1,4 +1,6 @@
 'use client'
+import EmailPasswordDialog from '@/components/profil-page/EditMailDialog'
+import TabsSection from '@/components/profil-page/TabsSection'
 import { Edit } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
@@ -17,28 +19,15 @@ export default function Page() {
     const Path = usePathname()
     
   return (
-    <div className='bg-gray-100'>
-        <div className=' bg-white pt-4 grid grid-cols-4 overflow-x-auto scrollbar-hide  px-4 border-b border-gray-600 '>
-            {tabs.map((tab) => (
-                    
-                <Link
-                key={tab.href}
-                href={tab.href}
-                className={` text-center flex flex-col justify-end gap-y-1 font-semibold text-sm pb-3 ${
-                    Path === tab.href ? "text-primary border-b-2 border-primary" : "text-gray-700 border-b-2 border-white"
-                }`}
-                >
-                {tab.label}
-                </Link>
-            ))}
-            </div>       
+    <div className='page-content '>
+            <TabsSection />
+        
 
-            <div className='p-4'>
                 
-            <div className='flex flex-col bg-white rounded-[8px] overflow-hidden shadow-md text-sm gap-y-4 '>
+            <div className='flex flex-col bg-white rounded-[8px] overflow-hidden  text-sm gap-y-4 '>
                 
                 <div className='flex flex-col'>
-                    <h1 className='text-xl font-bold p-4'>Ayarlar</h1>
+                    <h1 className='text-2xl font-bold p-4'>Ayarlar</h1>
 
                     <div className='flex flex-col gap-y-6 p-4'>
                         <h2 className='text-lg font-semibold'>Email ve Şifre</h2>
@@ -48,7 +37,7 @@ export default function Page() {
                                 <p className=' text-gray-600'>onur@gmail.com</p>
                             </div>
 
-                            <Edit size={20}/>
+                            <EmailPasswordDialog type={'email'} />
                         </div>
 
                         <div className="border-t-[1px] border-gray-300"></div>
@@ -59,7 +48,7 @@ export default function Page() {
                                 <p className=' text-gray-600'>***************</p>
                             </div>
 
-                            <Edit size={20}/>
+                            <EmailPasswordDialog type={'password'} />   
                         </div>
                     </div>
 
@@ -106,7 +95,6 @@ export default function Page() {
                 </div>
 
             </div>
-        </div>
     </div>
   )
 }

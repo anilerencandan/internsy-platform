@@ -83,7 +83,7 @@ export default function CompanyInterviewPage({ params }: { params: { company: st
   const company = getCompanyData(params.company)
 
   return (
-    <main className="min-h-screen bg-gray-50">
+    <main className="page-content min-h-screen ">
 
       <div className="container mx-auto px-4 py-6">
         <div className="mb-6">
@@ -96,7 +96,7 @@ export default function CompanyInterviewPage({ params }: { params: { company: st
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
           {/* Main Content */}
           <div className="md:col-span-8">
-            <div className="bg-white rounded-lg border border-gray-200 p-6 mb-6">
+            <div className="bg-white rounded-lg border border-gray-200 p-4 mb-6">
               <div className="flex items-start gap-4 mb-6">
                 <div className="w-16 h-16 bg-blue-100 rounded-lg flex items-center justify-center text-2xl font-bold text-blue-600 flex-shrink-0">
                   {company.logo}
