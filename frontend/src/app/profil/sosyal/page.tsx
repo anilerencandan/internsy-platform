@@ -1,5 +1,6 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import SocialSection from "@/components/profil-page/SocialSection"
+import TabsSection from "@/components/profil-page/TabsSection"
 
 // Verileri doğrudan sayfa içinde tanımlıyoruz
 const companies = [
@@ -145,11 +146,13 @@ const savedPosts = [
 
 export default function SocialPage() {
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-8 text-center">Sosyal Sayfam</h1>
+    <div className="page-content">
+      <TabsSection />
+    
+      <h1 className="text-3xl font-bold my-8 text-center">Takip Edilenler</h1>
 
       {/* Mobil görünüm için Tabs */}
-      <div className="md:hidden">
+      <div className="md:hidden px-4">
         <Tabs defaultValue="companies" className="w-full">
           <TabsList className="grid w-full grid-cols-3">
             <TabsTrigger value="companies">Şirketler</TabsTrigger>
@@ -169,7 +172,7 @@ export default function SocialPage() {
       </div>
 
       {/* Masaüstü görünüm için alt alta bölümler */}
-      <div className="hidden md:block space-y-12">
+      <div className="hidden md:block space-y-12 px-4">
         <SocialSection title="Takip Ettiğim Şirketler" items={companies} type="company" />
         <SocialSection title="Katıldığım Topluluklar" items={communities} type="community" />
         <SocialSection title="Kaydettiğim Gönderiler" items={savedPosts} type="post" />

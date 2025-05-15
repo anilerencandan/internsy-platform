@@ -18,8 +18,10 @@ export default function MobileSidebar() {
 
       <SheetContent side="right" className="w-full py-12" >
         <div className="flex flex-col">
-          <div className="flex items-center gap-x-4 p-4">
-            <UserAvatar name={"Onur Er"} />
+          <div className="flex items-center gap-x-4 p-4 ">
+            <span className='relative w-12 h-12 rounded-full  shrink-0'>
+              <UserAvatar name={"Onur Er"} />
+            </span>
             <div className="flex flex-col">
               <h3 className="text-lg font-semibold">Onur Er</h3>
               <p className="text-sm">Kocaeli Üniversitesinde Okuyor</p>

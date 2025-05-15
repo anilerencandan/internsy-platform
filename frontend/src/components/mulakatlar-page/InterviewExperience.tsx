@@ -92,7 +92,7 @@ export default function InterviewExperiencePost({experience}: { experience: Inte
                       : "bg-red-50 text-red-600 border-red-100"
                 }
               >
-                {experience.difficulty} zorluk
+                {experience.difficulty} Mülakat
               </Badge>
               <Badge
                 variant={experience.offer ? "outline" : "destructive"}
@@ -109,7 +109,7 @@ export default function InterviewExperiencePost({experience}: { experience: Inte
                 </div>
 
                 <div className="mb-4">
-                  <h4 className="font-semibold mb-1">Interview</h4>
+                  <h4 className="font-semibold mb-1">Mülakat Deneyimi</h4>
                   <p className="text-gray-700">
                     Microsoft biedt een strak en grondig proces, maar de lat ligt hoog. Niet ideaal als je jaren
                     praktijkervaring hebt maar niet dagelijks met leetcode-achtige problemen werkt. Alleen aan te raden
@@ -118,7 +118,7 @@ export default function InterviewExperiencePost({experience}: { experience: Inte
                 </div>
 
                 <div className="mb-4">
-                  <h4 className="font-semibold mb-1">Interview questions [1]</h4>
+                  <h4 className="font-semibold mb-1">Mülakat Soruları</h4>
                   <div className="flex flex-col gap-y-4">
                 {experience.questions.map((q, index) => (
                                         <div key={index} className="bg-gray-50 rounded-lg p-3">

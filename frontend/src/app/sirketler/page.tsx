@@ -34,11 +34,11 @@ export default function sirketlerPage() {
 
             <div className='flex items-center text-sm text-primary gap-x-2'>
                 <div className='flex '>
-                    <Star className='fill-primary text-white' />
-                    <Star className='fill-primary text-white' />
-                    <Star className='fill-primary text-white' />
-                    <Star className='fill-primary text-white' />
-                    <Star className='fill-gray-100 text-white' />
+                    <Star className=' fill-yellow-400 text-white' />
+                    <Star className=' fill-yellow-400 text-white' />
+                    <Star className=' fill-yellow-400 text-white' />
+                    <Star className=' fill-yellow-400 text-white' />
+                    <Star className=' fill-yellow-400 text-white' />
                 </div>
                 ve üstü
             </div>

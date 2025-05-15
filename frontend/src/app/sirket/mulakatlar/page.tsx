@@ -114,14 +114,16 @@ export default function Home({company}: { company: string }) {
           {/* Company Header */}
           
           {/* Interview Content */}
-          <div>
+          <div className="">
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-2xl font-bold">Google Mülakat Soruları</h2>
-              <span className="text-sm text-gray-500">Mayıs 6, 2025 tarihinde güncellendi</span>
+              <div className="flex flex-col h-full">
+                <span className="text-sm text-gray-500">Mayıs 6, 2025 tarihinde güncellendi</span>
+              </div>
             </div>
 
             {/* Difficulty Rating */}
-            <div className="mb-6">
+            <div className="mb-6  ">
               <div className="flex items-baseline gap-2 mb-2">
                 <span className="text-5xl font-bold">3.1</span>
                 <div className="flex items-center">
@@ -130,36 +132,41 @@ export default function Home({company}: { company: string }) {
                 </div>
               </div>
 
-              {/* Interview Experience */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                <div>
-                  <h4 className="text-lg font-semibold mb-3">Mülakat Deneyimi</h4>
-                  <div className="flex items-center mb-2">
-                    <div className="w-full max-w-xs">
-                      <div className="flex h-4 overflow-hidden rounded-full">
-                        <div className="bg-green-500 w-[67%]"></div>
-                        <div className="bg-gray-500 w-[20%]"></div>
-                        <div className="bg-red-500 w-[13%]"></div>
-                      </div>
+              <div>
+                <h4 className="text-lg font-semibold mb-3">Genel Mülakat Memnuniyeti</h4>
+
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                  {/* Progress Bar */}
+                  <div className="w-full max-w-xs">
+                    <div className="flex h-4 overflow-hidden rounded-full">
+                      <div className="bg-green-500 w-[67%]"></div>
+                      <div className="bg-gray-500 w-[20%]"></div>
+                      <div className="bg-red-500 w-[13%]"></div>
                     </div>
-                    <div className="ml-4 flex gap-6">
-                      <div className="flex items-center">
-                        <span className="text-green-500 font-semibold">67%</span>
-                        <span className="ml-1 text-sm">Pozitif</span>
-                      </div>
-                      <div className="flex items-center">
-                        <span className="text-red-500 font-semibold">13%</span>
-                        <span className="ml-1 text-sm">Negatif</span>
-                      </div>
+                  </div>
+
+                  {/* Legend */}
+                  <div className="flex w-fit flex-row gap-2 sm:gap-4 text-sm">
+                    <div className="flex items-center px-2 bg-gray-100 border-gray-300 text-black rounded-lg">
+                      <span className="text-green-500 font-semibold">67%</span>
+                      <span className="ml-1 text-sm">Pozitif</span>
+                    </div>
+                    <div className="flex items-center px-2 bg-gray-100 border-gray-300 text-black rounded-lg">
+                      <span className="text-gray-500 font-semibold">20%</span>
+                      <span className="ml-1 text-sm">Nötr</span>
+                    </div>
+                    <div className="flex items-center px-2 bg-gray-100 border-gray-300 text-black rounded-lg">
+                      <span className="text-red-500 font-semibold">13%</span>
+                      <span className="ml-1 text-sm">Negatif</span>
                     </div>
                   </div>
                 </div>
-              </div>  
-            </div>    
+              </div>
+            </div>
 
             {/* Top Jobs */}
             <div className="mb-8">
-              <h3 className="text-xl font-semibold mb-4">Interviews for top jobs at Microsoft</h3>
+              <h3 className="text-xl font-semibold mb-4">Staj Mülakatı Yapılan Pozisyonlar</h3>
               <div className="flex flex-wrap gap-2 mb-4">
                 <Badge variant="outline" className="py-2 px-3 rounded-full bg-gray-50 hover:bg-gray-100">
                   Software engineer (1830)
@@ -175,7 +182,7 @@ export default function Home({company}: { company: string }) {
                 </Badge>
               </div>
               <Button variant="ghost" className="text-green-600 hover:text-green-700 p-0 h-auto flex items-center">
-                See more interviews for top jobs
+              Tüm pozisyonları görüntüle
                 <ChevronDown className="h-4 w-4 ml-1" />
               </Button>
             </div>
@@ -185,7 +192,7 @@ export default function Home({company}: { company: string }) {
               <div className="flex items-center">
                 <Info className="h-5 w-5 text-blue-500 mr-2" />
                 <span className="text-sm">
-                  Your trust is our top concern, so companies cant alter or remove interviews.
+                Şeffaflık önceliğimizdir. Şirketler mülakat içeriklerine müdahale edemez.
                 </span>
               </div>
               <button className="text-gray-500 hover:text-gray-700">
@@ -195,21 +202,13 @@ export default function Home({company}: { company: string }) {
 
             {/* Interview Search */}
             <div className="mb-8">
-              <h2 className="text-2xl font-bold mb-4">Microsoft interview questions</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="relative">
+              <h2 className="text-2xl font-bold mb-4">Google Mülakat Soruları</h2>
+              <div className="grid gap-4">
+                <div className="relative justify-center">
                   <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
                   <input
                     type="text"
-                    placeholder="Job title"
-                    className="pl-10 pr-4 py-3 rounded-md bg-gray-100 border-none text-sm w-full focus:outline-none focus:ring-2 focus:ring-green-500"
-                  />
-                </div>
-                <div className="relative">
-                  <MapPin className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
-                  <input
-                    type="text"
-                    placeholder="Location"
+                    placeholder="Mülakat yapılan pozisyonu arayın"
                     className="pl-10 pr-4 py-3 rounded-md bg-gray-100 border-none text-sm w-full focus:outline-none focus:ring-2 focus:ring-green-500"
                   />
                 </div>

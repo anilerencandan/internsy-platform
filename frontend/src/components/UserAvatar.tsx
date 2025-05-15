@@ -8,7 +8,7 @@ export default function UserAvatar({ name }: { name: string }) {
     .toUpperCase()
 
   return (
-    <Avatar className="w-12 h-12 shadow-md">
+    <Avatar className="w-full h-full shadow-md">
       <AvatarImage src="" alt={name} />
       <AvatarFallback>{initials}</AvatarFallback>
     </Avatar>

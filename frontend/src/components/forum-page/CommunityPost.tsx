@@ -1,9 +1,11 @@
-import { Ellipsis, Heart, MessageCircle } from 'lucide-react'
+import { Ellipsis, Heart, MessageCircle, User2 } from 'lucide-react'
 import Image from 'next/image'
 import React from 'react'
 import { FaShare } from 'react-icons/fa'
 import { Button } from '../ui/button'
 import { CommunityPostType } from '@/models/CommunityPost'
+import UserAvatar from '../UserAvatar'
+import { AnonimAvatar } from '../AnonimAvatar'
 
 export default function CommunityPost({ post }: { post: CommunityPostType }) {
   return (
@@ -17,8 +19,8 @@ export default function CommunityPost({ post }: { post: CommunityPostType }) {
         </div>
         <div className='flex items-center justify-between '>
           <div className='flex items-center gap-x-2'>
-            <span className='relative w-8 h-8 rounded-full overflow-hidden shrink-0'>
-              <Image src={post.userAvatar} alt={'avatar'} fill className='object-cover' />
+            <span className='relative w-10 h-10 rounded-full  shrink-0'>
+              <AnonimAvatar icon={<User2/>}/>
             </span>
             <div className='flex w-full flex-col'>
               <h3 className='text-sm font-semibold'>{post.communityName}</h3>
@@ -34,25 +36,26 @@ export default function CommunityPost({ post }: { post: CommunityPostType }) {
         </div>
 
         <p className='text-sm'>
-          {post.content} <a href="" className='underline hover:text-primary'>read more</a>
+          {post.content} <a href="" className='underline hover:text-primary'>Devamını gör</a>
         </p>
 
         <div className='flex justify-between items-center text-xs font-semibold'>
-          <div className='grid grid-cols-3 items-center gap-x-4 w-full  text-gray-700'>
-            <div className='flex items-center w-full justify-center'>
+          <div className='flex items-center gap-x-4 w-full  text-gray-700'>
+            <div className='flex items-center justify-center'>
               <span className='flex justify-center w-fit py-2 gap-x-2 items-center rounded-lg '>
                 <Heart fill='white' className='text-primary hover:fill-primary duration-200' size={20} />
-                {post.likes} Beğen
+                {/* {post.likes}  */}
+                1.3K
               </span>
             </div>
-            <div className='flex items-center w-full justify-center'>
+            <div className='flex items-center justify-center'>
               <span className='flex justify-center gap-x-2 items-center group rounded-lg py-2 w-fit '>
-                <MessageCircle className='hover:fill-primary duration-200  hover:text-primary' size={20} /> {post.comments} Yorum
+                <MessageCircle className='hover:fill-primary duration-200  hover:text-primary' size={20} /> {post.comments} 
               </span>
             </div>
-            <div className='flex items-center w-full justify-center'>
+            <div className='flex items-center w-full  justify-end'>
               <span className='flex justify-center gap-x-2 items-center group rounded-lg py-2 w-fit '>
-                <FaShare className='hover:fill-primary duration-200  hover:text-primary' size={20} /> {post.shares} Paylaş
+                <FaShare className='hover:fill-primary duration-200  hover:text-primary' size={20} /> Paylaş 
               </span>
             </div>
           </div>

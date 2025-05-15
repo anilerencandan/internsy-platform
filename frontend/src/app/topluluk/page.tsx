@@ -20,7 +20,7 @@ export default function forumPage() {
       
         <Searchbar />
       </span>
-      <div className='flex flex-col sm:border border-gray-300 sm:rounded-xl'>
+      <div className='flex flex-col overflow-hidden sm:border border-gray-300 sm:rounded-xl'>
         {sampleData.map((sampleData: CommunityPostType, index ) => (
           <CommunityPost key={index}  post={sampleData} />
         ))}

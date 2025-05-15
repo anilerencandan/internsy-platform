@@ -23,9 +23,9 @@ export default function SocialSection({ title, items, type }: SocialSectionProps
   const displayedItems = items.slice(0, 4)
 
   return (
-    <div className="space-y-4">
+    <div className="flex flex-col gap-y-4">
       <div className="flex justify-between items-center">
-        <h2 className="text-2xl font-semibold">{title}</h2>
+        {/* <h2 className="text-2xl font-semibold py-4">{title}</h2> */}
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
