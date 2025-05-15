@@ -30,7 +30,7 @@ export default function ContinueWithSection() {
               Kullanım Sözleşmesini
             </a>{" "}
             ve{" "}
-            <a href="" className="underline text-primary font-bold">
+            <a href="/gizlilik-ve-guvenlik" className="underline text-primary font-bold">
               Gizlilik Sözleşmesini
             </a>{" "}
             Kabul Etmiş Olursunuz.

@@ -118,7 +118,7 @@ export default function CompanyList() {
           {companies.map((company) => (
             <tr key={company.id} className="hover:bg-gray-50">
               <td className="px-6 py-4 whitespace-nowrap">
-                <Link href={`/mulakatlar/${company.id}`} className="flex items-center">
+                <Link href={'sirket/mulakatlar'}  className="flex items-center">
                   <div
                     className={`w-10 h-10 ${company.color} rounded-lg flex items-center justify-center text-lg font-bold flex-shrink-0 mr-3`}
                   >

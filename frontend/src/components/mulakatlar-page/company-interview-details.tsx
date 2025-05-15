@@ -153,10 +153,6 @@ export default function CompanyInterviewDetails() {
           </Badge>
         </div>
 
-        <div className="mb-4">
-          <h4 className="font-medium mb-1">Application</h4>
-          <p className="text-sm">I interviewed at Microsoft</p>
-        </div>
 
         <div className="mb-4">
           <h4 className="font-medium mb-1">Interview</h4>

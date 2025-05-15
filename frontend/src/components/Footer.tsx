@@ -1,10 +1,17 @@
-import { Facebook, Instagram, Linkedin } from "lucide-react";
-import { FaTiktok } from "react-icons/fa";
-import { FaXTwitter } from "react-icons/fa6";
+'use client';
+
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+
 
 export default function Footer() {
+  const pathname = usePathname();
+
+  if (pathname === "/topluluk") {
+    return null; // Don't render the footer on the homepage
+  }
+
   return (
     <div className="flex flex-col w-full border-t border-gray-300">
       <div className="flex justify-center items-center w-full h-[100px] py-20">

@@ -3,10 +3,13 @@ import React from 'react'
 import PostEkleSection from '@/components/topluluk-page/PostEkleSection'
 import SeninIcinTopluluklarCard from '@/components/topluluk-page/SeninIcinTopluluklarCard'
 import Searchbar from '@/components/Searchbar'
+import sampleData from '@/sample/CommunityPostSampleData.json'
+import { CommunityPostType } from '@/models/CommunityPost'
+
 
 export default function forumPage() {
   return (
-    <div className='page-content sm:grid grid-cols-12  gap-x-12 xl:px-0 sm:px-4 px-0 sm:pt-4 '>
+    <div className='page-content sm:grid grid-cols-12  gap-x-12 xl:px-0 sm:px-4 px-0 sm:pt-4 mb-6'>
       <div className='lg:col-span-3 sm:col-span-4 hidden sm:flex flex-col gap-y-4 text-sm sticky top-20 h-fit'>
       <PostEkleSection />
       </div>
@@ -18,8 +21,8 @@ export default function forumPage() {
         <Searchbar />
       </span>
       <div className='flex flex-col sm:border border-gray-300 sm:rounded-xl'>
-        {Array.from({ length: 10 }, (_, index) => (
-          <CommunityPost key={index} />
+        {sampleData.map((sampleData: CommunityPostType, index ) => (
+          <CommunityPost key={index}  post={sampleData} />
         ))}
         </div>
       </div>

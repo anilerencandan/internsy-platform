@@ -2,7 +2,7 @@ export default function CvAiPage() {
     return (
 
   <section className="page-content mx-auto px-4 py-12 text-gray-800">
-    <h1 className="text-3xl font-bold mb-6">Internsy Gizlilik ve Güvenlik Politikası</h1>
+    <h1 className="text-4xl font-bold mb-6 text-primary">Internsy Gizlilik ve Güvenlik Politikası</h1>
 
     <p className="mb-4">
       Internsy olarak gizliliğinize önem veriyoruz. Platformumuzda yer alan her kullanıcı, verilerinin güvenli ve etik kurallar 
@@ -45,7 +45,7 @@ export default function CvAiPage() {
 
     <h2 className="text-xl font-semibold mt-8 mb-2">6. İletişim</h2>
     <p>
-      Gizlilik politikamızla ilgili tüm soru, öneri ve geri bildirimleriniz için 
+      Gizlilik politikamızla ilgili tüm soru, öneri ve geri bildirimleriniz için {" "} 
       <a href="/iletisim" className="text-primary underline">İletişim</a> sayfamızı ziyaret edebilirsiniz.
     </p>
   </section>

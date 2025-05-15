@@ -109,11 +109,6 @@ export default function InterviewExperiencePost({experience}: { experience: Inte
                 </div>
 
                 <div className="mb-4">
-                  <h4 className="font-semibold mb-1">Application</h4>
-                  <p className="text-gray-700">I interviewed at Microsoft</p>
-                </div>
-
-                <div className="mb-4">
                   <h4 className="font-semibold mb-1">Interview</h4>
                   <p className="text-gray-700">
                     Microsoft biedt een strak en grondig proces, maar de lat ligt hoog. Niet ideaal als je jaren

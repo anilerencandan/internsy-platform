@@ -4,8 +4,8 @@ import Image from 'next/image'
 
 export default function SeninIcinTopluluklarCard() {
   return (
-    <>
-    <div className='flex flex-col  pt-4 rounded-lg overflow-hidden border border-gray-300'>
+    <div className='flex flex-col gap-y-4  rounded-lg overflow-hidden'>
+      <div className='flex flex-col pt-4 rounded-lg overflow-hidden  border border-gray-300'>
 
           <h2 className='text-lg font-semibold px-4'>Senin için Topluluklar</h2>
           <a href="" className='text-primary font-semibold p-4 border-b-[1px] border-gray-300'>Toplulukları Keşfet</a>
@@ -27,7 +27,17 @@ export default function SeninIcinTopluluklarCard() {
             
           </div>
           ))}
+
         </div>
-    </>
+        <div className='flex flex-col gap-y-1 rounded-lg overflow-hidden bg-gray-100 text-sm border border-gray-300 p-4'>
+          <a href="/hakkimizda" className='hover:underline'>Hakkımızda</a>
+          <a href="" className='hover:underline'>Kullanım Şartları</a>
+          <a href="/cerez-politikasi" className='hover:underline'>Çerez Politikası</a>
+          <a href="/gizlilik-ve-guvenlik" className='hover:underline'>Gizlilik ve Güvenlik</a>
+          <br />
+
+        Copyright 2025. Internsy
+        </div>
+    </div>
 )
 }
