@@ -1,0 +1,134 @@
+[
+  {
+    "id": "1",
+    "communityName": "Yapay Zeka",
+    "userTitle": "Senior AI Researcher",
+    "userAvatar": "/images/avatar.jpg",
+    "timeAgo": "1h",
+    "content": "Bugün kendi verisetimizle eğittiğimiz küçük dil modelinin inference performansını test ettik. Beklenenden çok daha düşük latency ile çalıştı ve bazı benchmark testlerini başarıyla geçti. Bununla birlikte modelin düşük örnekli senaryolarda nasıl performans gösterdiğini detaylıca incelemek istiyoruz.",
+    "likes": 1340,
+    "comments": 320,
+    "shares": 120
+  },
+  {
+    "id": "2",
+    "communityName": "Frontend Geliştiricileri",
+    "userTitle": "React / Next.js Developer",
+    "userAvatar": "/images/avatar.jpg",
+    "timeAgo": "2h",
+    "content": "Responsive tasarımlar oluştururken Tailwind CSS ile media query kullanmadan nasıl mobil öncelikli komponentler yazabileceğinizi anlatan kısa bir rehber oluşturdum. Ayrıca dark mode desteği ve grid yapısı ile ilgili ipuçlarını da içeriyor. Geri bildirimlerinizi bekliyorum.",
+    "likes": 980,
+    "comments": 210,
+    "shares": 60
+  },
+  {
+    "id": "3",
+    "communityName": "Mobil Geliştiriciler",
+    "userTitle": "Flutter Specialist",
+    "userAvatar": "/images/avatar.jpg",
+    "timeAgo": "30m",
+    "content": "Riverpod ve Bloc karşılaştırmasını detaylıca ele aldım. Hangisi daha performanslı, hangisi daha okunabilir ve bakımı kolay? Ayrıca kişisel projelerde hangisini tercih ettiğimi, kurumsal projelerde karşılaştığım durumlarla birlikte anlattım.",
+    "likes": 870,
+    "comments": 150,
+    "shares": 45
+  },
+  {
+    "id": "4",
+    "communityName": "Siber Güvenlik",
+    "userTitle": "Penetration Tester",
+    "userAvatar": "/images/avatar.jpg",
+    "timeAgo": "4h",
+    "content": "Yeni bir açık keşfettik: Form doğrulama bypass'ı ile kullanıcı yetkileri dışında endpoint'lere erişim sağlanabiliyor. Bu durumu hem PoC ile gösterdim hem de GitHub'da örnek kodlar paylaştım. Dilerseniz birlikte test edebiliriz.",
+    "likes": 1020,
+    "comments": 220,
+    "shares": 70
+  },
+  {
+    "id": "5",
+    "communityName": "Oyun Geliştirme",
+    "userTitle": "Unity Dev",
+    "userAvatar": "/images/avatar.jpg",
+    "timeAgo": "5h",
+    "content": "Yeni oyunumda rogue-like bir yapı kurguluyorum. Karakterin her ölümden sonra farklı yeteneklerle yeniden doğduğu bir sistem üzerine çalışıyorum. Ayrıca procedural dungeon generation algoritması da ekledim. Denemek isteyen varsa demo'yu paylaşabilirim.",
+    "likes": 1500,
+    "comments": 300,
+    "shares": 90
+  },
+  {
+    "id": "6",
+    "communityName": "Veri Bilimi",
+    "userTitle": "Data Scientist",
+    "userAvatar": "/images/avatar.jpg",
+    "timeAgo": "1d",
+    "content": "Veri görselleştirmede matplotlib ile seaborn arasındaki farkları uygulamalı olarak gösterdiğim bir içerik paylaştım. Özellikle correlation heatmap, boxplot ve pairplot grafiklerini anlatırken hangi durumda hangisi tercih edilmeli sorusuna da değindim.",
+    "likes": 1100,
+    "comments": 180,
+    "shares": 40
+  },
+  {
+    "id": "7",
+    "communityName": "Makine Öğrenmesi",
+    "userTitle": "ML Engineer",
+    "userAvatar": "/images/avatar.jpg",
+    "timeAgo": "3h",
+    "content": "Overfitting problemiyle mücadele ederken dropout ve early stopping yöntemlerinin etkisini karşılaştırdım. Ayrıca validation accuracy'nin nasıl takip edileceğini ve model karmaşıklığının overfitting’e olan etkilerini analiz ettiğim bir blog yazısı yayınladım.",
+    "likes": 900,
+    "comments": 130,
+    "shares": 30
+  },
+  {
+    "id": "8",
+    "communityName": "Donanım ve IoT",
+    "userTitle": "Embedded Systems Engineer",
+    "userAvatar": "/images/avatar.jpg",
+    "timeAgo": "6h",
+    "content": "ESP32 ile geliştirdiğim yeni sıcaklık ve nem sensörü cihazını paylaştım. Bu cihaz WiFi üzerinden MQTT protokolüyle veri iletiyor. Dashboard kısmını Grafana ile entegre ettim. Merak edenlere detaylı devre şeması ve kodları da ekledim.",
+    "likes": 760,
+    "comments": 100,
+    "shares": 20
+  },
+  {
+    "id": "9",
+    "communityName": "Blockchain Türkiye",
+    "userTitle": "Web3 Enthusiast",
+    "userAvatar": "/images/avatar.jpg",
+    "timeAgo": "8h",
+    "content": "Yeni bir DAO (Decentralized Autonomous Organization) yapısı üzerinde çalışıyorum. Üyelerin oy hakkı stake miktarına göre değil katılım oranına göre dağıtılacak. Bu sistemin daha adil bir yönetim sağlayacağını düşünüyorum. Yorumlarınızı bekliyorum.",
+    "likes": 820,
+    "comments": 90,
+    "shares": 15
+  },
+  {
+    "id": "10",
+    "communityName": "Yazılım Mülakatları",
+    "userTitle": "Ex-Google SWE",
+    "userAvatar": "/images/avatar.jpg",
+    "timeAgo": "12h",
+    "content": "Google mülakatlarında en çok karşılaştığım algoritma tipi: sliding window. Hem açıklamalı örnek sorular hem de çözüm stratejilerini bir araya getirdim. Hazırlananlar için oldukça faydalı olabilir. Kodları GitHub'da bulabilirsiniz.",
+    "likes": 2000,
+    "comments": 400,
+    "shares": 150
+  },
+  {
+    "id": "11",
+    "communityName": "UI/UX Tasarım",
+    "userTitle": "Senior Product Designer",
+    "userAvatar": "/images/avatar.jpg",
+    "timeAgo": "3d",
+    "content": "Figma ile iOS 17 uyumlu bir mobil tasarım kiti hazırladım. İçinde hazır buton stilleri, grid sistemleri ve UI bileşenleri yer alıyor. Özellikle dark mode uyumluluğu olan bileşenleri test ederek geliştirdim. Dosyayı isteyenlerle paylaşabilirim.",
+    "likes": 950,
+    "comments": 170,
+    "shares": 38
+  },
+  {
+    "id": "12",
+    "communityName": "Yazılım Kariyeri",
+    "userTitle": "Career Coach",
+    "userAvatar": "/images/avatar.jpg",
+    "timeAgo": "1w",
+    "content": "Yeni mezun yazılımcılar için hazırladığım kariyer roadmap'ini paylaştım. Junior pozisyonlar için hangi beceriler aranıyor, nasıl öne çıkabilirsiniz ve LinkedIn profilinizi nasıl optimize etmelisiniz gibi konulara değindim.",
+    "likes": 1350,
+    "comments": 250,
+    "shares": 85
+  }
+]

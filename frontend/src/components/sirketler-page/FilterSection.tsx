@@ -1,4 +1,3 @@
-import { Star } from 'lucide-react'
 import React from 'react'
 
 export default function FilterSection() {
@@ -26,14 +25,6 @@ export default function FilterSection() {
             </div>
 
             <div className="border-t-[1px] border-gray-300"></div>
-
-            <div className='flex flex-col gap-y-4'>
-                <h2 className='text-lg font-semibold'>Şirket puanına göre filtrele</h2>
-                <div className='flex items-center text-sm text-primary gap-x-2'>
-                    {Array.from({ length: 5 }, (_, index) => (
-                        <Star key={index} size={16} fill='blue' className='text-primary' />
-                    ))} ve üstü
-                </div>
-            </div></>
+</>
 )
 }

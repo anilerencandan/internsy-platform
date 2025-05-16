@@ -1,17 +1,28 @@
-import { Bell, CircleUserRound, LogIn, Menu, Search } from "lucide-react";
-import Image from "next/image";
-import Link from "next/link";
+
+import { Bell, CircleUserRound, LogIn, Search } from "lucide-react"
+import Image from "next/image"
+import Link from "next/link"
+import MobileSidebar from "./MobileSideMenu"
 
 interface NavbarProps {
-  flag: boolean;
+  flag: boolean
 }
 
 export default function Navbar({ flag }: NavbarProps) {
+
   return (
-    <div className="w-full flex flex-col max-w-[1280px] mx-auto">
-      <div className="flex items-center justify-between h-16 xl:px-0 px-4 ">
+    <div
+      className={`
+        fixed top-0 left-0 w-full z-30
+        bg-white shadow-md
+        transition-transform duration-300 ease-in-out
+      `}
+    >
+      <div className="flex items-center justify-between h-16 max-w-[1280px] mx-auto px-4">
         {/* Logo */}
-        <Image src={'/images/internsy-logo.svg'} alt={"internsy-logo"} width={120} height={30} />
+        <Link href="/topluluk">
+          <Image src="/images/internsy-logo.svg" alt="internsy-logo" width={120} height={30} />
+        </Link>
 
         {/* Orta Menü */}
         <div className="hidden lg:flex gap-x-4 font-bold text-[16px] text-[#4B5563]">
@@ -24,29 +35,22 @@ export default function Navbar({ flag }: NavbarProps) {
 
         {/* Sağ Menü */}
         {flag ? (
-          <div className="flex items-center  text-gray-600">
+          <div className="flex items-center text-gray-600">
+            <div className="hover:bg-gray-100 rounded-full p-2"><Search /></div>
             <div className="hover:bg-gray-100 rounded-full p-2">
-              <Search  />
-
+              <Link href="/profil/bildirimler"><Bell /></Link>
             </div>
-            <div className="hover:bg-gray-100 rounded-full p-2">
-            <Bell />
-
-            </div>
-            <div className="hover:bg-gray-100 rounded-full p-2">
-            <CircleUserRound />
-            </div>
-            <div className="hover:bg-gray-100 rounded-full p-2">
-            <Menu />
-            </div>
+            <Link href="/profil" className="hover:bg-gray-100 rounded-full p-2">
+              <CircleUserRound />
+            </Link>
+            <div className="hover:bg-gray-100 rounded-full"><MobileSidebar /></div>
           </div>
         ) : (
-          <div className="hidden lg:flex items-center border border-black p-2 rounded-[10px] gap-x-2 font-bold text-sm text-black cursor-pointer hover:bg-gray-100 transition">
-            <LogIn size={18} />
-            Giriş Yap
+          <div className="hidden lg:flex items-center border p-2 rounded-[10px] gap-x-2 font-bold text-sm cursor-pointer hover:bg-gray-100">
+            <LogIn size={18} /> Giriş Yap
           </div>
         )}
       </div>
     </div>
-  );
+  )
 }

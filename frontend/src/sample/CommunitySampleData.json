@@ -1,0 +1,30 @@
+[
+  {
+    "id": "ai",
+    "name": "Yapay Zeka",
+    "description": "Yapay zeka ve makine öğrenmesi alanında paylaşımlar.",
+    "icon": "BrainCircuit",
+    "followers": "2M"
+  },
+  {
+    "id": "frontend",
+    "name": "Frontend Geliştiricileri",
+    "description": "React, Vue, Tailwind gibi modern UI araçları üzerine sohbet.",
+    "icon": "Code",
+    "followers": "1.3M"
+  },
+  {
+    "id": "cybersec",
+    "name": "Siber Güvenlik",
+    "description": "Etik hacking, CTF ve güvenlik açıkları hakkında tartışmalar.",
+    "icon": "ShieldCheck",
+    "followers": "950K"
+  },
+  {
+    "id": "career",
+    "name": "Yazılım Kariyeri",
+    "description": "Mülakat hazırlığı, CV önerileri ve kariyer planlaması.",
+    "icon": "Briefcase",
+    "followers": "1.8M"
+  }
+]

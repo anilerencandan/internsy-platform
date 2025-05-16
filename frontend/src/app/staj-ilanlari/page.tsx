@@ -1,90 +1,104 @@
-import { Settings2, Star } from 'lucide-react'
-import React from 'react'
-import { FaGoogle } from 'react-icons/fa'
-import { Input } from "@/components/ui/input"
-import { Tabs, TabsContent } from "@/components/ui/tabs"
 import { Search } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import PopularCompanies from "@/components/mulakatlar-page/popular-companies"
+import CompanyJobsCard from "@/components/staj-ilanlari/CompanyJobsCard"
 
-export default function sirketlerPage() {
+const popularCompanies = [
+  {
+    id: "google",
+    name: "Google",
+    logo: "G",
+    rating: 4.2,
+    reviews: 12453,
+    color: "bg-blue-100 text-blue-600",
+  },
+  {
+    id: "microsoft",
+    name: "Microsoft",
+    logo: "M",
+    rating: 4.0,
+    reviews: 9876,
+    color: "bg-green-100 text-green-600",
+  },
+  {
+    id: "amazon",
+    name: "Amazon",
+    logo: "A",
+    rating: 3.9,
+    reviews: 8765,
+    color: "bg-yellow-100 text-yellow-600",
+  },
+  {
+    id: "apple",
+    name: "Apple",
+    logo: "A",
+    rating: 4.1,
+    reviews: 7654,
+    color: "bg-gray-100 text-gray-600",
+  },
+  {
+    id: "meta",
+    name: "Meta",
+    logo: "M",
+    rating: 3.8,
+    reviews: 6543,
+    color: "bg-blue-100 text-blue-600",
+  },
+  {
+    id: "netflix",
+    name: "Netflix",
+    logo: "N",
+    rating: 4.3,
+    reviews: 5432,
+    color: "bg-red-100 text-red-600",
+  },
+]
+
+
+export default function StajIlanlariPage() {
   return (
-    <div className='page gap-y-12 py-6'>
-        <div className="relative z-10 px-4 py-16 md:py-24 max-w-7xl mx-auto">
-          <div className="bg-black/60 p-6 md:p-10 rounded-lg max-w-4xl mx-auto text-center">
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
-            Staj yapacaksın ama maaşlar ne alemde?
-            </h1>
-            <p className="text-white text-lg md:text-xl mb-8 max-w-2xl mx-auto">
-            Internsy ile şirketlerin verdiği stajyer maaşlarını karşılaştır, boş vaatlere kanma.
+    <main className="page-content  xl:px-0 sm:px-4 px-0 sm:pt-4">
+
+      <div className="container mx-auto px-4 py-6">
+        <div className=" mx-auto">
+          <div className="text-center mb-8">
+            <h1 className="text-3xl font-bold mb-4">Staj İlanları</h1>
+            <p className="text-gray-600 mb-6">
+              Binlerce şirketin mülakat süreçleri, soruları ve çalışan deneyimlerini keşfedin
             </p>
-
-            {/* Navigation Tabs */}
-            <Tabs defaultValue="salaries" className="w-full max-w-2xl mx-auto">
-              <TabsContent value="salaries">
-                <div className="flex flex-col md:flex-row">
-                  <Input placeholder="Şirket Ara" className="mb-2 md:mb-0 md:rounded-r-none" />
-                  <Button className="bg-green-500 hover:bg-green-600 md:rounded-l-none">
-                    <Search className="h-5 w-5" />
-                  </Button>
-                </div>
-              </TabsContent>
-            </Tabs>
+            <div className="relative max-w-xl mx-auto">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
+              <Input
+                placeholder="Şirket adı ara (örn. Google, Microsoft, Amazon...)"
+                className="pl-10 py-6 text-lg rounded-lg shadow-sm"
+              />
+            </div>
           </div>
+
+          <div className="mb-10">
+            <h2 className="text-xl font-semibold mb-4">Popüler Şirketler</h2>
+            <PopularCompanies />
+          </div>
+          
+          <div className="felx items-center p-4 border border-gray-300 rounded-lg">
+            <h2 className="text-2xl font-bold pb-4">Staj İlanları</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {popularCompanies.map((company) => (
+                <CompanyJobsCard
+                  key={company.id}
+                  company={company}
+                  jobs={[
+                    { title: "Staj İlanı 1", link: "#" },
+                    { title: "Staj İlanı 2", link: "#" },
+                    { title: "Staj İlanı 3", link: "#" },
+                  ]}
+                />
+              ))}
+            </div>
+          </div>
+          
         </div>
-        <div className='flex flex-col gap-y-2 px-4'>
-            <label className='text-sm' htmlFor="">Aklında bir şirket var mı?</label>
-            <div className='flex items-center gap-x-2'>
-                <input className='bg-gray-100 rounded-full placeholder:text-gray-600 py-2 px-4 w-full' placeholder='Şirket adını yazın' type="text" name="" id="" />
-                <button className='rounded-[8px] bg-black text-white p-2'>Ara</button>
-            </div>
-        </div>
-
-        <div className='flex flex-col gap-y-6 px-4 '>
-            <h1 className='text-2xl font-bold'>Şirketleri Keşfet</h1>
-            
-            <div className='flex items-center justify-between'>
-                <p className='text-sm text-gray-600'>1-10 of 9,990 sonuç</p>
-                <div className='flex gap-x-2 items-center font-semibold'>
-                    Filtre
-                    <Settings2 size={20}/>
-                </div>
-            </div>
-
-            <div className='flex items-center text-sm text-primary gap-x-2'>
-                <div className='flex '>
-                    <Star className='fill-primary text-white' />
-                    <Star className='fill-primary text-white' />
-                    <Star className='fill-primary text-white' />
-                    <Star className='fill-primary text-white' />
-                    <Star className='fill-gray-100 text-white' />
-                </div>
-                ve üstü
-            </div>
-
-            <div className='flex flex-col gap-y-12'>
-                {Array.from({ length: 12 }, (_, index) => (
-                    <div key={index} className='flex flex-col gap-y-4'>
-                        <div className='flex items-center gap-x-2'>
-                            <FaGoogle size={48} className='border-[1.5px] border-gray-400 rounded-sm p-2' />
-                            <p className='font-semibold'>Google</p>
-                            <span className='flex gap-x-1 items-center text-sm text-primary font-semibold'>4.3 <Star className='fill-primary text-white'/></span>
-                        </div>
-
-                        <div className='flex flex-col gap-y-2 text-sm text-gray-700'>
-                            <p>10000+ çalışan · Mountain View. - California</p>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
-                                Placeat tenetur eum quae exercitationem laborum atque magnam ratione reiciendis neque. Explicabo...</p>
-                            <div className='flex items-baseline gap-x-4 mt-2'>
-                                <div className='flex items-baseline justify-start gap-x-2 font-semibold text-lg text-black'>15<span className='text-sm text-primary'>Staj İlanı</span></div>
-                                <div className='flex items-baseline justify-start gap-x-2 font-semibold text-lg text-black'>62<span className='text-sm text-primary'>Görüşler</span></div>
-                            </div>
-                        </div>
-                    </div>
-                ))}
-            </div>
-
-
-        </div>
-    </div>
+      </div>
+    </main>
   )
 }

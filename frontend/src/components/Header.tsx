@@ -2,15 +2,15 @@ import Navbar from "./Navbar";
 import Searchbar from "./Searchbar";
 
 export default function Header() {
-    const isToplulukPage = false;
+    const mobilSearch = false;
     const isLoggedIn = true;
     const bowlFlag = false;
 
     return (
-        <div className="w-full flex flex-col">
+        <div className="page-content w-full flex flex-col">
             <Navbar flag={isLoggedIn} />
-            <div className="border-t-[1px] border-gray-300"></div>
-            {isToplulukPage ? <Searchbar /> : null}
+            <div className=""></div>
+            {mobilSearch ? <Searchbar /> : null}
 
             {bowlFlag ? (
                 
@@ -24,7 +24,7 @@ export default function Header() {
                 </div>
             ) : null}
 
-            <div className="border-t-[1px] border-gray-300"></div>
+            {/* <div className="border-t-[1px] border-gray-300"></div> */}
         </div>
     )
 }

@@ -1,8 +1,7 @@
 import { Settings2, Star } from 'lucide-react'
 import React from 'react'
-import { FaGoogle } from 'react-icons/fa'
-import Link from 'next/link'
 import FilterSection from '@/components/sirketler-page/FilterSection'
+import SirketCard from '@/components/sirketler-page/SirketCard'
 
 export default function sirketlerPage() {
   return (
@@ -20,47 +19,35 @@ export default function sirketlerPage() {
             <FilterSection />
         </div>
 
-        <div className='sm:col-span-8 flex flex-col gap-y-6 px-4'>
-            <h1 className='text-2xl font-bold pt-6'>Şirketleri Keşfet</h1>
+        <div className='sm:col-span-8 flex flex-col gap-y-4 px-4'>
+            <h1 className='text-3xl font-bold '>Şirketleri Keşfet</h1>
             
             <div className='flex items-center justify-between'>
                 <p className='text-sm text-gray-600'>1-10 of 9,990 sonuç</p>
-                <div className='flex gap-x-2 items-center font-semibold'>
+            </div>
+
+            <div className='flex justify-between items-center text-sm text-black gap-x-2'>
+                <div className='flex items-center gap-x-2'>
+                    <div className='flex items-center gap-x-1'>
+
+                        <Star className=' fill-yellow-400 text-white' />
+                        <Star className=' fill-yellow-400 text-white' />
+                        <Star className=' fill-yellow-400 text-white' />
+                        <Star className=' fill-yellow-400 text-white' />
+                        <Star className=' fill-yellow-400 text-white' />
+                    </div>
+                    ve üstü
+                </div>
+                <div className='flex gap-x-2 items-center font-semibold text-black'>
                     Filtre
                     <Settings2 size={20}/>
                 </div>
+
             </div>
 
-            <div className='flex items-center text-sm text-primary gap-x-2'>
-                <div className='flex '>
-                    <Star className='fill-primary text-white' />
-                    <Star className='fill-primary text-white' />
-                    <Star className='fill-primary text-white' />
-                    <Star className='fill-primary text-white' />
-                    <Star className='fill-gray-100 text-white' />
-                </div>
-                ve üstü
-            </div>
-
-            <div className=' flex flex-col gap-y-12 '>
+            <div className=' flex flex-col gap-y-6 '>
                 {Array.from({ length: 12 }, (_, index) => (
-                    <Link key={index} href={'/sirket'} className='flex flex-col gap-y-4'>
-                        <div className='flex items-center gap-x-2'>
-                            <FaGoogle size={48} className='border-[1.5px] border-gray-400 rounded-sm p-2' />
-                            <p className='font-semibold'>Google</p>
-                            <span className='flex gap-x-1 items-center text-sm text-primary font-semibold'>4.3 <Star className='fill-primary text-white'/></span>
-                        </div>
-
-                        <div className='flex flex-col gap-y-2 text-sm text-gray-700'>
-                            <p>10000+ çalışan · Mountain View. - California</p>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
-                                Placeat tenetur eum quae exercitationem laborum atque magnam ratione reiciendis neque. Explicabo...</p>
-                            <div className='flex items-baseline gap-x-4 mt-2'>
-                                <div className='flex items-baseline justify-start gap-x-2 font-semibold text-lg text-black'>15<span className='text-sm text-primary'>Staj İlanı</span></div>
-                                <div className='flex items-baseline justify-start gap-x-2 font-semibold text-lg text-black'>62<span className='text-sm text-primary'>Görüşler</span></div>
-                            </div>
-                        </div>
-                    </Link>
+                    <SirketCard key={index} />
                 ))}
             </div>
 
