@@ -9,7 +9,7 @@ import PostStars from "@/components/company-page/PostStars"; // yeni eklenen bil
 
 export default function CompanyPost() {
   return (
-    <div className="flex flex-col gap-y-4 p-4 border-b-[1px] border-gray-300">
+    <div className="flex flex-col gap-y-4 py-4 border-b-[1px] border-gray-300">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-x-1 relative">
           <p className="text-base font-semibold">4.0</p>

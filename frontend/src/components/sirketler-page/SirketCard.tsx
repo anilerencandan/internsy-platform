@@ -13,12 +13,10 @@ export default function SirketCard() {
             >
               G
             </div>
-            <div className='flex flex-col'>
-                <h3 className='font-medium'>Google</h3>
-                <span className='flex gap-x-1 items-center text-sm text-primary font-semibold'>
-                    4.3 <Star size={16} className='fill-yellow-400 text-yellow-400'/>
-                                    <span className="mx-1">•</span>
-                <span className='text-gray-600 flex items-center gap-x-2'><p className='text-primary '>12,345</p> değerlendirme</span>
+            <div className='flex items-center gap-x-1'>
+                <h3 className='font-medium'>Google</h3><span className="mx-1">•</span>
+                <span className='flex gap-x-1 items-center text-sm text-black font-semibold'>
+                    4.3 <Star size={16} className='fill-yellow-400 text-yellow-400'/>                                    
 
                 </span>
             </div>
@@ -29,8 +27,10 @@ export default function SirketCard() {
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
                 Placeat tenetur eum quae exercitationem laborum atque magnam ratione reiciendis neque. Explicabo...</p>
             <div className='flex items-baseline gap-x-4 mt-2'>
-                <div className='flex items-baseline justify-start gap-x-2 font-semibold text-lg text-black'>15<span className='text-sm text-primary'>Staj İlanı</span></div>
-                <div className='flex items-baseline justify-start gap-x-2 font-semibold text-lg text-black'>62<span className='text-sm text-primary'>Görüşler</span></div>
+                <div className='flex items-baseline justify-start gap-x-2 font-bold text-lg text-primary'>15<span className='text-sm font-bold text-black'>Staj İlanı</span></div>
+                <div className='flex items-baseline justify-start gap-x-2 font-bold text-lg text-primary'>62<span className='text-sm font-bold text-black'>Çalışan Görüşü</span></div>
+                <div className='flex items-baseline justify-start gap-x-2 font-bold text-lg text-primary'>34<span className='text-sm font-bold text-black'>Mülakat Deneyimi</span></div>
+
             </div>
         </div>
         </div>
