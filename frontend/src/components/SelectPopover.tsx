@@ -2,7 +2,6 @@
 
 import { useState } from "react"
 import { Input } from "@/components/ui/input"
-import { cn } from "@/lib/utils"
 
 const cities = [
   "İstanbul", "Ankara", "İzmir", "Bursa", "Antalya", "Adana", "Eskişehir", "Konya"

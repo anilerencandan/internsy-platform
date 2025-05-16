@@ -115,8 +115,8 @@ export default function InterviewExperiences({ company }: { company: string }) {
       </div>
 
       <div className="space-y-6">
-        {interviewExperiences.map((experience) => (
-                <InterviewExperiencePost experience={experience} />
+        {interviewExperiences.map((experience,index) => (
+                <InterviewExperiencePost key={index} experience={experience} />
         ))}
 
         <div className="flex justify-center">

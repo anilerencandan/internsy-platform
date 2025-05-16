@@ -1,22 +1,11 @@
-'use client'
 import EmailPasswordDialog from '@/components/profil-page/EditMailDialog'
 import TabsSection from '@/components/profil-page/TabsSection'
-import { Edit } from 'lucide-react'
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
 import React from 'react'
 import { FaGoogle } from 'react-icons/fa'
 
-const tabs = [
-    { label: "Profil", href: "/profil" },
-    { label: "Katkilar", href: "/profil/katkilar" },
-    { label: "Bildirimler", href: "/profil/bildirimler" },
-    { label: "Ayarlar", href: "/profil/ayarlar" },
-  ]
   
 
 export default function Page() {
-    const Path = usePathname()
     
   return (
     <div className='page-content '>

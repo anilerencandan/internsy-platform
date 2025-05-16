@@ -1,10 +1,8 @@
 import { Ellipsis, Heart, MessageCircle, User2 } from 'lucide-react'
-import Image from 'next/image'
 import React from 'react'
 import { FaShare } from 'react-icons/fa'
 import { Button } from '../ui/button'
 import { CommunityPostType } from '@/models/CommunityPost'
-import UserAvatar from '../UserAvatar'
 import { AnonimAvatar } from '../AnonimAvatar'
 
 export default function CommunityPost({ post }: { post: CommunityPostType }) {

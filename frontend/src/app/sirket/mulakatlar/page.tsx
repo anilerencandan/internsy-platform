@@ -1,18 +1,11 @@
 import {
   Search,
-  MapPin,
-  MoreHorizontal,
-  ThumbsUp,
-  Share2,
   X,
   Info,
   ChevronDown,
-  ChevronRight,
-  MessageSquare,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { Avatar } from "@/components/ui/avatar"
 import InterviewExperiencePost from "@/components/mulakatlar-page/InterviewExperience"
 
 
@@ -90,31 +83,16 @@ const interviewExperiences = [
   },
 ]
 
-interface InterviewExperience {
-    id: number
-    position: string
-    date: string
-    experience: string
-    difficulty: string
-    offer: boolean
-    content: string
-    likes: number
-    comments: number
-    questions: {
-        question: string
-        answer: string
-    }[]
-}
 
 
-export default function Home({company}: { company: string }) {
+
+export default function Home() {
   
   return (
-        <div className="">
-          {/* Company Header */}
+        <div >
           
           {/* Interview Content */}
-          <div className="">
+          <div >
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-2xl font-bold">Google Mülakat Soruları</h2>
               <div className="flex flex-col h-full">
@@ -217,8 +195,8 @@ export default function Home({company}: { company: string }) {
 
             {/* Interview List */}
             <div className="flex flex-col border-t">
-              {interviewExperiences.map((experience) => (
-                <InterviewExperiencePost experience={experience} />
+              {interviewExperiences.map((experience, index) => (
+                <InterviewExperiencePost key={index} experience={experience} />
               ))}
             </div>
           </div>

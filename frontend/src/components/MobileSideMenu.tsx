@@ -5,8 +5,6 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { LogOut, Menu } from "lucide-react"; // Hamburger ikonu
 import Link from "next/link";
 import { Separator } from "@/components/ui/separator";
-import { Button } from "./ui/button";
-import { Avatar } from "./ui/avatar";
 import UserAvatar from "./UserAvatar";
 
 export default function MobileSidebar() {

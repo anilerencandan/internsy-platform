@@ -1,10 +1,8 @@
-"use client"
 
 import { Bell, CircleUserRound, LogIn, Search } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import MobileSidebar from "./MobileSideMenu"
-import { useEffect, useRef, useState } from "react"
 
 interface NavbarProps {
   flag: boolean

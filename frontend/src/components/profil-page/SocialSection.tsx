@@ -18,7 +18,7 @@ interface SocialSectionProps {
   type: "company" | "community" | "post"
 }
 
-export default function SocialSection({ title, items, type }: SocialSectionProps) {
+export default function SocialSection({  items }: SocialSectionProps) {
   // Her bölüm için sadece 4 kart gösteriyoruz
   const displayedItems = items.slice(0, 4)
 

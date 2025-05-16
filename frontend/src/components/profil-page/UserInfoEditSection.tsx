@@ -4,20 +4,10 @@ import { useState } from "react"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
-import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover"
-import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem } from "@/components/ui/command"
-import { Check, ChevronLeft, ChevronsUpDown } from "lucide-react"
-import { cn } from "@/lib/utils"
+import {  ChevronLeft } from "lucide-react"
 import SelectPopover from "../SelectPopover"
 
-const universities = ["Boğaziçi Üniversitesi", "ODTÜ", "İTÜ", "Koç Üniversitesi","İTÜ","İTÜ","İTÜ","İTÜ","İTÜ","İTÜ",]
-const cities = ["İstanbul", "Ankara", "İzmir", "Bursa"]
-const departments = ["Bilgisayar Mühendisliği", "Elektrik-Elektronik", "Endüstri Mühendisliği"]
-
 export default function EditProfilePage({onToggleEditMode}: {onToggleEditMode: () => void}) {
-  const [selectedUniversity, setSelectedUniversity] = useState<string | null>(null)
-  const [selectedCity, setSelectedCity] = useState<string | null>(null)
-  const [selectedDepartment, setSelectedDepartment] = useState<string | null>(null)
   const [cvFile, setCvFile] = useState<File | null>(null)
 
   return (

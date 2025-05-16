@@ -12,7 +12,7 @@ interface CompanyCardProps {
     }[]
 }
 
-export default function CompanyJobsCard({company, jobs}: CompanyCardProps) {
+export default function CompanyJobsCard({company}: CompanyCardProps) {
   return (
         <Link
           key={company.id}

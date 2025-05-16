@@ -1,21 +1,11 @@
-'use client'
 import KatkilarCard from '@/components/profil-page/KatkilarCard'
 import TabsSection from '@/components/profil-page/TabsSection'
-import { Banknote, BriefcaseBusiness, ChevronRight, Star } from 'lucide-react'
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import { Banknote, BriefcaseBusiness, Star } from 'lucide-react'
 import React from 'react'
 
-const tabs = [
-    { label: "Profil", href: "/profil" },
-    { label: "Katkilar", href: "/profil/katkilar" },
-    { label: "Bildirimler", href: "/profil/bildirimler" },
-    { label: "Ayarlar", href: "/profil/ayarlar" },
-  ]
-  
+
 
 export default function Page() {
-      const Path = usePathname()
     
   return (
     <div className='page-content'>

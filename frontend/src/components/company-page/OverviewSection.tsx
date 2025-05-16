@@ -26,7 +26,7 @@ export default function OverviewSection() {
       </div>
 
         {Array.from({ length: 5 }, (_, index) => (
-          <CompanyPost/>
+          <CompanyPost key={index}/>
         ))}
 
 

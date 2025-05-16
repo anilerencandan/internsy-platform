@@ -2,7 +2,6 @@
 import TabsSection from '@/components/profil-page/TabsSection'
 import UserInfoEditSection from '@/components/profil-page/UserInfoEditSection'
 import UserInformationSection from '@/components/profil-page/UserInformationSection'
-import { Edit, User } from 'lucide-react'
 import React, { useState } from 'react'
 
 export default function Page() {

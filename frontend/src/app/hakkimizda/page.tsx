@@ -1,5 +1,4 @@
 import Image from "next/image"
-import AboutTabs from "@/components/hakkimizda-page/AboutBar" // 📥 İMPORT BURADA
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 

@@ -1,7 +1,5 @@
 import { Settings2, Star } from 'lucide-react'
 import React from 'react'
-import { FaGoogle } from 'react-icons/fa'
-import Link from 'next/link'
 import FilterSection from '@/components/sirketler-page/FilterSection'
 import SirketCard from '@/components/sirketler-page/SirketCard'
 

@@ -72,7 +72,7 @@ interface ContentCardProps {
   popularity: number
 }
 
-function ContentCard({ title, description, image, footer, category, popularity }: ContentCardProps) {
+function ContentCard({ title, description, footer, category, popularity }: ContentCardProps) {
   return (
     <Link href={`/kariyer-rehberi/egitimler/${title.replace(/\s+/g, "-").toLowerCase()}`} className="w-full">
     <Card className="h-full flex flex-col">

@@ -5,9 +5,9 @@ import { Mail, Phone, MapPin, Send, CheckCircle } from "lucide-react"
 // import { contactFormAction } from "@/app/bize-ulasin/actions"
 
 export default function BizeUlasinPage() {
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [isSuccess, setIsSuccess] = useState(false)
-  const [error, setError] = useState<string | null>(null)
+  const [isSubmitting] = useState(false)
+  const isSuccess = useState(false)
+  const [error] = useState<string | null>(null)
 
 
   //   try {
@@ -166,7 +166,7 @@ export default function BizeUlasinPage() {
                     <a href="/gizlilik-politikasi" className="text-blue-600 hover:underline">
                       Gizlilik Politikası
                     </a>
-                    'nı okudum ve kabul ediyorum.
+                    &apos;nı okudum ve kabul ediyorum.
                   </label>
                 </div>
 
