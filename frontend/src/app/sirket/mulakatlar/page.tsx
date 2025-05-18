@@ -5,6 +5,7 @@ import {
   ChevronDown,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import DifficultyScore from "@/components/company-page/DifficultyScore"
 import { Badge } from "@/components/ui/badge"
 import InterviewExperiencePost from "@/components/mulakatlar-page/InterviewExperience"
 
@@ -96,19 +97,13 @@ export default function Home() {
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-2xl font-bold">Google Mülakat Soruları</h2>
               <div className="flex flex-col h-full">
-                <span className="text-sm text-gray-500">Mayıs 6, 2025 tarihinde güncellendi</span>
+                <span className="text-xs text-gray-500">Mayıs 6, 2025 tarihinde güncellendi</span>
               </div>
             </div>
 
             {/* Difficulty Rating */}
             <div className="mb-6  ">
-              <div className="flex items-baseline gap-2 mb-2">
-                <span className="text-5xl font-bold">3.1</span>
-                <div className="flex items-center">
-                  <span className="text-lg text-gray-600">/5 zorluk seviyesi</span>
-                  <Info className="h-4 w-4 text-gray-400 ml-1" />
-                </div>
-              </div>
+            <DifficultyScore score={3.4} />
 
               <div>
                 <h4 className="text-lg font-semibold mb-3">Genel Mülakat Memnuniyeti</h4>
@@ -154,9 +149,6 @@ export default function Home() {
                 </Badge>
                 <Badge variant="outline" className="py-2 px-3 rounded-full bg-gray-50 hover:bg-gray-100">
                   Intern (674)
-                </Badge>
-                <Badge variant="outline" className="py-2 px-3 rounded-full bg-gray-50 hover:bg-gray-100">
-                  Software engineer(internship) (668)
                 </Badge>
               </div>
               <Button variant="ghost" className="text-green-600 hover:text-green-700 p-0 h-auto flex items-center">

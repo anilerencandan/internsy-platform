@@ -18,7 +18,7 @@ export default function MulakatlarPage() {
           <div className="w-full md:w-1/3 text-center ">
             <h1 className="text-3xl font-bold mb-4">Şirket Mülakat Deneyimleri</h1>
             <p className="text-gray-600 mb-6">
-              Binlerce şirketin mülakat süreçleri, soruları ve çalışan deneyimlerini keşfedin
+            Gerçek mülakat soruları, aday yorumları ve süreç bilgileriyle mülakatlara daha hazırlıklı gir.
             </p>
             <div className="relative max-w-xl mx-auto ">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />

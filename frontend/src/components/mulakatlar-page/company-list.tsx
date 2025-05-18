@@ -96,62 +96,91 @@ const companies = [
 
 export default function CompanyList() {
   return (
-    <div className="bg-white rounded-lg border border-gray-200 overflow-x-auto">
-      <table className="min-w-full divide-y divide-gray-200">
-        <thead className="bg-gray-50">
-          <tr>
-            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Şirket
-            </th>
-            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Değerlendirme
-            </th>
-            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Zorluk
-            </th>
-            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Değerlendirme Sayısı
-            </th>
-          </tr>
-        </thead>
-        <tbody className="bg-white divide-y divide-gray-200">
-          {companies.map((company) => (
-            <tr key={company.id} className="hover:bg-gray-50">
-              <td className="px-6 py-4 whitespace-nowrap">
-                <Link href={'sirket/mulakatlar'}  className="flex items-center">
-                  <div
-                    className={`w-10 h-10 ${company.color} rounded-lg flex items-center justify-center text-lg font-bold flex-shrink-0 mr-3`}
-                  >
-                    {company.logo}
-                  </div>
-                  <div className="font-medium">{company.name}</div>
-                </Link>
-              </td>
-              <td className="px-6 py-4 whitespace-nowrap">
-                <div className="flex items-center">
-                  <Star className="h-4 w-4 fill-yellow-400 text-yellow-400 mr-1" />
-                  <span>{company.rating}</span>
-                </div>
-              </td>
-              <td className="px-6 py-4 whitespace-nowrap">
-                <div className="flex items-center">
-                  <div className="h-2 w-24 bg-gray-200 rounded-full overflow-hidden mr-2">
-                    <div
-                      className="h-full bg-yellow-400 rounded-full"
-                      style={{ width: `${(company.difficulty / 5) * 100}%` }}
-                    ></div>
-                  </div>
-                  <span>{company.difficulty}/5</span>
-                </div>
-              </td>
-              <td className="px-6 py-4 whitespace-nowrap text-gray-600">{company.reviews.toLocaleString()}</td>
+    <>
+      {/* Masaüstü görünüm (table) */}
+      <div className="bg-white rounded-lg border border-gray-200 overflow-x-auto hidden sm:block">
+        <table className="min-w-full divide-y divide-gray-200">
+          <thead className="bg-gray-50">
+            <tr>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Şirket</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Değerlendirme</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Mülakat Zorluğu</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
-      <div className="px-6 py-4 border-t border-gray-200 flex justify-center items-center ">
-        <button className="text-blue-600 hover:text-blue-800 font-medium">Daha Fazla Göster</button>
+          </thead>
+          <tbody className="bg-white divide-y divide-gray-200">
+            {companies.map((company) => (
+              <tr key={company.id} className="hover:bg-gray-50">
+                <td className="px-6 py-4 whitespace-nowrap">
+                  <Link href={`/sirket/${company.id}`} className="flex items-center">
+                    <div className={`w-10 h-10 ${company.color} rounded-lg flex items-center justify-center text-lg font-bold mr-3`}>
+                      {company.logo}
+                    </div>
+                    <div className="font-medium">{company.name}</div>
+                  </Link>
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap">
+                  <div className="flex items-center">
+                    <Star className="h-4 w-4 fill-yellow-400 text-yellow-400 mr-1" />
+                    <span>{company.rating}</span>
+                  </div>
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap">
+                  <div className="flex items-center">
+                    <div className="h-2 w-24 bg-gray-200 rounded-full overflow-hidden mr-2">
+                      <div
+                        className="h-full bg-yellow-400 rounded-full"
+                        style={{ width: `${(company.difficulty / 5) * 100}%` }}
+                      ></div>
+                    </div>
+                    <span>{company.difficulty}/5</span>
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
-    </div>
+
+      {/* Mobil görünüm (kart) */}
+      <div className="sm:hidden flex flex-col gap-y-4">
+        {companies.map((company) => (
+          <Link
+            href={`/sirket/${company.id}`}
+            key={company.id}
+            className="border border-gray-200 rounded-lg p-4 shadow-sm bg-white"
+          >
+            <div className="flex items-center gap-x-4 mb-2">
+              <div className={`w-10 h-10 ${company.color} rounded-lg flex items-center justify-center text-lg font-bold`}>
+                {company.logo}
+              </div>
+              <div className="font-semibold text-lg">{company.name}</div>
+            </div>
+
+            <div className="flex items-center text-sm mb-1">
+              <Star className="h-4 w-4 fill-yellow-400 text-yellow-400 mr-1" />
+              <span>{company.rating} değerlendirme</span>
+            </div>
+
+            <div className="flex items-center text-sm p-2">
+              <span className="mr-2">Mülakat Zorluğu</span>
+              <div className="flex-1 h-2 bg-gray-200 rounded-full overflow-hidden">
+                <div
+                  className="h-full bg-yellow-400 rounded-full"
+                  style={{ width: `${(company.difficulty / 5) * 100}%` }}
+                ></div>
+              </div>
+              <span className="ml-2">{company.difficulty}/5</span>
+            </div>
+          </Link>
+        ))}
+      </div>
+
+      {/* Daha Fazla Göster Butonu (ortak) */}
+      <div className="flex justify-center items-center mb-2 mt-2">
+        <div className=" w-fit border border-white p-2 rounded-md bg-primary">
+          <button className="text-white hover:text-gray-100 font-medium">Daha Fazla Göster</button>
+        </div>
+      </div>
+    </>
   )
 }

@@ -3,6 +3,9 @@ import { Button } from '../ui/button'
 import { MessageSquare, MoreHorizontal, Share2, ThumbsUp } from 'lucide-react'
 import { Badge } from '../ui/badge'
 import { Avatar } from '../ui/avatar'
+import { HeartHandshake } from "lucide-react"
+import { FaShare } from "react-icons/fa6"
+
 
 interface InterviewExperience {
     id: number
@@ -25,7 +28,7 @@ export default function InterviewExperiencePost({experience}: { experience: Inte
               <div className="">
 
               {/* Interview Item */}
-              <div className=" border-b py-6">
+              <div className=" border-b py-4">
                 <div className="flex justify-between items-start mb-4">
                   <h3 className="text-2xl font-semibold">Senior Software Engineer Interview</h3>
                   <div className="flex items-center">
@@ -62,7 +65,7 @@ export default function InterviewExperiencePost({experience}: { experience: Inte
                   <span className="font-medium">Anonymous Interview Candidate</span>
                 </div>
 
-                <div className="flex items-center gap-4 mb-4">
+                <div className="flex items-center gap-4 mb-2">
                               <div className="flex flex-wrap gap-2 mb-4">
               <Badge
                 variant={experience.experience === "Pozitif" ? "outline" : "secondary"}
@@ -132,23 +135,22 @@ export default function InterviewExperiencePost({experience}: { experience: Inte
                   </div>
                 </div>
 
-            <div className="flex items-center gap-4 pt-2 border-t border-gray-100">
-              <Button variant="ghost" size="sm" className="text-gray-600">
-                <ThumbsUp className="h-4 w-4 mr-1" />
-                <span>{experience.likes}</span>
-              </Button>
-              <Button variant="ghost" size="sm" className="text-gray-600">
-                <MessageSquare className="h-4 w-4 mr-1" />
-                <span>{experience.comments} Yorum</span>
-              </Button>
-              <Button variant="ghost" size="sm" className="text-gray-600">
-                <Share2 className="h-4 w-4 mr-1" />
-                <span>Paylaş</span>
-              </Button>
-              {/* <Button variant="outline" size="sm" className="ml-auto">
-                Yorum Yap
-              </Button> */}
-            </div>
+                <div className="flex items-center justify-between pt-2 pb-2">
+                  {/* Sol taraf: Butonlar */}
+                  <div className="flex gap-x-8 items-center text-sm text-gray-600">
+                    <button className="flex items-center gap-x-2 hover:text-black transition">
+                      <HeartHandshake size={16} /> Yardımcı Oldu
+                    </button>
+                    <button className="flex items-center gap-x-2 hover:text-black transition">
+                      <FaShare size={16} /> Paylaş
+                    </button>
+                  </div>
+
+                  {/* Sağ taraf: Yardımcı oldu sayısı */}
+                  <div className="flex items-center gap-x-2 text-sm font-semibold text-gray-600">
+                    <HeartHandshake fill="#b5e550" size={16} /> 3829
+                  </div>
+                </div>
               </div>
             </div>
   )

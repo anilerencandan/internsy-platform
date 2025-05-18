@@ -69,7 +69,7 @@ export default function sirketlerPage() {
           {/* Sol Görsel */}
           <div className="hidden md:block w-full md:w-1/3 px-2">
             <img
-              src="/images/staj1.svg"
+              src="/images/sirketler1.svg"
               alt="Staj öğrenci"
               className="w-full h-auto"
             />
@@ -79,7 +79,7 @@ export default function sirketlerPage() {
           <div className="w-full md:w-1/3 text-center">
             <h1 className="text-3xl font-bold mb-4">Şirketler</h1>
             <p className="text-gray-600 mb-6">
-              Binlerce şirketteki güncel staj ilanlarını ve başvuru detaylarını keşfedin.
+            Farklı şirketlerin puanlarını ve stajyer görüşlerini inceleyerek sana en uygun staj yerini bul.
             </p>
             <div className="relative max-w-xl mx-auto">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
@@ -93,16 +93,11 @@ export default function sirketlerPage() {
           {/* Sağ Görsel */}
           <div className="hidden md:block w-full md:w-1/3 px-2">
             <img
-              src="/images/staj2.svg"
+              src="/images/sirketler2.svg"
               alt="Ofiste çalışan öğrenci"
               className="w-full h-auto"
             />
           </div>
-        </div>
-
-        <div className="mb-10">
-            <h2 className="text-xl font-semibold mb-4">Mülakat İstatistikleri</h2>
-            <CompaniesStats />
         </div>
 
         {/* Popüler Şirketler */}

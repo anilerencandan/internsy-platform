@@ -24,8 +24,6 @@ export default function SeninIcinTopluluklarCard() {
     <div className='flex flex-col gap-y-4 rounded-lg overflow-hidden'>
       <div className='flex flex-col pt-4 rounded-lg overflow-hidden border border-gray-300'>
         <h2 className='text-lg font-semibold px-4'>Senin için Topluluklar</h2>
-        <a href="" className='text-primary font-semibold p-4 border-b border-gray-300'>Toplulukları Keşfet</a>
-
         {topluluklar.map((topluluk) => (
           <div key={topluluk.id} className='p-4 flex gap-x-2 border-b border-gray-300 w-full hover:bg-gray-100'>
             <div className='hidden xl:flex flex-col items-center text-xs font-bold gap-y-1 overflow-hidden shrink-0 text-gray-400'>

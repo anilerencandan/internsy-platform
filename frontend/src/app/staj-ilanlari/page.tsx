@@ -72,8 +72,7 @@ export default function StajIlanlariPage() {
           <div className="w-full md:w-1/3 text-center">
             <h1 className="text-3xl font-bold mb-4">Staj İlanları</h1>
             <p className="text-gray-600 mb-6">
-              Binlerce şirketteki güncel staj ilanlarını ve başvuru detaylarını keşfedin.
-            </p>
+            Şirketlerin sunduğu güncel staj fırsatlarını keşfet, başvuru koşullarını ve detaylarını kolayca öğren.            </p>
             <div className="relative max-w-xl mx-auto">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
               <Input

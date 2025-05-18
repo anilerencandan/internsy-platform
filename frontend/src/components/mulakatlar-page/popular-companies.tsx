@@ -58,7 +58,7 @@ export default function PopularCompanies() {
       {popularCompanies.map((company) => (
         <Link
           key={company.id}
-          href={`/sirket/mulakatlar`}
+          href={`/sirket`}
           className="bg-white rounded-lg border border-gray-200 p-4 hover:shadow-md transition-shadow"
         >
           <div className="flex items-center gap-3">
