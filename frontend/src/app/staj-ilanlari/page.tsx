@@ -54,17 +54,25 @@ const popularCompanies = [
   },
 ]
 
-
 export default function StajIlanlariPage() {
   return (
-    <main className="page-content  xl:px-0 sm:px-4 px-0 sm:pt-4">
+    <main className="page-content xl:px-0 px-4  sm:pt-4">
+      <div className=" mx-auto py-6">
+        <div className="flex items-center justify-between flex-wrap gap-y-6">
+          {/* Sol Görsel */}
+          <div className="hidden md:block w-full md:w-1/3 px-2">
+            <img
+              src="/images/staj1.svg"
+              alt="Staj öğrenci"
+              className="w-full h-auto"
+            />
+          </div>
 
-      <div className="container mx-auto px-4 py-6">
-        <div className=" mx-auto">
-          <div className="text-center mb-8">
+          {/* Orta İçerik */}
+          <div className="w-full md:w-1/3 text-center">
             <h1 className="text-3xl font-bold mb-4">Staj İlanları</h1>
             <p className="text-gray-600 mb-6">
-              Binlerce şirketin mülakat süreçleri, soruları ve çalışan deneyimlerini keşfedin
+              Binlerce şirketteki güncel staj ilanlarını ve başvuru detaylarını keşfedin.
             </p>
             <div className="relative max-w-xl mx-auto">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
@@ -75,28 +83,32 @@ export default function StajIlanlariPage() {
             </div>
           </div>
 
-          <div className="mb-10">
-            <h2 className="text-xl font-semibold mb-4">Popüler Şirketler</h2>
-            <PopularCompanies />
+          {/* Sağ Görsel */}
+          <div className="hidden md:block w-full md:w-1/3 px-2">
+            <img
+              src="/images/staj2.svg"
+              alt="Ofiste çalışan öğrenci"
+              className="w-full h-auto"
+            />
           </div>
-          
-          <div className="felx items-center p-4 border border-gray-300 rounded-lg">
-            <h2 className="text-2xl font-bold pb-4">Staj İlanları</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {popularCompanies.map((company) => (
-                <CompanyJobsCard
-                  key={company.id}
-                  company={company}
-                  jobs={[
-                    { title: "Staj İlanı 1", link: "#" },
-                    { title: "Staj İlanı 2", link: "#" },
-                    { title: "Staj İlanı 3", link: "#" },
-                  ]}
-                />
-              ))}
-            </div>
+        </div>
+
+        {/* Staj İlanları */}
+        <div className="flex flex-col gap-y-6 p-4 ">
+          <h2 className="text-2xl font-bold">Staj İlanları</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {popularCompanies.map((company) => (
+              <CompanyJobsCard
+                key={company.id}
+                company={company}
+                jobs={[
+                  { title: "Staj İlanı 1", link: "#" },
+                  { title: "Staj İlanı 2", link: "#" },
+                  { title: "Staj İlanı 3", link: "#" },
+                ]}
+              />
+            ))}
           </div>
-          
         </div>
       </div>
     </main>

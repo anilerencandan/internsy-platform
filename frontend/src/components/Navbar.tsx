@@ -20,7 +20,7 @@ export default function Navbar({ flag }: NavbarProps) {
     >
       <div className="flex items-center justify-between h-16 max-w-[1280px] mx-auto px-4">
         {/* Logo */}
-        <Link href="/topluluk">
+        <Link href="/">
           <Image src="/images/internsy-logo.svg" alt="internsy-logo" width={120} height={30} />
         </Link>
 

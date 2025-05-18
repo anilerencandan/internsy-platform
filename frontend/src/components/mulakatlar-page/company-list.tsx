@@ -149,7 +149,7 @@ export default function CompanyList() {
           ))}
         </tbody>
       </table>
-      <div className="px-6 py-4 border-t border-gray-200">
+      <div className="px-6 py-4 border-t border-gray-200 flex justify-center items-center ">
         <button className="text-blue-600 hover:text-blue-800 font-medium">Daha Fazla Göster</button>
       </div>
     </div>
