@@ -7,7 +7,7 @@ export default function LandingPage() {
     <div className="flex flex-col items-center ">
       <div className="flex flex-col">
         <img src="/images/landing-page-picture-1.svg" alt="landing-page-picture-1" className="flex lg:hidden "/>
-        <h1 className="text-3xl sm:text-5xl font-bold text-primary p-4 text-center lg:pt-12 lg:pb-8">Staj mı? Merak etme, buradayız.</h1>
+        <h1 className="text-3xl sm:text-5xl font-bold text-primary-dark p-4 text-center lg:pt-12 lg:pb-8">Staj mı? Merak etme, buradayız.</h1>
       </div>
       
       <div className="flex items-center max-w-[1280px] mx-auto lg:pb-8">

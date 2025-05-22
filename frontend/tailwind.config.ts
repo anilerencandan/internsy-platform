@@ -12,6 +12,18 @@ const config: Config = {
         'var(--font-open-sans)',
         'sans-serif'
       ],
+      sans: [
+        "Inter",
+        "ui-sans-serif",
+        "system-ui",
+        "-apple-system",
+        "BlinkMacSystemFont",
+        "Segoe UI",
+        "Roboto",
+        "Helvetica Neue",
+        "Arial",
+        "sans-serif",
+      ],
       bebas: [
         'var(--font-bebas)',
         'sans-serif'

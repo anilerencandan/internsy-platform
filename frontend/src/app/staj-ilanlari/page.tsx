@@ -2,6 +2,8 @@ import { Search } from "lucide-react"
 import { Input } from "@/components/ui/input"
 import PopularCompanies from "@/components/mulakatlar-page/popular-companies"
 import CompanyJobsCard from "@/components/staj-ilanlari/CompanyJobsCard"
+import CompanyList from "@/components/mulakatlar-page/company-list"
+
 
 const popularCompanies = [
   {
@@ -94,7 +96,7 @@ export default function StajIlanlariPage() {
 
         {/* Staj İlanları */}
         <div className="flex flex-col gap-y-6 p-4 ">
-          <h2 className="text-2xl font-bold">Staj İlanları</h2>
+          <h2 className="text-2xl font-bold">Öne Çıkan Şirketler</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {popularCompanies.map((company) => (
               <CompanyJobsCard
@@ -109,6 +111,21 @@ export default function StajIlanlariPage() {
             ))}
           </div>
         </div>
+      </div>
+      <div>
+        <div className="flex justify-between items-center mb-4">
+          <h2 className="text-xl font-semibold">Tüm Şirketler</h2>
+          <div className="flex items-center gap-2">
+            <span className="text-sm text-gray-500">Sırala:</span>
+            <select className="text-sm border rounded-md px-2 py-1">
+              <option>Popülerlik</option>
+              <option>Puan (Yüksek-Düşük)</option>
+              <option>Puan (Düşük-Yüksek)</option>
+              <option>A-Z</option>
+            </select>
+          </div>
+        </div>
+        <CompanyList />
       </div>
     </main>
   )

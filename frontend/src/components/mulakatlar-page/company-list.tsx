@@ -176,10 +176,12 @@ export default function CompanyList() {
       </div>
 
       {/* Daha Fazla Göster Butonu (ortak) */}
-      <div className="flex justify-center items-center mb-2 mt-2">
-        <div className=" w-fit border border-white p-2 rounded-md bg-primary">
-          <button className="text-white hover:text-gray-100 font-medium">Daha Fazla Göster</button>
-        </div>
+      <div className="flex justify-center items-center my-4">
+        <Link href="/tum-ilanlar">
+          <div className="w-fit px-4 py-2 rounded-md text-primary hover:text-primary-light font-medium">
+            Daha Fazla Göster
+          </div>
+        </Link>
       </div>
     </>
   )

@@ -39,7 +39,8 @@ main {
 @layer base {
   :root {
     --radius: 0.5rem;
-    --primary: 222 89% 53%; /* Örnek: mavi */
+    --primary: 210 88% 40%; /* Bu #0A66C2 kodunun HSL karşılığı */
+    --primary-light: 210 88% 60%; /* İstersen biraz daha açık tonu da tanımlayabilirsin */
     --primary-foreground: 0 0% 100%;
     --background: 0 0% 100%;
     --foreground: 222 47% 11%;

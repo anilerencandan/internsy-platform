@@ -37,7 +37,8 @@ export default function CompanyJobsCard({company}: CompanyCardProps) {
               </div>
             </div>
           </div>
-          <StajIlan name="Proje Yöneticisi Stajı"/>
+          <StajIlan/>
+          
         </Link>
   )
 }

@@ -172,9 +172,15 @@ export default function SocialPage() {
       </div>
 
       {/* Masaüstü görünüm için alt alta bölümler */}
-      <div className="hidden md:block space-y-12 px-4">
+      <div className="hidden md:block space-y-2 px-4">
+      <h1 className="text-2xl font-bold text-left shadow rounded-lg p-2 w-fit">Takip Edilen Şirketler</h1>
+
         <SocialSection title="Takip Ettiğim Şirketler" items={companies} type="company" />
+        <h1 className="text-2xl font-bold text-left shadow rounded-lg p-2 w-fit">Takip Edilen Topluluklar</h1>
+
         <SocialSection title="Katıldığım Topluluklar" items={communities} type="community" />
+
+        <h1 className="text-2xl font-bold text-left shadow rounded-lg p-2 w-fit">Kaydedilen Yazılar</h1>
         <SocialSection title="Kaydettiğim Gönderiler" items={savedPosts} type="post" />
       </div>
     </div>

@@ -23,14 +23,14 @@ export default function Navbar({ flag }: NavbarProps) {
         <Link href="/">
           <Image src="/images/internsy-logo.svg" alt="internsy-logo" width={120} height={30} />
         </Link>
-
+        
         {/* Orta Menü */}
-        <div className="hidden lg:flex gap-x-4 font-bold text-[16px] text-[#4B5563]">
-          <Link href="/topluluk">Topluluk</Link>
-          <Link href="/sirketler">Şirketler</Link>
-          <Link href="/mulakatlar">Mülakatlar</Link>
-          <Link href="/staj-ilanlari">Staj İlanları</Link>
-          <Link href="/kariyer-rehberi">Kariyer Rehberi</Link>
+        <div className="hidden lg:flex gap-x-6 font-bold text-[18px] text-primary">
+          <Link href="/topluluk" className="hover:text-primary-light ">Topluluk</Link>
+          <Link href="/sirketler" className="hover:text-primary-light ">Şirketler</Link>
+          <Link href="/mulakatlar" className="hover:text-primary-light ">Mülakatlar</Link>
+          <Link href="/staj-ilanlari" className="hover:text-primary-light ">Staj İlanları</Link>
+          <Link href="/kariyer-rehberi" className="hover:text-primary-light ">Kariyer Rehberi</Link>
         </div>
 
         {/* Sağ Menü */}

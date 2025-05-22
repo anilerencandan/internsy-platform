@@ -13,8 +13,8 @@ export default function DifficultyScore({ score }: DifficultyScoreProps) {
     : "text-red-600"
 
   return (
-    <div className="mb-6">
-      <div className="flex items-baseline gap-2 mb-2">
+    <div className="mb-3">
+      <div className="flex items-baseline gap-2 font-sans">
         <span className={`text-5xl font-bold ${difficultyColor}`}>
           {score.toFixed(1)}
         </span>

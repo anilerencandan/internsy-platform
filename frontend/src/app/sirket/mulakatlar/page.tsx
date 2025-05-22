@@ -95,7 +95,7 @@ export default function Home() {
           {/* Interview Content */}
           <div >
             <div className="flex justify-between items-center mb-4">
-              <h2 className="text-2xl font-bold">Google Mülakat Soruları</h2>
+              <h2 className="text-2xl font-bold">Google Mülakat Deneyimleri</h2>
               <div className="flex flex-col h-full">
                 <span className="text-xs text-gray-500">Mayıs 6, 2025 tarihinde güncellendi</span>
               </div>
@@ -103,9 +103,10 @@ export default function Home() {
 
             {/* Difficulty Rating */}
             <div className="mb-6  ">
-            <DifficultyScore score={3.4} />
-
-              <div>
+              <div className="">
+            <DifficultyScore score={2} />
+            </div>
+              <div className="pt-4 pb-4">
                 <h4 className="text-lg font-semibold mb-3">Genel Mülakat Memnuniyeti</h4>
 
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
@@ -135,23 +136,38 @@ export default function Home() {
                   </div>
                 </div>
               </div>
+              <div>
+            <h2 className="text-xl font-medium text-gray-900 mb-4">Teklif Alma Oranı</h2>
+            <div className="flex flex-wrap gap-6 items-center">
+              <div className="flex items-center">
+                <div className="w-4 h-4 rounded-full bg-emerald-500 mr-2"></div>
+                <span className="text-2xl font-medium text-emerald-600">58%</span>
+                <span className="ml-2 text-gray-600">Teklif alındı</span>
+              </div>
+              <div className="flex items-center">
+                <div className="w-4 h-4 rounded-full bg-gray-400 mr-2"></div>
+                <span className="text-2xl font-medium text-gray-600">42%</span>
+                <span className="ml-2 text-gray-600">Teklif alınmadı</span>
+              </div>
+            </div>
+          </div>
             </div>
 
             {/* Top Jobs */}
             <div className="mb-8">
               <h3 className="text-xl font-semibold mb-4">Staj Mülakatı Yapılan Pozisyonlar</h3>
               <div className="flex flex-wrap gap-2 mb-4">
-                <Badge variant="outline" className="py-2 px-3 rounded-full bg-gray-50 hover:bg-gray-100">
+                <Badge variant="outline" className="px-3 py-2 border border-primary rounded-full text-primary font-sans">
                   Software engineer (1830)
                 </Badge>
-                <Badge variant="outline" className="py-2 px-3 rounded-full bg-gray-50 hover:bg-gray-100">
+                <Badge variant="outline" className="px-3 py-2 border border-primary rounded-full text-primary font-sans">
                   Software development engineer (1122)
                 </Badge>
-                <Badge variant="outline" className="py-2 px-3 rounded-full bg-gray-50 hover:bg-gray-100">
+                <Badge variant="outline" className="px-3 py-2 border border-primary rounded-full text-primary font-sans">
                   Intern (674)
                 </Badge>
               </div>
-              <Button variant="ghost" className="text-green-600 hover:text-green-700 p-0 h-auto flex items-center">
+              <Button variant="ghost" className="text-primary hover:text-primary-light p-0 h-auto flex items-center">
               Tüm pozisyonları görüntüle
                 <ChevronDown className="h-4 w-4 ml-1" />
               </Button>

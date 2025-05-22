@@ -52,10 +52,14 @@ export default function SocialSection({  items }: SocialSectionProps) {
         ))}
       </div>
 
-      <div className="flex justify-center mt-4">
+      <div className="items-center flex justify-center border-b border-gray-400">
         <Link href={`/profil/sosyal/company`}>
           <Button variant="link" className="flex items-center gap-1">
-            Daha Fazlasını Gör <ArrowRight className="h-4 w-4" />
+          <div className="flex justify-center items-center mb-2 mt-2">
+            <div className=" w-fit border border-white p-2 rounded-md bg-primary">
+              <button className="text-white hover:text-gray-100 font-medium">Daha Fazla Göster</button>
+            </div>
+          </div>
           </Button>
         </Link>
       </div>

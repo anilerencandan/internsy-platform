@@ -3,7 +3,7 @@ import { CircleCheck, Star } from "lucide-react";
 import { FaGoogle } from "react-icons/fa";
 import Image from "next/image";
 import { SquareArrowOutUpRight } from 'lucide-react'
-
+import CompanyInfoCard from "@/components/company-page/CompanyInfoCard";
 import StajIlanlarCard from "@/components/sirketler-page/StajIlanlarCard";
 
 export default function SirketLayout({ children }: { children: React.ReactNode }) {
@@ -26,7 +26,7 @@ export default function SirketLayout({ children }: { children: React.ReactNode }
             </div>
           </div>
           <div className="flex items-center justify-center py-2">
-            <button className="px-4 py-2 rounded-lg bg-black font-bold w-fit text-white">
+            <button className="px-4 py-2 rounded-lg bg-primary font-bold w-fit text-white">
               Şirketleri Keşfet
             </button>
           </div>
@@ -49,6 +49,7 @@ export default function SirketLayout({ children }: { children: React.ReactNode }
           </div>
 
           <div className="flex flex-col gap-y-1 px-4">
+            
             <h3 className="text-2xl font-semibold">Google</h3>
             <h4 className="text-sm text-gray-700 flex gap-x-2 items-center">
               <CircleCheck size={16} /> Onaylı Şirket
@@ -59,7 +60,9 @@ export default function SirketLayout({ children }: { children: React.ReactNode }
                 Görüş Ekle
               </button>
             </div>
+            <CompanyInfoCard />
           </div>
+          
 
           {/* Tıklanabilir Sekmeler */}
           <CompanyTabs />
@@ -75,17 +78,19 @@ export default function SirketLayout({ children }: { children: React.ReactNode }
         <div className="flex flex-col text-xs">
           <h3 className="text-xl font-bold mb-2">Şirket Bilgileri</h3>
         </div>
+        
+        <div className="flex flex-col gap-y-1">
+      <p><span className="font-bold">Lokasyon:</span> Mountain View, Amerika</p>
+      <p><span className="font-bold">Kategori:</span> Teknoloji</p>
+    </div>
 
-        <div className='flex items-center gap-x-2 text-primary'>
-            
-          <a href="">goo.gle/4ehVuXi</a>
-          <SquareArrowOutUpRight size={12} />
-        </div>
-        <p>Mountain View, Amerika</p>
-        <p>10000+ Çalışan</p>
-        <p>Kategori: Teknoloji</p>
-        <p>Kuruluş: 1998</p>
-        <p>Gelir: $10+ Milyar [USD]</p>
+    {/* Sağ sütun */}
+    <div className="flex flex-col gap-y-1">
+      <p><span className="font-bold">Çalışan:</span> 10000+</p>
+      <p><span className="font-bold">Gelir:</span> $10+ Milyar [USD]</p>
+      <p><span className="font-bold">Kuruluş:</span> 1998</p>
+    </div>
+
         </div>
         <div className="border border-gray-300 rounded-lg p-4">
           <StajIlanlarCard />
