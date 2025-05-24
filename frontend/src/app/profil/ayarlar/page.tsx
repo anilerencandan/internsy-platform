@@ -1,22 +1,28 @@
+'use client'
 import EmailPasswordDialog from '@/components/profil-page/EditMailDialog'
-import TabsSection from '@/components/profil-page/TabsSection'
-import React from 'react'
+import SubMenu from '@/components/profil-page/SubMenu';
+import { ChevronLeft } from 'lucide-react';
+import React, { useState } from 'react'
 import { FaGoogle } from 'react-icons/fa'
 
   
 
 export default function Page() {
+      const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     
   return (
-    <div className='page-content '>
-            <TabsSection />
-        
-
-                
-            <div className='flex flex-col bg-white rounded-[8px] overflow-hidden  text-sm gap-y-4 '>
+    <div className='mb-6'>
+            <div className='flex flex-col bg-white rounded-[8px] overflow-hidden  text-sm gap-y-4 sm:border border-gray-300 py-6'>
                 
                 <div className='flex flex-col'>
-                    <h1 className='text-2xl font-bold p-4'>Ayarlar</h1>
+                    <div className='flex items-center sm:justify-start justify-center relative'>
+                        <ChevronLeft
+                            size={24}
+                            className="absolute left-4 cursor-pointer sm:hidden block text-primary"
+                            onClick={() => setIsSidebarOpen(true)}
+                        />
+                    <h1 className='text-2xl font-bold px-4 text-primary'>Ayarlar</h1>
+                    </div>
 
                     <div className='flex flex-col gap-y-6 p-4'>
                         <h2 className='text-lg font-semibold'>Email ve Şifre</h2>
@@ -84,6 +90,12 @@ export default function Page() {
                 </div>
 
             </div>
+            <SubMenu
+                    isOpen={isSidebarOpen}
+                    onClose={() => setIsSidebarOpen(false)}
+                    title="Profil Menüsü"
+                    widthClass="w-64"
+                  />
     </div>
   )
 }

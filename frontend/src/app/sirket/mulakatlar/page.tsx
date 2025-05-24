@@ -107,6 +107,7 @@ export default function Home() {
             <DifficultyScore score={2} />
             </div>
               <div className="pt-4 pb-4">
+                
                 <h4 className="text-lg font-semibold mb-3">Genel Mülakat Memnuniyeti</h4>
 
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">

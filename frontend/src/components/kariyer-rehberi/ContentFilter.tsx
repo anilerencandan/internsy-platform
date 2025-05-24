@@ -43,7 +43,7 @@ export function ContentFilter({
   }
 
   return (
-    <div className="space-y-4 mb-8">
+    <div className="space-y-4 mb-8 sm:px-0 px-4">
       <div className="flex flex-col md:flex-row gap-4">
         <form onSubmit={handleSearchSubmit} className="flex-1 relative">
           <Input

@@ -7,15 +7,8 @@ import React, { useState } from 'react'
 export default function Page() {
     const [editMode, setEditMode] = useState(false)  
   return (
-    <div className='page-content '>
-        
-            <div className='pb-24'>
-                
-            <TabsSection />
-            <div className='flex flex-col bg-white rounded-[8px] text-sm gap-y-4 p-4 '>
-            {!editMode ? (<UserInformationSection onToggleEditMode={() => {setEditMode(true)}} />) : (<UserInfoEditSection onToggleEditMode={() => {setEditMode(false)}} />)}
-            </div>
-        </div>
-    </div>
+      <div className='w-full flex flex-col bg-white rounded-[8px] text-sm gap-y-4  '>
+      {!editMode ? (<UserInformationSection onToggleEditMode={() => {setEditMode(true)}} />) : (<UserInfoEditSection onToggleEditMode={() => {setEditMode(false)}} />)}
+      </div>
   )
 }

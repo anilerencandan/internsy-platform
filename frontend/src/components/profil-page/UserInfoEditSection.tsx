@@ -11,41 +11,43 @@ export default function EditProfilePage({onToggleEditMode}: {onToggleEditMode: (
   const [cvFile, setCvFile] = useState<File | null>(null)
 
   return (
-    <div className="flex flex-col gap-y-4">
-        <button onClick={onToggleEditMode} className="text-lg text-primary font-semibold flex items-center gap-x-2 "><ChevronLeft size={24}/> Profil Ekranına Dön</button>
-        <h1 className="text-2xl font-bold ">Profili Düzenle</h1>
+    <div className="flex flex-col gap-y-4 sm:border border-gray-300 rounded-lg p-6 ">
+      <div className="flex items-center justify-center relative">
+        <button onClick={onToggleEditMode} className="text-lg text-primary font-semibold flex items-center gap-x-2 absolute left-0 "><ChevronLeft size={24}/></button>
+        <h1 className="text-2xl font-bold text-primary">Profili Düzenle</h1>
+      </div>
 
 
-      <div className="flex flex-col gap-y-4">
-        <div className="flex flex-col gap-y-2">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-12">
+        <div className="flex flex-col gap-y-2 ">
           <Label>Ad Soyad</Label>
           <Input placeholder="Ad Soyad" />
         </div>
 
-        <div className="flex flex-col gap-y-2">
+        <div className="flex flex-col gap-y-2 ">
           <Label>Profil Başlığı (Title)</Label>
           <Input placeholder="Örn: Frontend Developer" />
         </div>
 
-        <div className="flex flex-col gap-y-2">
+        <div className="flex flex-col gap-y-2 ">
           <Label>Üniversite</Label>
           <SelectPopover
           />
         </div>
 
-        <div className="flex flex-col gap-y-2">
+        <div className="flex flex-col gap-y-2 ">
           <Label>Şehir</Label>
           <SelectPopover
           />
         </div>
 
-        <div className="flex flex-col gap-y-2">
+        <div className="flex flex-col gap-y-2 ">
           <Label>Bölüm</Label>
           <SelectPopover
           />
         </div>
 
-        <div className="flex flex-col gap-y-2">
+        <div className="flex flex-col gap-y-2 ">
           <Label>CV Yükle</Label>
           <input
             type="file"

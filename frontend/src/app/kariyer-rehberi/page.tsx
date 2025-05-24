@@ -1,37 +1,44 @@
 "use client"
 
-import { useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Button } from "@/components/ui/button"
 import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { ChevronRight } from "lucide-react"
+import { Badge } from "@/components/ui/badge"
+import { ChevronLeft, ChevronRight, ArrowRight, Calendar, Clock, BookOpen } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
+import useEmblaCarousel from "embla-carousel-react"
 import { blogPosts, trainings, extras, formatDate } from "@/lib/ContentTypes"
+
 
 export default function KariyerRehberi() {
   const [activeTab, setActiveTab] = useState("blog")
 
+  
+
   // Get the first 4 items for each section
-  const featuredBlogs = blogPosts.slice(0, 4)
-  const featuredTrainings = trainings.slice(0, 4)
-  const featuredExtras = extras.slice(0, 4)
+  const featuredBlogs = blogPosts.slice(0, 12)
+  const featuredTrainings = trainings.slice(0, 12)
+  const featuredExtras = extras.slice(0, 12)
 
   return (
     <div className="page-content mx-auto  py-8">
-      <h1 className="text-3xl font-bold text-center mb-8">Kariyer Rehberi</h1>
+      <h1 className="text-3xl font-bold text-center mb-8 px-4">Kariyer Rehberi</h1>
 
       {/* Mobil görünüm için tabs */}
-      <div className="md:hidden">
-        <Tabs defaultValue="blog" value={activeTab} onValueChange={setActiveTab}>
-          <TabsList className="grid w-full grid-cols-3">
+      {/* <div className="md:hidden">
+        <Tabs  defaultValue="blog" value={activeTab} onValueChange={setActiveTab}>
+          <div className="sm:px-0 px-4">
+          <TabsList className="grid w-full grid-cols-3 ">
             <TabsTrigger value="blog">Blog Yazıları</TabsTrigger>
             <TabsTrigger value="egitimler">Eğitimler</TabsTrigger>
             <TabsTrigger value="ekstralar">Ekstralar</TabsTrigger>
           </TabsList>
+          </div>
 
-          <TabsContent value="blog">
-            <SectionTitle title="Blog Yazıları" />
+          <TabsContent  value="blog">
+            <SectionTitle  title="Blog Yazıları" />
             <BlogSection blogs={featuredBlogs} />
           </TabsContent>
 
@@ -45,12 +52,12 @@ export default function KariyerRehberi() {
             <EkstralarSection extras={featuredExtras} />
           </TabsContent>
         </Tabs>
-      </div>
+      </div> */}
 
       {/* Masaüstü görünüm için dikey sıralama */}
-      <div className="hidden md:block space-y-16">
+      <div className="block space-y-16">
         <section>
-          <SectionTitle title="Blog Yazıları" />
+          <SectionTitle  title="Blog Yazıları" />
           <BlogSection blogs={featuredBlogs} />
         </section>
 
@@ -70,87 +77,328 @@ export default function KariyerRehberi() {
 
 function SectionTitle({ title }: { title: string }) {
   return (
-    <div className="flex items-center justify-between mb-6">
+    <div className="flex items-center justify-between mb-6 px-4">
       <h2 className="text-2xl font-bold">{title}</h2>
     </div>
   )
 }
 
 function BlogSection({ blogs }: { blogs: typeof blogPosts }) {
+  const [emblaRef, emblaApi] = useEmblaCarousel({
+    loop: false,
+    align: "start",
+    dragFree: true,
+    skipSnaps: true,
+  })
+
+  const [prevDisabled, setPrevDisabled] = useState(true)
+  const [nextDisabled, setNextDisabled] = useState(false)
+  const [scrollProgress, setScrollProgress] = useState(0)
+
+  // Check buttons and update scroll progress
+  const onScroll = useCallback(() => {
+    if (!emblaApi) return
+    const progress = Math.max(0, Math.min(1, emblaApi.scrollProgress()))
+    setScrollProgress(progress)
+    setPrevDisabled(!emblaApi.canScrollPrev())
+    setNextDisabled(!emblaApi.canScrollNext())
+  }, [emblaApi])
+
+  // Carousel settings
+  useEffect(() => {
+    if (!emblaApi) return
+    emblaApi.on("select", onScroll)
+    emblaApi.on("scroll", onScroll)
+    onScroll()
+
+    return () => {
+      emblaApi.off("select", onScroll)
+      emblaApi.off("scroll", onScroll)
+    }
+  }, [emblaApi, onScroll])
+
+  const scrollPrev = useCallback(() => {
+    if (emblaApi) emblaApi.scrollPrev()
+  }, [emblaApi])
+
+  const scrollNext = useCallback(() => {
+    if (emblaApi) emblaApi.scrollNext()
+  }, [emblaApi])
+
   return (
-    <>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {blogs.map((post) => (
-          <ContentCard
-            key={post.id}
-            title={post.title}
-            description={post.description}
-            image={post.image}
-            footer={formatDate(post.date)}
-            category={post.category}
-          />
-        ))}
+    <div className="relative w-full mx-auto ">
+      <div className="relative">
+        {/* Carousel container */}
+        <div className="overflow-hidden rounded-xl" ref={emblaRef}>
+          <div className="grid grid-flow-col auto-cols-[75%] sm:auto-cols-[45%] md:auto-cols-[30%] lg:auto-cols-[23%] gap-4 px-4 ">
+            {blogs.map((post) => (
+              <ContentCard
+                key={post.id}
+                title={post.title}
+                description={post.description}
+                image={post.image}
+                footer={formatDate(post.date)}
+                category={post.category}
+                type="blog"
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* Navigation buttons */}
+        <button
+          className={`hidden lg:block absolute top-1/2 -left-4 -translate-y-1/2 z-10 p-2 bg-background border shadow-md rounded-full ${
+            prevDisabled ? "opacity-0 cursor-default" : "hover:bg-muted"
+          } transition-opacity duration-200`}
+          onClick={scrollPrev}
+          disabled={prevDisabled}
+          aria-label="Önceki"
+        >
+          <ChevronLeft className="w-5 h-5" />
+        </button>
+
+        <button
+          className={`hidden lg:block absolute top-1/2 -right-4 -translate-y-1/2 z-10 p-2 bg-background border shadow-md rounded-full ${
+            nextDisabled ? "opacity-0 cursor-default" : "hover:bg-muted"
+          } transition-opacity duration-200`}
+          onClick={scrollNext}
+          disabled={nextDisabled}
+          aria-label="Sonraki"
+        >
+          <ChevronRight className="w-5 h-5" />
+        </button>
       </div>
+
+      {/* Progress bar */}
+      <div className="mt-4 h-1 bg-muted rounded-full overflow-hidden">
+        <div
+          className="h-full bg-primary transition-all duration-200 ease-out"
+          style={{ width: `${scrollProgress * 100}%` }}
+        />
+      </div>
+
       <div className="flex justify-center mt-8">
         <Link href="/kariyer-rehberi/blog">
-          <Button variant="outline" className="flex items-center gap-2">
-            Daha Fazlasını Gör <ChevronRight className="h-4 w-4" />
+          <Button className="flex items-center gap-2 group px-4 py-2">
+            Daha Fazlasını Gör
+            <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
           </Button>
         </Link>
       </div>
-    </>
+    </div>
   )
 }
 
+
 function EgitimlerSection({ trainings: trainingItems }: { trainings: typeof trainings }) {
+  const [emblaRef, emblaApi] = useEmblaCarousel({
+    loop: false,
+    align: "start",
+    dragFree: true,
+    skipSnaps: true,
+  })
+
+  const [prevDisabled, setPrevDisabled] = useState(true)
+  const [nextDisabled, setNextDisabled] = useState(false)
+  const [scrollProgress, setScrollProgress] = useState(0)
+
+  // Check buttons and update scroll progress
+  const onScroll = useCallback(() => {
+    if (!emblaApi) return
+    const progress = Math.max(0, Math.min(1, emblaApi.scrollProgress()))
+    setScrollProgress(progress)
+    setPrevDisabled(!emblaApi.canScrollPrev())
+    setNextDisabled(!emblaApi.canScrollNext())
+  }, [emblaApi])
+
+  // Carousel settings
+  useEffect(() => {
+    if (!emblaApi) return
+    emblaApi.on("select", onScroll)
+    emblaApi.on("scroll", onScroll)
+    onScroll()
+
+    return () => {
+      emblaApi.off("select", onScroll)
+      emblaApi.off("scroll", onScroll)
+    }
+  }, [emblaApi, onScroll])
+
+  const scrollPrev = useCallback(() => {
+    if (emblaApi) emblaApi.scrollPrev()
+  }, [emblaApi])
+
+  const scrollNext = useCallback(() => {
+    if (emblaApi) emblaApi.scrollNext()
+  }, [emblaApi])
+
   return (
-    <>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {trainingItems.map((egitim) => (
-          <ContentCard
-            key={egitim.id}
-            title={egitim.title}
-            description={egitim.description}
-            image={egitim.image}
-            footer={`Süre: ${egitim.duration}`}
-            category={egitim.category}
-          />
-        ))}
+    <div className="relative w-full mx-auto ">
+      <div className="relative">
+        {/* Carousel container */}
+        <div className="overflow-hidden rounded-xl" ref={emblaRef}>
+          <div className="grid grid-flow-col auto-cols-[75%] sm:auto-cols-[45%] md:auto-cols-[30%] lg:auto-cols-[23%] gap-4 px-4 ">
+            {trainingItems.map((post) => (
+              <ContentCard
+                key={post.id}
+                title={post.title}
+                description={post.description}
+                image={post.image}
+                footer={formatDate(post.date)}
+                category={post.category}
+                type="blog"
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* Navigation buttons */}
+        <button
+          className={`hidden lg:block absolute top-1/2 -left-4 -translate-y-1/2 z-10 p-2 bg-background border shadow-md rounded-full ${
+            prevDisabled ? "opacity-0 cursor-default" : "hover:bg-muted"
+          } transition-opacity duration-200`}
+          onClick={scrollPrev}
+          disabled={prevDisabled}
+          aria-label="Önceki"
+        >
+          <ChevronLeft className="w-5 h-5" />
+        </button>
+
+        <button
+          className={`hidden lg:block absolute top-1/2 -right-4 -translate-y-1/2 z-10 p-2 bg-background border shadow-md rounded-full ${
+            nextDisabled ? "opacity-0 cursor-default" : "hover:bg-muted"
+          } transition-opacity duration-200`}
+          onClick={scrollNext}
+          disabled={nextDisabled}
+          aria-label="Sonraki"
+        >
+          <ChevronRight className="w-5 h-5" />
+        </button>
       </div>
+
+      {/* Progress bar */}
+      <div className="mt-4 h-1 bg-muted rounded-full overflow-hidden">
+        <div
+          className="h-full bg-primary transition-all duration-200 ease-out"
+          style={{ width: `${scrollProgress * 100}%` }}
+        />
+      </div>
+
       <div className="flex justify-center mt-8">
         <Link href="/kariyer-rehberi/egitimler">
-          <Button variant="outline" className="flex items-center gap-2">
-            Daha Fazlasını Gör <ChevronRight className="h-4 w-4" />
+          <Button className="flex items-center gap-2 group px-4 py-2">
+            Daha Fazlasını Gör
+            <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
           </Button>
         </Link>
       </div>
-    </>
+    </div>
   )
 }
 
 function EkstralarSection({ extras: extraItems }: { extras: typeof extras }) {
+  const [emblaRef, emblaApi] = useEmblaCarousel({
+    loop: false,
+    align: "start",
+    dragFree: true,
+    skipSnaps: true,
+  })
+
+  const [prevDisabled, setPrevDisabled] = useState(true)
+  const [nextDisabled, setNextDisabled] = useState(false)
+  const [scrollProgress, setScrollProgress] = useState(0)
+
+  // Check buttons and update scroll progress
+  const onScroll = useCallback(() => {
+    if (!emblaApi) return
+    const progress = Math.max(0, Math.min(1, emblaApi.scrollProgress()))
+    setScrollProgress(progress)
+    setPrevDisabled(!emblaApi.canScrollPrev())
+    setNextDisabled(!emblaApi.canScrollNext())
+  }, [emblaApi])
+
+  // Carousel settings
+  useEffect(() => {
+    if (!emblaApi) return
+    emblaApi.on("select", onScroll)
+    emblaApi.on("scroll", onScroll)
+    onScroll()
+
+    return () => {
+      emblaApi.off("select", onScroll)
+      emblaApi.off("scroll", onScroll)
+    }
+  }, [emblaApi, onScroll])
+
+  const scrollPrev = useCallback(() => {
+    if (emblaApi) emblaApi.scrollPrev()
+  }, [emblaApi])
+
+  const scrollNext = useCallback(() => {
+    if (emblaApi) emblaApi.scrollNext()
+  }, [emblaApi])
+
   return (
-    <>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {extraItems.map((ekstra) => (
-          <ContentCard
-            key={ekstra.id}
-            title={ekstra.title}
-            description={ekstra.description}
-            image={ekstra.image}
-            footer={ekstra.type}
-            category={ekstra.category}
-          />
-        ))}
+    <div className="relative w-full mx-auto ">
+      <div className="relative">
+        {/* Carousel container */}
+        <div className="overflow-hidden rounded-xl" ref={emblaRef}>
+          <div className="grid grid-flow-col auto-cols-[75%] sm:auto-cols-[45%] md:auto-cols-[30%] lg:auto-cols-[23%] gap-4 px-4 ">
+            {extraItems.map((post) => (
+              <ContentCard
+                key={post.id}
+                title={post.title}
+                description={post.description}
+                image={post.image}
+                footer={formatDate(post.date)}
+                category={post.category}
+                type="blog"
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* Navigation buttons */}
+        <button
+          className={`hidden lg:block absolute top-1/2 -left-4 -translate-y-1/2 z-10 p-2 bg-background border shadow-md rounded-full ${
+            prevDisabled ? "opacity-0 cursor-default" : "hover:bg-muted"
+          } transition-opacity duration-200`}
+          onClick={scrollPrev}
+          disabled={prevDisabled}
+          aria-label="Önceki"
+        >
+          <ChevronLeft className="w-5 h-5" />
+        </button>
+
+        <button
+          className={`hidden lg:block absolute top-1/2 -right-4 -translate-y-1/2 z-10 p-2 bg-background border shadow-md rounded-full ${
+            nextDisabled ? "opacity-0 cursor-default" : "hover:bg-muted"
+          } transition-opacity duration-200`}
+          onClick={scrollNext}
+          disabled={nextDisabled}
+          aria-label="Sonraki"
+        >
+          <ChevronRight className="w-5 h-5" />
+        </button>
       </div>
+
+      {/* Progress bar */}
+      <div className="mt-4 h-1 bg-muted rounded-full overflow-hidden">
+        <div
+          className="h-full bg-primary transition-all duration-200 ease-out"
+          style={{ width: `${scrollProgress * 100}%` }}
+        />
+      </div>
+
       <div className="flex justify-center mt-8">
-        <Link href="/kariyer-rehberi/ekstralar">
-          <Button variant="outline" className="flex items-center gap-2">
-            Daha Fazlasını Gör <ChevronRight className="h-4 w-4" />
+        <Link href="/kariyer-rehberi/egitimler">
+          <Button className="flex items-center gap-2 group px-4 py-2">
+            Daha Fazlasını Gör
+            <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
           </Button>
         </Link>
       </div>
-    </>
+    </div>
   )
 }
 
@@ -160,22 +408,50 @@ interface ContentCardProps {
   image: string
   footer: string
   category: string
+  type?: "blog" | "training" | "extra"
 }
 
-function ContentCard({ title, description, image, footer, category }: ContentCardProps) {
+export function ContentCard({ title, description, image, footer, category, type = "blog" }: ContentCardProps) {
+  // Different icon based on content type
+  const getIcon = () => {
+    switch (type) {
+      case "blog":
+        return <div className="flex items-center gap-x-2 text-xs"><BookOpen className="h-4 w-4 mr-1" /> 5 dk okuma suresi</div>
+      case "training":
+        return <Clock className="h-4 w-4 mr-1" />
+      case "extra":
+        return <Calendar className="h-4 w-4 mr-1" />
+      default:
+        return null
+    }
+  }
+
   return (
-    <Card className="h-full flex flex-col">
-      <div className="relative w-full h-40">
-        <div className="absolute top-2 right-2 z-10">
-          <span className="bg-primary text-primary-foreground text-xs px-2 py-1 rounded-full">{category}</span>
+    <Card className="h-full flex flex-col overflow-hidden group hover:shadow-lg transition-all duration-300 ">
+      <div className="relative w-full pt-[60%]">
+        <Badge className="absolute top-3 right-3 z-10">{category}</Badge>
+        <div className="absolute inset-0 overflow-hidden shadow-md">
+          <Image
+            src={"/kariyer-rehberi-sample.jpg"}
+            alt={title}
+            width={400}
+            height={300}
+            className="object-cover transition-transform duration-500 group-hover:scale-105"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
         </div>
-        <Image src={image || "/internsy-logo.svg"} alt={title} fill className="object-cover rounded-t-lg" />
       </div>
-      <CardHeader>
-        <CardTitle className="line-clamp-2">{title}</CardTitle>
-        <CardDescription className="line-clamp-3">{description}</CardDescription>
+
+      <CardHeader className="flex-grow p-4">
+        <CardTitle className="line-clamp-2 group-hover:text-primary transition-colors">{title}</CardTitle>
+        <CardDescription className="line-clamp-3 mt-2">{description}</CardDescription>
       </CardHeader>
-      <CardFooter className="mt-auto text-sm text-muted-foreground">{footer}</CardFooter>
+
+      <CardFooter className="text-sm text-muted-foreground border-t pt-3 flex items-center p-4">
+        {getIcon()}
+        {footer}
+      </CardFooter>
     </Card>
   )
 }
+

@@ -1,10 +1,11 @@
 "use client"
 
 import { useState } from "react"
-import { Bell, Briefcase, Calendar, CheckCircle, Clock, MessageSquare } from "lucide-react"
+import { Bell, Briefcase, Calendar, CheckCircle, ChevronLeft, Clock, MessageSquare } from "lucide-react"
 import { Card, CardContent, CardDescription, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import SubMenu from "./SubMenu"
 
 export default function NotificationCards() {
   const [activeTab, setActiveTab] = useState("all")
@@ -60,10 +61,20 @@ export default function NotificationCards() {
   const filteredNotifications =
     activeTab === "all" ? notifications : notifications.filter((notification) => notification.type === activeTab)
 
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  
+
   return (
-    <div className="w-full max-w-md mx-auto">
+    <div className="w-full mx-auto">
       <div className="flex items-center justify-between mb-4">
-        <h2 className="text-2xl font-bold">Bildirimler</h2>
+                  <ChevronLeft
+            size={24}
+            className=" left-0 cursor-pointer sm:hidden block text-primary"
+            onClick={() => setIsSidebarOpen(true)}
+          />
+
+        
+        <h2 className="text-2xl font-bold text-primary">Bildirimler</h2>
         <Badge variant="outline" className="bg-blue-50 text-blue-500 hover:bg-blue-100 rounded-full">
           {notifications.filter((n) => !n.read).length} Yeni
         </Badge>
@@ -114,6 +125,13 @@ export default function NotificationCards() {
           </div>
         </TabsContent>
       </Tabs>
+
+      <SubMenu
+              isOpen={isSidebarOpen}
+              onClose={() => setIsSidebarOpen(false)}
+              title="Profil Menüsü"
+              widthClass="w-64"
+            />
     </div>
   )
 }

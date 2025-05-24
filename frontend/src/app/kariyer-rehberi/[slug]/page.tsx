@@ -143,7 +143,7 @@ export default function BlogPostPage() {
       {/* Engagement Section */}
       <div className="p-6 border-t border-b">
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-4">
+          <div className="flex items-center">
             <Button variant="outline" className="flex items-center gap-2">
               <ThumbsUp className="w-4 h-4" />
               <span>Yardımcı Oldu (87)</span>

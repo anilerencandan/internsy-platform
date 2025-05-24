@@ -41,6 +41,11 @@ export default function MulakatlarPage() {
         <InterviewStats />
       </div>
 
+      <div className="mb-10 mt-10 ">
+          <h2 className="text-xl font-semibold mb-4">Popüler Şirketler</h2>
+          <PopularCompanies />
+        </div>
+
       <div>
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-xl font-semibold">Tüm Şirketler</h2>

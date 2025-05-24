@@ -4,7 +4,7 @@ import { useState } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { ChevronLeft } from "lucide-react"
+import { Badge, BookOpen, Calendar, ChevronLeft, Clock } from "lucide-react"
 import Image from "next/image"
 import { ContentFilter } from "@/components/kariyer-rehberi/ContentFilter"
 import { trainings, trainingCategories, filterAndSortContent } from "@/lib/ContentTypes"
@@ -47,6 +47,8 @@ export default function EgitimlerPage() {
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {filteredTrainings.map((egitim) => (
+            <Link href={`/kariyer-rehberi/egitimler/${egitim.id}`} key={egitim.id}>
+
             <ContentCard
               key={egitim.id}
               title={egitim.title}
@@ -55,7 +57,8 @@ export default function EgitimlerPage() {
               footer={`Süre: ${egitim.duration}`}
               category={egitim.category}
               popularity={egitim.popularity}
-            />
+              />
+              </Link>
           ))}
         </div>
       )}
@@ -70,29 +73,50 @@ interface ContentCardProps {
   footer: string
   category: string
   popularity: number
+  type?: "blog" | "training" | "extra"
 }
 
-function ContentCard({ title, description, footer, category, popularity }: ContentCardProps) {
+export function ContentCard({ title, description, image, footer, category, type = "blog" }: ContentCardProps) {
+  // Different icon based on content type
+  const getIcon = () => {
+    switch (type) {
+      case "blog":
+        return <div className="flex items-center gap-x-2 text-xs"><BookOpen className="h-4 w-4 mr-1" /> 5 dk okuma suresi</div>
+      case "training":
+        return <Clock className="h-4 w-4 mr-1" />
+      case "extra":
+        return <Calendar className="h-4 w-4 mr-1" />
+      default:
+        return null
+    }
+  }
+
   return (
-    <Link href={`/kariyer-rehberi/egitimler/${title.replace(/\s+/g, "-").toLowerCase()}`} className="w-full">
-    <Card className="h-full flex flex-col">
-      <div className="relative w-full h-40">
-        <div className="absolute top-2 right-2 z-10">
-          <span className="bg-primary text-primary-foreground text-xs px-2 py-1 rounded-full">{category}</span>
+    <Card className="h-full flex flex-col overflow-hidden group hover:shadow-lg transition-all duration-300 ">
+      <div className="relative w-full pt-[60%]">
+        <Badge className="absolute top-3 right-3 z-10">{category}</Badge>
+        <div className="absolute inset-0 overflow-hidden shadow-md">
+      
+          <Image
+            src={"/kariyer-rehberi-sample.jpg"}
+            alt={title}
+            width={400}
+            height={300}
+            className="object-cover transition-transform duration-500 group-hover:scale-105"
+            />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
         </div>
-        {popularity > 90 && (
-          <div className="absolute top-2 left-2 z-10">
-            <span className="bg-amber-500 text-white text-xs px-2 py-1 rounded-full">Popüler</span>
-          </div>
-        )}
-        <Image src={"/images/internsy-logo.svg"} alt={title} fill className="object rounded-t-lg" />
       </div>
-      <CardHeader>
-        <CardTitle className="line-clamp-2">{title}</CardTitle>
-        <CardDescription className="line-clamp-3">{description}</CardDescription>
+
+      <CardHeader className="flex-grow p-4">
+        <CardTitle className="line-clamp-2 group-hover:text-primary transition-colors">{title}</CardTitle>
+        <CardDescription className="line-clamp-3 mt-2">{description}</CardDescription>
       </CardHeader>
-      <CardFooter className="mt-auto text-sm text-muted-foreground">{footer}</CardFooter>
+
+      <CardFooter className="text-sm text-muted-foreground border-t pt-3 flex items-center p-4">
+        {getIcon()}
+        {footer}
+      </CardFooter>
     </Card>
-        </Link>
   )
 }

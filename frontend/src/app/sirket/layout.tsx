@@ -74,7 +74,7 @@ export default function SirketLayout({ children }: { children: React.ReactNode }
       {/* Sağ */}
       <div className="xl:col-span-3 xl:flex hidden flex-col gap-y-4 h-fit sticky top-4">
         {/* İlk Kart: Staj İlanları */}
-        <div className="border border-gray-300 rounded-lg p-4 bg-white shadow-sm">
+        <div className="border border-gray-300 rounded-lg p-4 bg-primary text-white shadow-sm">
         <div className="flex flex-col text-xs">
           <h3 className="text-xl font-bold mb-2">Şirket Bilgileri</h3>
         </div>

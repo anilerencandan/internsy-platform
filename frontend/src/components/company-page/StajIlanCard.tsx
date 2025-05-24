@@ -21,24 +21,24 @@ export default function StajIlan({ name, linkedinCompanyId, kariyerNetCompanyId 
   const kariyerUrl = `https://www.kariyer.net/is-ilanlari/${kariyerNetCompanyId ?? companyInterns.kariyerNetCompanyId}`;
 
   return (
-    <div className="border border-gray-300 rounded-lg p-4 bg-white">
-      <CardFooter className="pt-0 pb-2 border ">
-        <Link href={linkedinUrl} target="_blank" rel="noopener noreferrer" className="w-full">
-          <Button variant="outline" className="w-full justify-between text-sm">
+    <div className="border border-gray-300 rounded-lg p-4  bg-gray-50">
+      <div className="pt-0 pb-2  ">
+        <Link href={linkedinUrl} target="_blank" rel="noopener noreferrer" className="w-full ">
+          <Button variant="outline" className="w-full justify-between text-sm px-4 py-2 hover:bg-black hover:text-white duration-0 transition-none">
             <span>LinkedIn'de Staj İlanları</span>
             <ExternalLink className="h-4 w-4 ml-2" />
           </Button>
         </Link>
-      </CardFooter>
+      </div>
 
-      <CardFooter className="border pt-0">
+      <div className=" pt-0">
         <Link href={kariyerUrl} target="_blank" rel="noopener noreferrer" className="w-full">
-          <Button variant="outline" className="w-full justify-between text-sm">
+          <Button variant="outline" className="w-full justify-between text-sm px-4 py-2 hover:bg-black hover:text-white duration-0 transition-none">
             <span>Kariyer.net'te İlanları Gör</span>
             <ExternalLink className="h-4 w-4 ml-2" />
           </Button>
         </Link>
-      </CardFooter>
+      </div>
     </div>
   );
 }

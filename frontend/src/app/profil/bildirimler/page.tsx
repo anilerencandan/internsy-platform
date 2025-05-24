@@ -6,15 +6,10 @@ import React from 'react'
 export default function Page() {
     
   return (
-    <div className='page-content '>
-            <TabsSection />
-        
-
-                
-            <div className='flex flex-col bg-white rounded-[8px] overflow-hidden  text-sm gap-y-4  p-4'>
-              <NotificationCards />
-            </div>
-
+    <div className='w-full mb-6'>
+      <div className='flex flex-col bg-white overflow-hidden  text-sm gap-y-4  sm:border border-gray-300 py-6 px-4 rounded-lg '>
+        <NotificationCards />
+      </div>
     </div>
   )
 }

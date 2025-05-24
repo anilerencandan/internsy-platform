@@ -89,15 +89,15 @@ export default function CompanySidebar({ company }: { company: CompanyProps }) {
       <div className="bg-white rounded-lg border border-gray-200 p-4">
         <h3 className="font-semibold mb-4">Bağlantılar</h3>
         <div className="space-y-3">
-          <Button variant="outline" className="w-full justify-start">
+          <Button variant="outline" className="w-full justify-start px-4 py-2 hover:bg-primary hover:text-white duration-0 transition-none">
             <ExternalLink className="h-4 w-4 mr-2" />
             Şirket Web Sitesi
           </Button>
-          <Button variant="outline" className="w-full justify-start">
+          <Button variant="outline" className="w-full justify-start px-4 py-2 hover:bg-primary hover:text-white duration-0 transition-none">
             <ExternalLink className="h-4 w-4 mr-2" />
             Kariyer Sayfası
           </Button>
-          <Button variant="outline" className="w-full justify-start">
+          <Button variant="outline" className="w-full justify-start px-4 py-2 hover:bg-primary hover:text-white duration-0 transition-none">
             <ExternalLink className="h-4 w-4 mr-2" />
             LinkedIn Profili
           </Button>

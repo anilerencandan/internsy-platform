@@ -24,7 +24,7 @@ export default function KatkilarCard({title, eventCount, icon, link}: KatkilarCa
             </Link>
         </div>
 
-        <button className='w-fit bg-gray-100 rounded-md px-4 py-2 font-semibold text-center'>Görüş Ekle</button>
+        <button className='w-fit bg-primary text-white font-sans rounded-md px-4 py-2 font-semibold text-center'>Görüş Ekle</button>
     </div>
     )
 }

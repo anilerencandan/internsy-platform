@@ -10,11 +10,11 @@ import { Separator } from "@/components/ui/separator"
 
 export default function BlogPostPage() {
   return (
-    <div className="page-content mx-auto bg-white">
+    <div className="page-content mx-auto bg-white sm:px-4">
 
       {/* Back Navigation */}
       <div className="p-4 border-b">
-        <Link href="/kariyer-rehberi/egitimler" className="flex items-center gap-2 text-blue-600 hover:underline">
+        <Link href="/kariyer-rehberi/blog" className="flex items-center gap-2 text-blue-600 hover:underline">
           <ArrowLeft className="w-4 h-4" />
           <span>Geri dön</span>
         </Link>
@@ -144,7 +144,7 @@ export default function BlogPostPage() {
       <div className="p-6 border-t border-b">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-4">
-            <Button variant="outline" className="flex items-center gap-2">
+            <Button variant="outline" className="flex items-center gap-2 px-4 py-2 ">
               <ThumbsUp className="w-4 h-4" />
               <span>Yardımcı Oldu (87)</span>
             </Button>
@@ -187,7 +187,7 @@ export default function BlogPostPage() {
               placeholder="Yorum yaz..."
               className="w-full p-3 pr-24 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
-            <Button className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-blue-600 hover:bg-blue-700 text-white">
+            <Button className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-blue-600 hover:bg-blue-700 text-white px-2 py-1">
               Paylaş
             </Button>
           </div>
@@ -199,7 +199,7 @@ export default function BlogPostPage() {
             <CommentCard key={comment} />
           ))}
 
-          <Button variant="outline" className="w-full">
+          <Button variant="outline" className="w-full px-4 py-3">
             Daha Fazla Yorum Görüntüle
           </Button>
         </div>
