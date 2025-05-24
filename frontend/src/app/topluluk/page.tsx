@@ -5,6 +5,7 @@ import SeninIcinTopluluklarCard from '@/components/topluluk-page/SeninIcinToplul
 import Searchbar from '@/components/Searchbar'
 import sampleData from '@/sample/CommunityPostSampleData.json'
 import { CommunityPostType } from '@/models/CommunityPost'
+import WelcomeModal from '@/components/topluluk-page/WelcomeFormModal'
 
 
 export default function forumPage() {
@@ -19,6 +20,7 @@ export default function forumPage() {
       <span className='sm:flex hidden'>
       
         <Searchbar />
+        <WelcomeModal/>
       </span>
       <div className='flex flex-col overflow-hidden sm:border border-gray-300 sm:rounded-xl'>
         {sampleData.map((sampleData: CommunityPostType, index ) => (
