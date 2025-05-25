@@ -23,7 +23,7 @@ export default function Page() {
             onClick={() => setIsSidebarOpen(true)}
           />
 
-                <h1 className='text-2xl font-bold px-4 text-primary'>Katkılarım</h1>
+                <h1 className='text-2xl font-bold px-4 text-primary w-full text-center'>Katkılarım</h1>
               </div>
                 <KatkilarCard title={'Görüşler'} eventCount={4} icon={<Star size={20} />}  />
                 <KatkilarCard title={'Maaşlar'} eventCount={1} icon={<Banknote  size={20} />}  />
