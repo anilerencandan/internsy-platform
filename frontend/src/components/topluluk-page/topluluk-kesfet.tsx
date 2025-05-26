@@ -1,5 +1,34 @@
 
-"use client"
+ "use client"
+
+// Slugify utility for Turkish-friendly URLs
+function slugify(text: string) {
+  const map: Record<string, string> = {
+    ı: "i",
+    İ: "i",
+    ü: "u",
+    Ü: "u",
+    ö: "o",
+    Ö: "o",
+    ç: "c",
+    Ç: "c",
+    ğ: "g",
+    Ğ: "g",
+    ş: "s",
+    Ş: "s",
+  }
+
+  return text
+    .toLowerCase()
+    .split("")
+    .map((char) => map[char] || char)
+    .join("")
+    .replace(/\s+/g, "-")
+    .replace(/[^\w\-]+/g, "")
+    .replace(/\-\-+/g, "-")
+    .replace(/^-+/, "")
+    .replace(/-+$/, "")
+}
 
 // Community Type Definitions
 type BaseCommunity = {
@@ -25,6 +54,7 @@ import type React from "react"
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
@@ -87,7 +117,27 @@ const regularCommunities = [
     color: "bg-indigo-50 border-indigo-200",
     category: "Development",
   },
+
+  {
+    id: 13,
+    name: "Mobile Development",
+    description: "iOS, Android, and cross-platform mobile development discussions and resources.",
+    memberCount: 2673,
+    thumbnail: "/placeholder.svg?height=80&width=80",
+    color: "bg-indigo-50 border-indigo-200",
+    category: "Development",
+  },
+  {
+    id: 14,
+    name: "Mobile Development",
+    description: "iOS, Android, and cross-platform mobile development discussions and resources.",
+    memberCount: 2673,
+    thumbnail: "/placeholder.svg?height=80&width=80",
+    color: "bg-indigo-50 border-indigo-200",
+    category: "Development",
+  },
 ]
+
 
 // Mock data for university communities
 const universityCommunities = [
@@ -159,7 +209,7 @@ function CategorySearchFilter({
 
   const filteredCategories = categories.filter((category) => category.toLowerCase().includes(searchTerm.toLowerCase()))
 
-  const selectedCategoryName = selectedCategory === "all" ? "All Categories" : selectedCategory
+  const selectedCategoryName = selectedCategory === "all" ? "Tüm Kategoriler" : selectedCategory
 
   return (
     <div className="relative">
@@ -185,7 +235,7 @@ function CategorySearchFilter({
               <Search className="absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-400 w-3 h-3" />
               <input
                 type="text"
-                placeholder="Search categories..."
+                placeholder="Kategori Ara..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="w-full pl-7 pr-2 py-1 text-sm border border-gray-200 rounded focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
@@ -202,7 +252,7 @@ function CategorySearchFilter({
               }}
               className={`w-full px-3 py-2 text-left text-sm hover:bg-gray-50 ${selectedCategory === "all" ? "bg-blue-50 text-blue-600" : ""}`}
             >
-              All Categories
+              Tüm Kategoriler
             </button>
             {filteredCategories.map((category) => (
               <button
@@ -218,7 +268,7 @@ function CategorySearchFilter({
               </button>
             ))}
             {filteredCategories.length === 0 && searchTerm && (
-              <div className="px-3 py-2 text-sm text-gray-500">No categories found</div>
+              <div className="px-3 py-2 text-sm text-gray-500">Kategori Bulunamadı</div>
             )}
           </div>
         </div>
@@ -241,7 +291,7 @@ function UniversitySearchFilter({
     university.toLowerCase().includes(searchTerm.toLowerCase()),
   )
 
-  const selectedUniversityName = selectedUniversity === "all" ? "All Universities" : selectedUniversity
+  const selectedUniversityName = selectedUniversity === "all" ? "Tüm Üniversiteler" : selectedUniversity
 
   return (
     <div className="relative">
@@ -267,7 +317,7 @@ function UniversitySearchFilter({
               <Search className="absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-400 w-3 h-3" />
               <input
                 type="text"
-                placeholder="Search universities..."
+                placeholder="Üniversite Ara..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="w-full pl-7 pr-2 py-1 text-sm border border-gray-200 rounded focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
@@ -284,7 +334,7 @@ function UniversitySearchFilter({
               }}
               className={`w-full px-3 py-2 text-left text-sm hover:bg-gray-50 ${selectedUniversity === "all" ? "bg-blue-50 text-blue-600" : ""}`}
             >
-              All Universities
+              Tüm Üniversiteler
             </button>
             {filteredUniversities.map((university) => (
               <button
@@ -300,7 +350,7 @@ function UniversitySearchFilter({
               </button>
             ))}
             {filteredUniversities.length === 0 && searchTerm && (
-              <div className="px-3 py-2 text-sm text-gray-500">No universities found</div>
+              <div className="px-3 py-2 text-sm text-gray-500">Üniversite Bulunamadı</div>
             )}
           </div>
         </div>
@@ -461,6 +511,9 @@ export default function CommunityPage() {
   const [selectedCategory, setSelectedCategory] = useState("all")
   const [selectedUniversity, setSelectedUniversity] = useState("all")
   const [isRequestModalOpen, setIsRequestModalOpen] = useState(false)
+  const [visibleCount, setVisibleCount] = useState(6)
+
+  const router = useRouter()
 
   // Close dropdowns when clicking outside
   useEffect(() => {
@@ -479,6 +532,7 @@ export default function CommunityPage() {
     setSelectedCategory("all")
     setSelectedUniversity("all")
     setSelectedCommunity(tab === "regular" ? regularCommunities[0] : universityCommunities[0])
+    setVisibleCount(6)
   }
 
   const filteredCommunities = currentCommunities.filter((community) => {
@@ -504,13 +558,13 @@ export default function CommunityPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header with Request Button */}
         <div className="text-center mb-8 relative">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">Communities</h1>
-          <p className="text-gray-600">Discover and join communities that match your interests</p>
+          <h1 className="text-3xl font-bold text-primary mb-2">Topluluklar</h1>
+          <p className="text-gray-600">İlgi alanlarına uygun toplulukları keşfet ve katıl</p>
 
           {/* Request Community Button */}
           <Button
             onClick={() => setIsRequestModalOpen(true)}
-            className="absolute top-0 right-0 bg-blue-500 hover:bg-blue-600 text-white"
+            className="absolute top-0 right-0 gap-2 px-6 py-3 rounded-xl font-medium transition-all duration-200 bg-blue-500 hover:bg-blue-600 text-white"
           >
             <Plus className="w-4 h-4 mr-2" />
             Topluluk Talep Et
@@ -554,7 +608,7 @@ export default function CommunityPage() {
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
                 <input
                   type="text"
-                  placeholder="Search communities..."
+                  placeholder="Topluluk Ara..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
@@ -578,13 +632,13 @@ export default function CommunityPage() {
 
         {/* Community Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-          {filteredCommunities.map((community) => (
+          {filteredCommunities.slice(0, visibleCount).map((community) => (
             <Card
               key={community.id}
-              className={`cursor-pointer transition-all duration-200 hover:shadow-lg hover:-translate-y-1 border-2 ${community.color} ${
-                selectedCommunity && selectedCommunity.id === community.id ? "ring-2 ring-blue-500 ring-offset-2" : ""
-              }`}
-              onClick={() => setSelectedCommunity(community as Community)}
+              className={`cursor-pointer transition-all duration-200 hover:shadow-lg hover:-translate-y-1 border-2 ${community.color}`}
+              onClick={() =>
+                router.push(`/topluluk/${slugify(community.name)}`)
+              }
             >
               <CardHeader className="pb-4">
                 <div className="flex items-center gap-3 mb-3">
@@ -627,9 +681,8 @@ export default function CommunityPage() {
                     {community.memberCount.toLocaleString()} members
                   </Badge>
                   <Link
-                    href={`/community/${community.id}`}
+                    href={`/topluluk/${slugify(community.name)}`}
                     className="text-sm text-blue-600 hover:text-blue-700 font-medium"
-                    onClick={(e) => e.stopPropagation()}
                   >
                     View →
                   </Link>
@@ -638,6 +691,17 @@ export default function CommunityPage() {
             </Card>
           ))}
         </div>
+
+        {visibleCount < filteredCommunities.length && (
+          <div className="text-center mb-12">
+            <Button
+              onClick={() => setVisibleCount((prev) => prev + 6)}
+              className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-lg"
+            >
+              Daha Fazla Göster
+            </Button>
+          </div>
+        )}
 
         {filteredCommunities.length === 0 && (
           <div className="text-center py-12">

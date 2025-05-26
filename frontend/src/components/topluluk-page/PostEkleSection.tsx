@@ -5,6 +5,8 @@ import AnonimDropdown from '../forum-page/AnonimDropdown'
 import { Button } from '../ui/button'
 import { MessagesSquare, Plus } from 'lucide-react'
 import { useNav } from '@/context/NavContext'
+import Link from "next/link"
+
 import {
   Dialog,
   DialogContent,
@@ -47,10 +49,12 @@ export default function PostEkleSection() {
 
         <div className='flex flex-col gap-y-4'>
           <h3 className='text-xl font-bold'>Topluluklarım</h3>
-          <Button className='flex items-center gap-x-2 px-4 py-2 border w-fit rounded-lg bg-white text-black hover:bg-black hover:text-white'>
-            <MessagesSquare size={20} />
-            <p className='font-semibold text-sm'>Toplulukları Keşfet</p>
-          </Button>
+          <Link href="/topluluklari-kesfet">
+            <Button className='flex items-center gap-x-2 px-4 py-2 border w-fit rounded-lg bg-white text-black hover:bg-black hover:text-white'>
+              <MessagesSquare size={20} />
+              <p className='font-semibold text-sm'>Toplulukları Keşfet</p>
+            </Button>
+          </Link>
         </div>
       </div>
 

@@ -16,7 +16,7 @@ export default function MulakatlarPage() {
 
           {/* Orta içerik */}
           <div className="w-full md:w-1/3 text-center ">
-            <h1 className="text-3xl font-bold mb-4">Şirket Mülakat Deneyimleri</h1>
+            <h1 className="text-3xl font-bold mb-4 text-primary">Şirket Mülakat Deneyimleri</h1>
             <p className="text-gray-600 mb-6">
             Gerçek mülakat soruları, aday yorumları ve süreç bilgileriyle mülakatlara daha hazırlıklı gir.
             </p>
