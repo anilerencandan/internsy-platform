@@ -3,9 +3,14 @@ import { useState } from "react";
 import { FaApple, FaGoogle, FaLinkedin } from "react-icons/fa";
 import ContinueWithCard from "./ContinueWithCard";
 
+
 export default function ContinueWithSection() {
   const [email, setEmail] = useState("");
   const [step, setStep] = useState(0);
+
+  const loginWithGoogle = () => {
+
+  }
 
   const handleEmailContinue = () => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
