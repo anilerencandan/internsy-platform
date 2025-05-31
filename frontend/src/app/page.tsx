@@ -1,8 +1,41 @@
 import AboutUsSection from "@/components/landing-page/AboutUsSection";
 import ContinueWithSection from "@/components/landing-page/ContinueWithSection";
 import StartYourSearchSection from "@/components/landing-page/StartYourSearchSection";
+import { createClient } from "@/utils/supabase/server";
 
-export default function LandingPage() {
+
+export default async function LandingPage() {
+
+  const supabase = await createClient();
+
+  try {
+    // Get the logged-in user
+    const { data: auth, error: authError } = await supabase.auth.getUser();
+    if (authError) throw authError;
+
+    const userId = auth?.user?.id;
+    if (!userId) {
+      console.log("No user is logged in.");
+      return;
+    }
+
+    // Fetch user profile
+    const { data: profile, error: profileError } = await supabase
+      .from("users")
+      .select("*")
+      .eq("id", userId)
+      .single();
+
+    if (profileError) throw profileError;
+
+    // Success
+    console.log("User profile:", profile);
+
+  } catch (err) {
+    console.error("Supabase error:", err);
+  }
+
+
   return (
     <div className="flex flex-col items-center ">
       <div className="flex flex-col">
