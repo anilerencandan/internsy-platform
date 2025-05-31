@@ -43,7 +43,7 @@ export default function Component() {
                 </div>
                 <div className="flex items-center gap-3">
                   <TrendingUp className="h-5 w-5 text-purple-500" />
-                  <span className="text-gray-700">Kariyer gelişim etkinlikleri</span>
+                  <span className="text-gray-700">Üniversite toplulukları</span>
                 </div>
               </div>
               <Link href="/topluluk" className="mt-6 inline-block">
@@ -65,14 +65,14 @@ export default function Component() {
                         <p className="text-sm">"Google'da staj deneyimim hakkında sorularınızı alayım!"</p>
                         <div className="flex items-center gap-2 mt-2">
                           <div className="w-6 h-6 bg-white/30 rounded-full"></div>
-                          <span className="text-xs">Ahmet K. • 2 saat önce</span>
+                          <span className="text-xs">Google Yazılım Stajyeri • 2 saat önce</span>
                         </div>
                       </div>
                       <div className="bg-white/10 p-4 rounded-lg">
                         <p className="text-sm">"Frontend developer pozisyonları için portfolio önerileri"</p>
                         <div className="flex items-center gap-2 mt-2">
                           <div className="w-6 h-6 bg-white/30 rounded-full"></div>
-                          <span className="text-xs">Zeynep M. • 5 saat önce</span>
+                          <span className="text-xs">Yazılım Mühendisliği Öğrencisi • 5 saat önce</span>
                         </div>
                       </div>
                     </div>
@@ -97,21 +97,21 @@ export default function Component() {
                       <div className="bg-white/10 p-4 rounded-lg text-center">
                         <Award className="h-8 w-8 mx-auto mb-2" />
                         <div className="text-2xl font-bold">2.5k+</div>
-                        <div className="text-sm opacity-90">Staj Pozisyonu</div>
+                        <div className="text-sm opacity-90">Şirket İncelemesi</div>
                       </div>
                     </div>
                     <div className="space-y-3">
                       <div className="flex items-center justify-between bg-white/10 p-3 rounded-lg">
                         <span className="font-medium">Google</span>
-                        <span className="text-sm bg-white/20 px-2 py-1 rounded">15 pozisyon</span>
+                        <span className="text-sm bg-white/20 px-2 py-1 rounded">15 staj ilanı</span>
                       </div>
                       <div className="flex items-center justify-between bg-white/10 p-3 rounded-lg">
                         <span className="font-medium">Microsoft</span>
-                        <span className="text-sm bg-white/20 px-2 py-1 rounded">8 pozisyon</span>
+                        <span className="text-sm bg-white/20 px-2 py-1 rounded">8 staj ilanı</span>
                       </div>
                       <div className="flex items-center justify-between bg-white/10 p-3 rounded-lg">
                         <span className="font-medium">Trendyol</span>
-                        <span className="text-sm bg-white/20 px-2 py-1 rounded">12 pozisyon</span>
+                        <span className="text-sm bg-white/20 px-2 py-1 rounded">12 staj ilan</span>
                       </div>
                     </div>
                   </div>
@@ -126,7 +126,7 @@ export default function Component() {
                 <h3 className="text-3xl font-bold text-gray-900 ">Şirketleri Keşfet</h3>
               </div>
               <p className="text-lg text-gray-600 leading-relaxed">
-                Türkiye'nin en büyük şirket veritabanında dream job'unu bul. Şirket kültürlerini öğren, maaş bilgilerini
+                Türkiye'nin en büyük şirket veritabanında en iyi staj yerini bul. Şirket kültürlerini öğren, maaş bilgilerini
                 incele ve başvuru süreçlerini keşfet.
               </p>
               <div className="space-y-3">
@@ -143,9 +143,11 @@ export default function Component() {
                   <span className="text-gray-700">Şirket değerlendirmeleri</span>
                 </div>
               </div>
+              <Link href="/sirketler" passHref>
               <Button className="mt-6 bg-emerald-600 hover:bg-emerald-700 p-2 rounded-lg">
                 Şirketleri İncele <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
+            </Link>
             </div>
           </div>
 
@@ -169,16 +171,18 @@ export default function Component() {
                 </div>
                 <div className="flex items-center gap-3">
                   <BookOpen className="h-5 w-5 text-green-500" />
-                  <span className="text-gray-700">Soru bankası ve çözümleri</span>
+                  <span className="text-gray-700">Mülaklat soruları ve çözümleri</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <Star className="h-5 w-5 text-yellow-500" />
-                  <span className="text-gray-700">Uzman tavsiyeleri</span>
+                  <span className="text-gray-700">Teklif Bilgisi </span>
                 </div>
               </div>
+              <Link href="/mulakatlar" passHref>
               <Button className="mt-6 bg-purple-600 hover:bg-purple-700 p-2 rounded-lg">
                 Deneyimleri Oku <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
+            </Link>
             </div>
             <div className="relative">
               <Card className="overflow-hidden shadow-xl border-0">
@@ -190,7 +194,7 @@ export default function Component() {
                     <div className="space-y-4">
                       <div className="bg-white/10 p-4 rounded-lg">
                         <div className="flex items-center gap-2 mb-2">
-                          <span className="font-medium">Google - Software Engineer Intern</span>
+                          <span className="font-medium">Turkcell - Yazılım Mühendisi Stajyeri</span>
                         </div>
                         <p className="text-sm opacity-90">
                           "3 aşamalı süreç: Online test, teknik mülakat ve HR görüşmesi..."
@@ -201,7 +205,7 @@ export default function Component() {
                               <Star key={star} className="h-3 w-3 fill-current" />
                             ))}
                           </div>
-                          <span className="text-xs">Mehmet A.</span>
+                          <span className="text-xs">KOU Öğrencisi</span>
                         </div>
                       </div>
                       <div className="bg-white/10 p-4 rounded-lg">
@@ -218,7 +222,7 @@ export default function Component() {
                             ))}
                             <Star className="h-3 w-3" />
                           </div>
-                          <span className="text-xs">Ayşe K.</span>
+                          <span className="text-xs">BOUN Öğrencisi</span>
                         </div>
                       </div>
                     </div>
@@ -294,9 +298,11 @@ export default function Component() {
                   <span className="text-gray-700">Güncel sektör trendleri</span>
                 </div>
               </div>
+              <Link href="/kariyer-rehberi" passHref>
               <Button className="mt-6 bg-orange-600 hover:bg-orange-700 p-2 rounded-lg">
                 Rehberleri İncele <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
+              </Link>
             </div>
           </div>
         </div>

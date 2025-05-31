@@ -31,12 +31,8 @@ export default function ContinueWithSection() {
         <div className="min-w-full px-4 flex flex-col gap-y-2 justify-center items-center pt-4 pb-24 sm:pb-4">
           <p className="text-xs text-center text-black">
             Devam Ederken{" "}
-            <a href="" className="underline text-primary font-bold">
-              Kullanım Sözleşmesini
-            </a>{" "}
-            ve{" "}
             <a href="/gizlilik-ve-guvenlik" className="underline text-primary font-bold">
-              Gizlilik Sözleşmesini
+              Kullanım ve Gizlilik Sözleşmesini
             </a>{" "}
             Kabul Etmiş Olursunuz.
           </p>
@@ -52,22 +48,22 @@ export default function ContinueWithSection() {
           </div>
 
           <div className="flex flex-col w-full gap-y-2 mb-2">
-            <label htmlFor="email" className="text-xs">
+            <label htmlFor="email" className="text-xs font-semibold">
               Email ile Giriş Yap
             </label>
             <input
               type="email"
               id="email"
               className="focus:ring-2 focus:ring-primary px-4 py-2 bg-transparent focus:outline-none w-full text-sm text-gray-800 placeholder:text-gray-500 border-[1px] border-gray-400 rounded-[8px]"
-              placeholder="ornek@mail.com"
+              placeholder="örnek@mail.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
 
           <ContinueWithCard name="Email" onClick={handleEmailContinue} />
-          <p className="text-sm text-gray-600 flex items-center gap-x-1">Hesabın yok mu? 
-           <a href="/signup" className="text-primary underline">Hemen Kayit Ol</a></p>  
+          <p className="text-sm text-gray-600 flex items-center gap-x-1 font-semibold">Hesabın yok mu? 
+           <a href="/signup" className="text-primary underline font-bold">Hemen Kayit Ol</a></p>  
         </div>
 
         {/* === 2. Adım: Sonraki Section (şifre girme/kod ekranı vs) === */}
