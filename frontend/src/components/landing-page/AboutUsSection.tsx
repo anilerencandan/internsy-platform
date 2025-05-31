@@ -6,8 +6,8 @@ export default function AboutUsSection() {
             <div className="flex flex-col gap-y-4 items-center justify-center text-sm w-full max-w-[500px]">
               <h2 className="text-2xl text-black font-semibold">Internsy ile Yolculuğa Çık</h2>
               <p className="text-center text-sm">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam labore eius doloribus praesentium cum sit at adipisci consequatur ullam quos.
-              </p>
+              Internsy, öğrenciler ve yeni mezunlar için staj ve kariyer yolculuğunu daha şeffaf, adil ve erişilebilir hale getirmeyi amaçlayan bir topluluk platformudur.
+              Amacımız, staj sürecinin belirsizliklerini ortadan kaldırmak, doğru bilgiye ulaşmayı kolaylaştırmak ve öğrencilerin birbiriyle dayanışma içinde öğrenebileceği bir alan yaratmak.              </p>
 
             </div>
             <div className="w-full grid grid-cols-2 lg:grid-cols-4  grid-rows-2 lg:grid-rows-1 gap-x-4 gap-y-6">

@@ -72,7 +72,7 @@ export default function StajIlanlariPage() {
 
           {/* Orta İçerik */}
           <div className="w-full md:w-1/3 text-center">
-            <h1 className="text-3xl font-bold mb-4">Staj İlanları</h1>
+            <h1 className="text-3xl font-bold mb-4 text-primary">Staj İlanları</h1>
             <p className="text-gray-600 mb-6">
             Şirketlerin sunduğu güncel staj fırsatlarını keşfet, başvuru koşullarını ve detaylarını kolayca öğren.            </p>
             <div className="relative max-w-xl mx-auto">
@@ -96,7 +96,7 @@ export default function StajIlanlariPage() {
 
         {/* Staj İlanları */}
         <div className="flex flex-col gap-y-6 p-4 ">
-          <h2 className="text-2xl font-bold">Öne Çıkan Şirketler</h2>
+          <h2 className="text-2xl font-bold text-primary">Öne Çıkan Şirketler</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {popularCompanies.map((company) => (
               <CompanyJobsCard

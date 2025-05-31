@@ -16,7 +16,7 @@ export async function GET() {
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json()
-    const { category_id, user_id, title, content, display_name } = body
+    const { category_id, user_id, title, content } = body
 
     const { data, error } = await supabase
       .from('forum_posts')
@@ -26,7 +26,6 @@ export async function POST(req: NextRequest) {
           user_id,
           title,
           content,
-          display_name,
           like_count: 0,
           comment_count: 0,
           is_deleted: false,

@@ -77,7 +77,7 @@ export default function sirketlerPage() {
 
           {/* Orta İçerik */}
           <div className="w-full md:w-1/3 text-center">
-            <h1 className="text-3xl font-bold mb-4">Şirketler</h1>
+            <h1 className="text-3xl font-bold mb-4 text-primary">Şirketler</h1>
             <p className="text-gray-600 mb-6">
             Farklı şirketlerin puanlarını ve stajyer görüşlerini inceleyerek sana en uygun staj yerini bul.
             </p>

@@ -74,7 +74,7 @@ export default function NotificationCards() {
           />
 
         
-        <h2 className="text-2xl font-bold text-primary">Bildirimler</h2>
+        <h2 className="text-2xl font-bold text-primary w-full text-center">Bildirimler</h2>
         <Badge variant="outline" className="bg-blue-50 text-blue-500 hover:bg-blue-100 rounded-full">
           {notifications.filter((n) => !n.read).length} Yeni
         </Badge>

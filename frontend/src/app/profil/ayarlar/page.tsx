@@ -14,14 +14,14 @@ export default function Page() {
     <div className='mb-6'>
             <div className='flex flex-col bg-white rounded-[8px] overflow-hidden  text-sm gap-y-4 sm:border border-gray-300 py-6'>
                 
-                <div className='flex flex-col'>
+                <div className='flex flex-col '>
                     <div className='flex items-center sm:justify-start justify-center relative'>
                         <ChevronLeft
                             size={24}
                             className="absolute left-4 cursor-pointer sm:hidden block text-primary"
                             onClick={() => setIsSidebarOpen(true)}
                         />
-                    <h1 className='text-2xl font-bold px-4 text-primary'>Ayarlar</h1>
+                    <h1 className='text-2xl font-bold px-4 text-primary text-center w-full'>Ayarlar</h1>
                     </div>
 
                     <div className='flex flex-col gap-y-6 p-4'>

@@ -245,7 +245,7 @@ export default function SocialPage() {
             className="absolute left-4 cursor-pointer sm:hidden block text-primary"
             onClick={() => setIsSidebarOpen(true)}
           />
-          <h1 className="text-2xl font-bold text-center text-primary">Takip Edilenler</h1>
+          <h1 className="text-2xl font-bold text-center text-primary w-full">Takip Edilenler</h1>
         </div>
 
         {/* Mobil görünüm için Tabs */}

@@ -5,6 +5,7 @@ import Image from "next/image";
 import { SquareArrowOutUpRight } from 'lucide-react'
 import CompanyInfoCard from "@/components/company-page/CompanyInfoCard";
 import StajIlanlarCard from "@/components/sirketler-page/StajIlanlarCard";
+import Link from "next/link";
 
 export default function SirketLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -26,9 +27,11 @@ export default function SirketLayout({ children }: { children: React.ReactNode }
             </div>
           </div>
           <div className="flex items-center justify-center py-2">
-            <button className="px-4 py-2 rounded-lg bg-primary font-bold w-fit text-white">
-              Şirketleri Keşfet
-            </button>
+            <Link href="/sirketler">
+              <button className="px-4 py-2 rounded-lg bg-primary font-bold w-fit text-white">
+                Şirketleri Keşfet
+              </button>
+            </Link>
           </div>
         </div>
       </div>
