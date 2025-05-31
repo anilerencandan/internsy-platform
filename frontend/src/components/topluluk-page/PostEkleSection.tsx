@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import AnonimDropdown from '../forum-page/AnonimDropdown'
 import { Button } from '../ui/button'
 import { MessagesSquare, Plus } from 'lucide-react'
@@ -16,22 +16,36 @@ import {
 } from "@/components/ui/dialog"
 import { Input } from '../ui/input'
 import { Textarea } from '../ui/textarea'
+import { postCommunity } from '@/app/topluluk/postCommunity'
+import { createBrowserClient } from '@supabase/ssr'
+
+type Category = {
+  id: string, 
+  name: string
+}
+
+const supabase = createBrowserClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+)
 
 export default function PostEkleSection() {
   const { show, height } = useNav()
   const stickyTop = show ? height : 0
-  const [open, setOpen] = useState(false)
   const [selectedCommunity, setSelectedCommunity] = useState("")
   const [content, setContent] = useState("")
+  const [categories, setCategories] = useState<Category[]>([])
+  const [open, setOpen] = useState(false)
 
-  const handleSubmit = () => {
-    if (content && selectedCommunity) {
-      alert("Gönderiniz paylaşılmıştır.")
-      setOpen(false)
-      setContent("")
-      setSelectedCommunity("")
-    }
-  }
+
+  useEffect(() => {
+    const fetcCategories = async () => {
+      const {data, error } = await supabase.from('forum_categories').select('id, name') 
+      if(!error && data) setCategories(data)
+    } 
+
+    fetcCategories()
+  }, [])
 
   return (
     <>
@@ -64,24 +78,28 @@ export default function PostEkleSection() {
             <DialogTitle>Anonim Post Paylaş</DialogTitle>
           </DialogHeader>
           <p className='text-sm text-gray-600'>Paylaşımınız anonim olarak yapılacaktır.</p>
-          <select
-            value={selectedCommunity}
-            onChange={(e) => setSelectedCommunity(e.target.value)}
-            className="w-full border p-2 rounded text-sm"
-          >
-            <option value="">Topluluk Seçin</option>
-            <option value="yazilim">Yazılım</option>
-            <option value="tasarim">Tasarım</option>
-            <option value="kariyer">Kariyer</option>
-          </select>
-          <Textarea
-            placeholder="Ne paylaşmak istersin?"
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-          />
-          <DialogFooter>
-            <Button onClick={handleSubmit}>Paylaş</Button>
-          </DialogFooter>
+          <form action={postCommunity} method='POST'>
+             <Input name="title" placeholder="Başlık" required />
+            <select
+              name='category_id'
+              value={selectedCommunity}
+              className="w-full border p-2 rounded text-sm"
+              >
+              <option value="">Topluluk Seçin</option>
+              {categories.map((category, index) => (
+                <option key={index} value={category.id}>{category.name}</option>
+              ))}
+            </select>
+            <Textarea
+              name='content'
+              placeholder="Ne paylaşmak istersin?"
+              value={content}
+              onChange={(e) => setContent(e.target.value)}
+              />
+            <DialogFooter>
+              <Button  type='submit'>Paylaş</Button>
+            </DialogFooter>
+            </form>
         </DialogContent>
       </Dialog>
     </>

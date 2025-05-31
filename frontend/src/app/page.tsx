@@ -23,7 +23,7 @@ export default async function LandingPage() {
     const { data: profile, error: profileError } = await supabase
       .from("users")
       .select("*")
-      .eq("id", userId)
+      .eq("auth_id", userId)
       .single();
 
     if (profileError) throw profileError;
