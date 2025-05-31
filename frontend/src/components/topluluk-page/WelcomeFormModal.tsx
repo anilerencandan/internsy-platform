@@ -108,8 +108,7 @@ export default function WelcomeFlowModal() {
         {/* 1. Adım */}
         {step === 1 && (
           <Form {...userForm}>
-            <form onSubmit={userForm.handleSubmit(onUserS
-              ubmit)} className="space-y-4 pt-2">
+            <form onSubmit={userForm.handleSubmit(onUserSubmit)} className="space-y-4 pt-2">
               {['firstName','lastName','school'].map(name => (
                 <FormField key={name} control={userForm.control} name={name as any} render={({ field }) => (
                   <FormItem>
