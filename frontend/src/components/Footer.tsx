@@ -24,7 +24,7 @@ export default function Footer() {
         <div className="flex flex-col lg:items-center">
           <div className="flex flex-col gap-y-2 lg:items-start ">
             <h4 className="font-bold text-primary-dark">Internsy.co</h4>
-            <Link href="/hakkimizda" className="hover:text-black">Hakkımızda</Link>
+            <Link href="/hakkimizda" className=" font-hover:text-black">Hakkımızda</Link>
             <Link href="/topluluk" className="hover:text-black">Topluluk</Link>
             <Link href="/sirketler" className="hover:text-black">Şirketler</Link>
             <Link href="/mulakatlar" className="hover:text-black">Mülakatlar</Link>

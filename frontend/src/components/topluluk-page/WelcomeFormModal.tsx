@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { Search } from "lucide-react";
+import { Building2, Star, TrendingUp, Award, ArrowRight } from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { useForm, useFieldArray } from "react-hook-form";
@@ -20,8 +22,6 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/u
 
 // 1. Kullanıcı Bilgileri Şeması
 const userSchema = z.object({
-  firstName: z.string().min(1, { message: "Ad zorunlu" }),
-  lastName: z.string().min(1, { message: "Soyad zorunlu" }),
   school: z.string().min(1, { message: "Üniversite zorunlu" }),
 });
 type UserFormValues = z.infer<typeof userSchema>;
@@ -76,6 +76,10 @@ export default function WelcomeFlowModal() {
   const [step, setStep] = useState<1 | 2 | 3 | 4 | 5 | 6>(1);
   const [userInfo, setUserInfo] = useState<UserFormValues | null>(null);
   const [showAnswerIdx, setShowAnswerIdx] = useState<number[]>([]);
+  // Dropdown state for university selection
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [universitySearch, setUniversitySearch] = useState("");
+  const [selectedUniversity, setSelectedUniversity] = useState<string>("");
 
   // İlk açılışta göster
   useEffect(() => {
@@ -85,7 +89,7 @@ export default function WelcomeFlowModal() {
   // 1. form: kullanıcı bilgileri
   const userForm = useForm<UserFormValues>({
     resolver: zodResolver(userSchema),
-    defaultValues: { firstName: "", lastName: "", school: "" },
+    defaultValues: { school: "" },
   });
 
   // 2. form: mülakat paylaşım
@@ -119,10 +123,28 @@ export default function WelcomeFlowModal() {
   });
 
 
+  // Example university list for dropdown
+  const universities = [
+    "Boğaziçi Üniversitesi",
+    "Orta Doğu Teknik Üniversitesi",
+    "İstanbul Teknik Üniversitesi",
+    "Hacettepe Üniversitesi",
+    "Yıldız Teknik Üniversitesi",
+    "Ege Üniversitesi",
+    "Dokuz Eylül Üniversitesi",
+    "Ankara Üniversitesi",
+    "Sabancı Üniversitesi",
+    "Koç Üniversitesi",
+  ];
+
   // 1. adım gönderildiğinde
-  const onUserSubmit = (values: UserFormValues) => {
-    setUserInfo(values);
-    setStep(2);
+  const onUserSubmit = () => {
+    if (selectedUniversity) {
+      setUserInfo({ school: selectedUniversity });
+      setStep(2);
+    } else {
+      userForm.setError("school", { message: "Üniversite seçiniz" });
+    }
   };
 
   // mülakat formu gönderildiğinde
@@ -175,9 +197,9 @@ export default function WelcomeFlowModal() {
 
   return (
     <Dialog open={open}>
-      <DialogContent className="sm:max-w-[500px] h-auto overflow-y-auto">
-        <DialogHeader>
-          <DialogTitle>
+      <DialogContent className="sm:max-w-[500px] min-h-[400px] overflow-y-auto ">
+        <DialogHeader >
+          <DialogTitle className="text-primary font-bold ">
             {step === 1 && "Hoş geldin! Bilgilerini doldur"}
             {step === 2 && "Ne paylaşmak istersin?"}
             {step === 3 && "Mülakat Deneyimini Paylaş"}
@@ -187,16 +209,58 @@ export default function WelcomeFlowModal() {
         {/* 1. Adım */}
         {step === 1 && (
           <Form {...userForm}>
-            <form onSubmit={userForm.handleSubmit(onUserSubmit)} className="space-y-4 pt-2">
-              {['firstName','lastName','school'].map(name => (
-                <FormField key={name} control={userForm.control} name={name as any} render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>{ name==='firstName'? 'Adın' : name==='lastName'? 'Soyadın':'Üniversiten' }</FormLabel>
-                    <FormControl><Input {...field} placeholder={field.name==='school'?'Üniversiten': field.name==='firstName'?'Adın':'Soyadın'} /></FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )} />
-              ))}
+            <form onSubmit={onUserSubmit} className="space-y-4 pt-2">
+              <FormItem>
+                <FormLabel>Üniversiten</FormLabel>
+                <FormControl>
+                  <div className="relative">
+                    <button
+                      type="button"
+                      className="w-full flex items-center justify-between px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white text-left"
+                      onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                    >
+                      <span>{selectedUniversity || "Üniversite Seç"}</span>
+                      <Search className="w-4 h-4 text-gray-400" />
+                    </button>
+                    {isDropdownOpen && (
+                      <div className="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-lg shadow-lg">
+                        <input
+                          type="text"
+                          placeholder="Ara..."
+                          value={universitySearch}
+                          onChange={(e) => setUniversitySearch(e.target.value)}
+                          className="w-full px-4 py-2 text-sm border-b border-gray-200 focus:outline-none"
+                        />
+                        <div className="max-h-40 overflow-y-auto">
+                          {universities
+                            .filter((uni) =>
+                              uni.toLowerCase().includes(universitySearch.toLowerCase())
+                            )
+                            .map((uni) => (
+                              <button
+                                key={uni}
+                                type="button"
+                                className="w-full text-left px-4 py-2 hover:bg-gray-100"
+                                onClick={() => {
+                                  setSelectedUniversity(uni);
+                                  setIsDropdownOpen(false);
+                                }}
+                              >
+                                {uni}
+                              </button>
+                            ))}
+                          {universities.filter((uni) =>
+                            uni.toLowerCase().includes(universitySearch.toLowerCase())
+                          ).length === 0 && (
+                            <div className="px-4 py-2 text-sm text-gray-500">Üniversite bulunamadı</div>
+                          )}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </FormControl>
+                <FormMessage>{!selectedUniversity && userForm.formState.errors.school?.message}</FormMessage>
+              </FormItem>
               <div className="flex justify-end pt-2">
                 <Button type="submit">Devam</Button>
               </div>
@@ -206,13 +270,59 @@ export default function WelcomeFlowModal() {
         
         {/* 2. Adım */}
         {step === 2 && (
-          <div className="grid gap-3 pt-4">
-            <Button onClick={() => setStep(3)}>Mülakat Paylaş</Button>
-            <Button onClick={() => setStep(4)}>Maaş Bilgisi Paylaş</Button>
-            <Button onClick={() => setStep(5)}>Şirket Görüşü Paylaş</Button>
-            <div className="mt-6 flex flex-col items-center gap-2 text-sm text-gray-600">
+          <div className="gap-3 flex flex-col items-center pt-4">
+            <div className="grid gap-3 w-full max-w-md">
+              <Button className="flex items-center justify-center gap-2 p-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg min-w-[300px]" onClick={() => setStep(3)}>
+                Mülakat Paylaş
+              </Button>
+              <Button className="flex items-center justify-center gap-2 p-3 bg-green-600 hover:bg-green-700 text-white rounded-lg min-w-[300px]" onClick={() => setStep(4)}>
+                Maaş Bilgisi Paylaş
+              </Button>
+              <Button className="flex items-center justify-center gap-2 p-3 bg-purple-600 hover:bg-purple-700 text-white rounded-lg min-w-[300px]" onClick={() => setStep(5)}>
+                Şirket Görüşü Paylaş
+              </Button>
+            </div>
+            <p className="text-center text-sm text-gray-500 mt-2 italic">veya premium ayrıcalıklarla devam et</p>
+            <div className="w-full max-w-md bg-gradient-to-br from-yellow-50 to-yellow-100 rounded-xl shadow-md p-6 border border-yellow-300">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="p-3 bg-yellow-200 rounded-full">
+                <Star className="h-6 w-6 text-yellow-600" />
+              </div>
+              <h3 className="text-2xl font-bold text-gray-900">Premium Üyelik</h3>
+            </div>
+            <p className="text-gray-700 mb-4">
+              Daha fazlasını keşfet! Premium üyelik ile topluluğun sunduğu özel ayrıcalıklardan faydalan:
+            </p>
+            <div className="space-y-3 mb-6">
+              <div className="flex items-center gap-3">
+                <ArrowRight className="h-5 w-5 text-yellow-600" />
+                <span className="text-gray-800">Tüm şirket yorumlarına sınırsız erişim</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <ArrowRight className="h-5 w-5 text-yellow-600" />
+                <span className="text-gray-800">Ayrıntılı maaş analizlerine erken erişim</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <ArrowRight className="h-5 w-5 text-yellow-600" />
+                <span className="text-gray-800">Premium topluluk rozetleriyle öne çık</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <ArrowRight className="h-5 w-5 text-yellow-600" />
+                <span className="text-gray-800">Reklamsız deneyim</span>
+              </div>
+            </div>
+            <Button onClick={() => window.location.href = "/premium"} className="w-full bg-yellow-500 hover:bg-yellow-600 text-white p-2 rounded-lg">
+              Premium Edinin
+            </Button>
+          </div>
+            <div className="mt-2 flex flex-col items-center gap-2 text-sm text-gray-600">
               <span>Hiç staj yapmadın mı?</span>
-              <Button variant="outline" onClick={() => setStep(6)}>Hiç Staj Yapmadım</Button>
+              <Button
+                onClick={() => setStep(6)}
+                className="bg-white border border-gray-300 text-gray-800 hover:bg-gray-100 px-4 py-2 rounded-lg shadow-sm transition"
+              >
+                Hiç Staj Yapmadım
+              </Button>
             </div>
           </div>
         )}
