@@ -377,51 +377,51 @@ export default function WelcomeFlowModal() {
         )}
 
         {/* 3. Adım - Mülakat Formu */}
-        {step === 3 && (
+    {step === 3 && (
   <form onSubmit={interviewForm.handleSubmit(onInterviewSubmit)} className="space-y-6 pt-4">
     {/* Firma ve Pozisyon */}
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-    <div>
-  <label className="block text-sm font-medium text-gray-700 mb-1">Şirket</label>
-  <div className="relative">
-    <input
-      type="text"
-      placeholder="Bir şirket seçin..."
-      value={companySearch}
-      onChange={(e) => {
-        setCompanySearch(e.target.value);
-        setIsCompanyDropdownOpen(true);
-      }}
-      onFocus={() => setIsCompanyDropdownOpen(true)}
-      className="mt-1 w-full p-2 border border-gray-300 rounded-md"
-    />
-    {isCompanyDropdownOpen && (
-      <div className="absolute z-20 w-full bg-white border border-gray-200 rounded-md shadow-lg max-h-60 overflow-y-auto mt-1">
-        {companies
-          .filter((c) => c.toLowerCase().includes(companySearch.toLowerCase()))
-          .map((c) => (
-            <button
-              key={c}
-              type="button"
-              className="w-full text-left px-4 py-2 hover:bg-blue-50"
-              onClick={() => {
-                setSelectedCompany(c);
-                setCompanySearch(c);
-                setIsCompanyDropdownOpen(false);
-              }}
-            >
-              {c}
-            </button>
-          ))}
-        {companies.filter((c) =>
-          c.toLowerCase().includes(companySearch.toLowerCase())
-        ).length === 0 && (
-          <div className="px-4 py-2 text-sm text-gray-500">Şirket bulunamadı</div>
-        )}
+    <div className="space-y-4">
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-1">Şirket</label>
+        <div className="relative">
+          <input
+            type="text"
+            placeholder="Bir şirket seçin..."
+            value={companySearch}
+            onChange={(e) => {
+              setCompanySearch(e.target.value);
+              setIsCompanyDropdownOpen(true);
+            }}
+            onFocus={() => setIsCompanyDropdownOpen(true)}
+            className="mt-1 w-full p-2 border border-gray-300 rounded-md"
+          />
+          {isCompanyDropdownOpen && (
+            <div className="absolute z-20 w-full bg-white border border-gray-200 rounded-md shadow-lg max-h-60 overflow-y-auto mt-1">
+              {companies
+                .filter((c) => c.toLowerCase().includes(companySearch.toLowerCase()))
+                .map((c) => (
+                  <button
+                    key={c}
+                    type="button"
+                    className="w-full text-left px-4 py-2 hover:bg-blue-50"
+                    onClick={() => {
+                      setSelectedCompany(c);
+                      setCompanySearch(c);
+                      setIsCompanyDropdownOpen(false);
+                    }}
+                  >
+                    {c}
+                  </button>
+                ))}
+              {companies.filter((c) =>
+                c.toLowerCase().includes(companySearch.toLowerCase())
+              ).length === 0 && (
+                <div className="px-4 py-2 text-sm text-gray-500">Şirket bulunamadı</div>
+              )}
+            </div>
+          )}
+        </div>
       </div>
-    )}
-  </div>
-</div>
 
       <div>
         <label className="block text-sm font-medium text-gray-700">Pozisyon</label>
@@ -510,56 +510,63 @@ export default function WelcomeFlowModal() {
     </div>
 
     {/* Soru Kartları */}
-    <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
-      <h3 className="font-semibold text-gray-800 mb-3">Mülakatta Sorulan Sorular</h3>
-      {fields.map((item, idx) => (
-        <div key={item.id} className="bg-white border rounded-lg p-4 mb-4 shadow-sm">
-          <label className="block text-sm font-medium text-gray-700 mb-1">Soru #{idx + 1}</label>
-          <input
-            type="text"
-            name={`questions[${idx}].question`}
-            placeholder="Soruyu yazın..."
-            className="w-full p-2 border border-gray-300 rounded-md mb-2"
-          />
+    <div className="max-w-2xl w-full mx-auto bg-gradient-to-b from-slate-50 to-white border border-gray-200 rounded-xl p-6">
+      <h3 className="text-lg font-semibold text-slate-800 mb-4 text-center">Mülakatta Sorulan Sorular</h3>
 
-          {showAnswerIdx.includes(idx) && (
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Cevap</label>
-              <textarea
-                name={`questions[${idx}].answer`}
-                rows={2}
-                placeholder="Cevabı yazın..."
-                className="w-full p-2 border border-gray-300 rounded-md"
-              ></textarea>
+      <div className="space-y-4">
+        {fields.map((item, idx) => (
+          <div key={item.id} className="bg-white border border-gray-200 rounded-lg shadow-sm p-4">
+            <div className="mb-3">
+              <label className="block text-sm font-medium text-gray-700 mb-1">Soru #{idx + 1}</label>
+              <input
+                type="text"
+                name={`questions[${idx}].question`}
+                placeholder="Soruyu yazın..."
+                className="w-full px-3 py-2 border border-slate-200 rounded-md focus:outline-none focus:ring focus:ring-slate-100 text-sm"
+              />
             </div>
-          )}
 
-          <div className="flex justify-between items-center mt-3">
-            <button
-              type="button"
-              className="text-blue-600 text-sm underline hover:text-blue-800 transition"
-              onClick={() => handleToggleAnswer(idx)}
-            >
-              + Cevap Ekle
-            </button>
-            <button
-              type="button"
-              className="text-red-500 text-sm hover:text-red-700 transition"
-              onClick={() => remove(idx)}
-            >
-              ✕ Sil
-            </button>
+            {showAnswerIdx.includes(idx) && (
+              <div className="mb-2">
+                <label className="block text-xs font-medium text-slate-600 mb-1">Cevap</label>
+                <textarea
+                  name={`questions[${idx}].answer`}
+                  placeholder="Cevabı yazın..."
+                  rows={3}
+                  className="w-full px-3 py-2 border border-slate-200 rounded-md focus:outline-none focus:ring focus:ring-slate-100 text-sm"
+                ></textarea>
+              </div>
+            )}
+
+            <div className="flex justify-between pt-2">
+              <button
+                type="button"
+                className="text-xs text-slate-500 hover:text-slate-800 hover:underline"
+                onClick={() => handleToggleAnswer(idx)}
+              >
+                + Cevap Ekle
+              </button>
+              <button
+                type="button"
+                className="text-xs text-rose-500 hover:text-rose-700 hover:underline"
+                onClick={() => remove(idx)}
+              >
+                ✕ Sil
+              </button>
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
 
-      <button
-        type="button"
-        className="mt-2 text-sm font-medium text-blue-600 underline"
-        onClick={() => append({ question: "", answer: "" })}
-      >
-        + Yeni Soru Ekle
-      </button>
+      <div className="mt-5 text-center">
+        <button
+          type="button"
+          onClick={() => append({ question: "", answer: "" })}
+          className="text-sm px-4 py-2 border border-slate-200 rounded-md hover:bg-slate-50 text-slate-700 transition"
+        >
+          + Yeni Soru Ekle
+        </button>
+      </div>
     </div>
 
     {/* Navigasyon */}
@@ -582,45 +589,161 @@ export default function WelcomeFlowModal() {
 )}
         {/* 4. Adım - Maaş Bilgisi */}
         {step === 4 && (
-          <form onSubmit={() => console.log("maaş gönderildi")} className="space-y-4 pt-2">
-            <h2 className="text-xl font-bold">Şirket Maaş Bilgisi Paylaş</h2>
+          <form onSubmit={salaryForm.handleSubmit((values) => console.log("maaş gönderildi", values))} className="space-y-4 pt-2">
+            <h2 className="text-xl font-bold text-primary">Şirket Maaş Bilgisi Paylaş</h2>
+
             <div>
-              <label className="block font-medium">Şirket</label>
-              <Input placeholder="Şirket adı" />
+              <label className="block text-sm font-medium text-gray-700 mb-1">Şirket</label>
+              <div className="relative">
+                <input
+                  type="text"
+                  placeholder="Bir şirket seçin..."
+                  value={companySearch}
+                  onChange={(e) => {
+                    setCompanySearch(e.target.value);
+                    setIsCompanyDropdownOpen(true);
+                  }}
+                  onFocus={() => setIsCompanyDropdownOpen(true)}
+                  className="mt-1 w-full p-2 border border-gray-300 rounded-md"
+                />
+                {isCompanyDropdownOpen && (
+                  <div className="absolute z-20 w-full bg-white border border-gray-200 rounded-md shadow-lg max-h-60 overflow-y-auto mt-1">
+                    {companies
+                      .filter((c) => c.toLowerCase().includes(companySearch.toLowerCase()))
+                      .map((c) => (
+                        <button
+                          key={c}
+                          type="button"
+                          className="w-full text-left px-4 py-2 hover:bg-blue-50"
+                          onClick={() => {
+                            setSelectedCompany(c);
+                            setCompanySearch(c);
+                            setIsCompanyDropdownOpen(false);
+                          }}
+                        >
+                          {c}
+                        </button>
+                      ))}
+                    {companies.filter((c) =>
+                      c.toLowerCase().includes(companySearch.toLowerCase())
+                    ).length === 0 && (
+                      <div className="px-4 py-2 text-sm text-gray-500">Şirket bulunamadı</div>
+                    )}
+                  </div>
+                )}
+              </div>
             </div>
-            <div>
-              <label className="block font-medium">Pozisyon</label>
-              <Input placeholder="Pozisyon" />
-            </div>
-            <div>
-              <label className="block font-medium">Aylık Maaş (₺)</label>
-              <Input type="number" placeholder="Örn. 15.000" />
-            </div>
-            <div className="flex justify-between pt-4">
-              <Button variant="ghost" onClick={() => setStep(2)}>Geri</Button>
-              <Button type="submit">Gönder</Button>
-            </div>
+
+            <Form {...salaryForm}>
+              <FormField
+                control={salaryForm.control}
+                name="position"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-gray-600 font-medium">Pozisyon</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="Pozisyon"
+                        {...field}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm placeholder-gray-400"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={salaryForm.control}
+                name="monthlySalary"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-gray-600 font-medium">Aylık Maaş (₺)</FormLabel>
+                    <FormControl>
+                      <Input
+                        type="number"
+                        placeholder="Örn. 15.000"
+                        {...field}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm placeholder-gray-400"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <div className="flex justify-between pt-6">
+                <button
+                  type="button"
+                  onClick={() => setStep(2)}
+                  className="flex items-center gap-2 text-sm text-gray-700 hover:text-white border border-gray-300 hover:border-blue-600 hover:bg-blue-600 font-medium px-3 py-1.5 rounded-md transition-colors duration-200"
+                >
+                  ← Geri
+                </button>
+                <Button type="submit" className="bg-blue-600 text-white px-5 py-2 rounded-lg hover:bg-blue-700 transition">
+                  Gönder
+                </Button>
+              </div>
+            </Form>
           </form>
         )}
 
         {/* 5. Adım - Şirket Görüşü */}
         {step === 5 && (
-          <form onSubmit={() => console.log("şirket görüşü gönderildi")} className="space-y-4 pt-2">
-            <h2 className="text-xl font-bold">Şirket Staj Deneyimi Paylaş</h2>
+          <form onSubmit={() => console.log("şirket görüşü gönderildi", { selectedCompany })} className="space-y-4 pt-2">
+            <h2 className="text-xl font-bold text-primary">Şirket Staj Deneyimi Paylaş</h2>
             <div>
-              <label className="block font-medium">Şirket</label>
-              <Input placeholder="Şirket adı" />
+              <label className="block text-sm font-medium text-gray-700 mb-1">Şirket</label>
+              <div className="relative">
+                <input
+                  type="text"
+                  placeholder="Bir şirket seçin..."
+                  value={companySearch}
+                  onChange={(e) => {
+                    setCompanySearch(e.target.value);
+                    setIsCompanyDropdownOpen(true);
+                  }}
+                  onFocus={() => setIsCompanyDropdownOpen(true)}
+                  className="mt-1 w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
+                />
+                {isCompanyDropdownOpen && (
+                  <div className="absolute z-20 w-full bg-white border border-gray-200 rounded-md shadow-lg max-h-60 overflow-y-auto mt-1">
+                    {companies
+                      .filter((c) => c.toLowerCase().includes(companySearch.toLowerCase()))
+                      .map((c) => (
+                        <button
+                          key={c}
+                          type="button"
+                          className="w-full text-left px-4 py-2 hover:bg-blue-50"
+                          onClick={() => {
+                            setSelectedCompany(c);
+                            setCompanySearch(c);
+                            setIsCompanyDropdownOpen(false);
+                          }}
+                        >
+                          {c}
+                        </button>
+                      ))}
+                    {companies.filter((c) =>
+                      c.toLowerCase().includes(companySearch.toLowerCase())
+                    ).length === 0 && (
+                      <div className="px-4 py-2 text-sm text-gray-500">Şirket bulunamadı</div>
+                    )}
+                  </div>
+                )}
+              </div>
             </div>
             <div>
-              <label className="block font-medium">Pozitif / Negatif</label>
-              <select className="w-full p-2 border rounded">
-                <option value="positive">Pozitif</option>
-                <option value="negative">Negatif</option>
-              </select>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Olumlu Yönler</label>
+              <Textarea
+                placeholder="Staj deneyiminde hoşuna giden şeyleri yaz..."
+                className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm placeholder-gray-400"
+              />
             </div>
             <div>
-              <label className="block font-medium">Görüş</label>
-              <Textarea placeholder="Deneyimini paylaş..." />
+              <label className="block text-sm font-medium text-gray-700 mb-1">Olumsuz Yönler</label>
+              <Textarea
+                placeholder="Geliştirilebilecek veya hoşuna gitmeyen yönleri yaz..."
+                className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm placeholder-gray-400"
+              />
             </div>
             {/* Rating fields */}
             <Form {...reviewForm}>
@@ -637,18 +760,49 @@ export default function WelcomeFlowModal() {
                 <StarRatingInput label="Çalışma Koşulları" value={field.value} onChange={field.onChange} />
               )} />
             </Form>
-            <div className="flex justify-between pt-4">
-              <Button variant="ghost" onClick={() => setStep(2)}>Geri</Button>
-              <Button type="submit">Gönder</Button>
+            <div className="flex justify-between pt-6">
+              <button
+                type="button"
+                onClick={() => setStep(2)}
+                className="flex items-center gap-2 text-sm text-gray-700 hover:text-white border border-gray-300 hover:border-blue-600 hover:bg-blue-600 font-medium px-3 py-1.5 rounded-md transition-colors duration-200"
+              >
+                ← Geri
+              </button>
+              <Button type="submit" className="bg-blue-600 text-white px-5 py-2 rounded-lg hover:bg-blue-700 transition">
+                Gönder
+              </Button>
             </div>
           </form>
         )}
         {/* 6. Adım - Hiç staj yapmadım */}
         {step === 6 && (
-          <div className="space-y-4 pt-4 text-center">
-            <p className="text-sm text-gray-700">Merak etme, staj yapmamış olman sorun değil. Platformu keşfetmeye devam edebilirsin 🎉</p>
+          <div className="max-w-md mx-auto bg-white rounded-xl shadow-md p-6 space-y-6 text-center">
+            <div className="flex flex-col items-center">
+              <svg
+                className="w-12 h-12 text-yellow-400 mb-2"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M12 2a10 10 0 00-3.536 19.316c.28.052.384-.122.384-.272v-1.043c-1.562.34-1.89-.754-1.89-.754-.254-.647-.62-.819-.62-.819-.508-.347.038-.34.038-.34.562.04.858.578.858.578.5.858 1.312.61 1.632.466.05-.366.198-.61.358-.75-1.247-.142-2.557-.624-2.557-2.774 0-.614.218-1.116.578-1.51-.058-.14-.252-.7.054-1.46 0 0 .468-.15 1.53.576a5.32 5.32 0 011.396-.188c.474.002.952.064 1.396.188 1.062-.726 1.53-.576 1.53-.576.306.76.112 1.32.054 1.46.36.394.578.896.578 1.51 0 2.16-1.31 2.632-2.56 2.774.204.176.384.524.384 1.058v1.574c0 .152.106.326.386.27A10 10 0 0012 2z"
+                />
+              </svg>
+              <p className="text-gray-600">Merak etme, staj yapmamış olman sorun değil.</p>
+              <p className="text-gray-600">Platformu keşfetmeye devam edebilirsin 🎉</p>
+              <p className="text-gray-500 text-sm mt-2">2 haftalık deneme süren başladı</p>
+            </div>
             <div className="flex justify-center">
-              <Button onClick={() => { localStorage.setItem("welcome-seen", "true"); setOpen(false); }}>Devam Et</Button>
+              <Button
+                onClick={() => { localStorage.setItem("welcome-seen", "true"); setOpen(false); }}
+                className="mt-4 bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-md shadow-sm transition-colors duration-200"
+              >
+                Devam Et
+              </Button>
             </div>
           </div>
         )}
