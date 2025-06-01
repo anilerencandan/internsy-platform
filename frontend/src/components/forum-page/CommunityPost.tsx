@@ -14,13 +14,23 @@ import {
   DialogFooter,
 } from "@/components/ui/dialog"
 import ReadMoreModal from '../topluluk-page/ReadMoreModal'
+import { formatDistanceToNow } from 'date-fns';
+import { tr } from 'date-fns/locale';
+import { getShortTimeAgo } from '@/utils/formatters'
+
 
 export default function CommunityPost({ post }: { post: CommunityPostType }) {
   const [open, setOpen] = useState(false)
   const [liked, setLiked] = useState(false)
   const [likeCount, setLikeCount] = useState(post.like_count || 0)
+  const [commentCount, setCommentCount] = useState(post.comment_count || 0)
   const kelimeler = post.content.trim().split(/\s+/)
   const fazlaKelime = kelimeler.length > 10
+  const zaman = getShortTimeAgo(new Date(post.created_at));
+  const [following, setFollowing] = useState(false)
+
+  console.log('ulaaa', post)
+
 
   const handleOpen = () => setOpen(true)
 
@@ -67,6 +77,46 @@ export default function CommunityPost({ post }: { post: CommunityPostType }) {
     fetchLikedStatus();
   }, [post.id]);
 
+  useEffect(() => {
+  const fetchCommentCount = async () => {
+    const res = await fetch(`/api/forum/comments/count?post_id=${post.id}`)
+    const data = await res.json()
+    
+    console.log(data)
+    if (data.comment_count !== undefined) {
+      setCommentCount(data.comment_count)
+    }
+  }
+
+  fetchCommentCount()
+}, [post.id])
+
+useEffect(() => {
+  const checkFollowStatus = async () => {
+    const res = await fetch(`/api/forum/is-following?category_id=${post.category_id}`)
+    const result = await res.json()
+    if (result.following !== undefined) setFollowing(result.following)
+  }
+
+  checkFollowStatus()
+}, [post.category_id])
+
+
+const toggleFollow = async () => {
+  const res = await fetch("/api/forum/follow-category", {
+    method: "POST",
+    body: JSON.stringify({ category_id: post.category_id }),
+  })
+  const result = await res.json()
+  if (result.following !== undefined) setFollowing(result.following)
+}
+
+<Button onClick={toggleFollow}>
+  {following ? "Takip Ediliyor" : "Topluluğu Takip Et"}
+</Button>
+
+
+
   return (
     <>
       <div
@@ -76,9 +126,15 @@ export default function CommunityPost({ post }: { post: CommunityPostType }) {
         <div className='flex flex-col gap-y-4 p-4 w-full'>
           <div className='flex items-center justify-between'>
             <a className='text-xs text-gray-400'>Diğer Toplulukları Keşfet</a>
-            <Button className='bg-[#f2f4f5] rounded-[8px] text-xs font-semibold py-1 px-2 text-black hover:text-white'>
-              Topluluğu Takip Et
-            </Button>
+              <Button
+                onClick={(e) => {
+                  e.stopPropagation()
+                  toggleFollow()
+                }}
+                className='bg-[#f2f4f5] rounded-[8px] text-xs font-semibold py-1 px-2 text-black hover:text-white'
+              >
+                {following ? "Takip Ediliyor" : "Topluluğu Takip Et"}
+              </Button>
           </div>
           <div className='flex items-center justify-between '>
             <div className='flex items-center gap-x-2'>
@@ -91,7 +147,7 @@ export default function CommunityPost({ post }: { post: CommunityPostType }) {
               </div>
             </div>
             <div className='flex items-center gap-x-2 h-full'>
-              <p className='text-xs flex'>2 min ago</p>
+              <p className='text-xs flex'>{zaman}</p>
               <span className='hover:bg-gray-100 p-2 rounded-full'>
                 <Ellipsis size={20} />
               </span>
@@ -128,7 +184,7 @@ export default function CommunityPost({ post }: { post: CommunityPostType }) {
               </div>
               <div className='flex items-center justify-center'>
                 <span className='flex justify-center gap-x-2 items-center group rounded-lg py-2 w-fit '>
-                  <MessageCircle className='hover:fill-primary duration-200  hover:text-primary' size={20} /> {post.comment_count}
+                  <MessageCircle className='hover:fill-primary duration-200  hover:text-primary' size={20} /> {commentCount}
                 </span>
               </div>
               <div className='flex items-center w-full  justify-end'>
@@ -142,7 +198,7 @@ export default function CommunityPost({ post }: { post: CommunityPostType }) {
       </div>
 
       {/* Modal */}
-      <ReadMoreModal open={open} onClose={() => setOpen(false)} post={post} />
+      <ReadMoreModal open={open} onClose={() => setOpen(false)} commented={() => setCommentCount(prev => prev + 1)} post={post} />
     </>
   )
 }

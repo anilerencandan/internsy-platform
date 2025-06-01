@@ -12,7 +12,7 @@ export async function GET(req: NextRequest) {
   }
 
   const { data, error } = await supabase
-    .from('forum_comments')
+    .from('forum_post_comments')
     .select('*')
     .eq('post_id', post_id)
     .order('created_at', { ascending: true })
@@ -38,7 +38,7 @@ export async function POST(req: NextRequest) {
   }
 
   const { data, error } = await supabase
-    .from('forum_comments')
+    .from('forum_post_comments')
     .insert({
       post_id,
       content,

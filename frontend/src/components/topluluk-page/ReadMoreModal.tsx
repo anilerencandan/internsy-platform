@@ -15,9 +15,10 @@ interface Props {
   open: boolean
   onClose: () => void
   post: CommunityPostType
+  commented: () => void
 }
 
-export default function CommentModal({ open, onClose, post }: Props) {
+export default function CommentModal({ open, onClose, post, commented }: Props) {
   const [comment, setComment] = useState('')
   const [comments, setComments] = useState<CommunityPostComment[]>([])
 
@@ -71,7 +72,10 @@ export default function CommentModal({ open, onClose, post }: Props) {
         <DialogFooter>
           <button
             className="bg-primary text-white py-1 px-4 rounded"
-            onClick={handleSubmit}
+            onClick={async () => {
+              await handleSubmit()
+              commented()
+            } }
           >
             Gönder
           </button>

@@ -23,6 +23,7 @@ export default async function forumPage() {
       created_at,
       like_count,
       comment_count,
+      category_id,
       forum_categories (
         name
       )
