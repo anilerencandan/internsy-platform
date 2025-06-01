@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { supabase } from "@/lib/utils/supabase";
+import { supabase } from "@/lib/supabase";
 import { Search } from "lucide-react";
 import { Building2, Star, TrendingUp, Award, ArrowRight } from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -29,7 +29,7 @@ type UserFormValues = z.infer<typeof userSchema>;
 
 // 2. Mülakat Paylaşım Şeması
 const interviewSchema = z.object({
-  companyName: z.string().min(1, { message: "Firma ismi zorunlu" }),
+  // companyName: z.string().min(1, { message: "Firma ismi zorunlu" }),
   position: z.string().min(1, { message: "Pozisyon zorunlu" }),
   experience: z.enum(["positive", "negative"], {
     errorMap: () => ({ message: "Pozitif veya negatif seçimi zorunlu" }),
@@ -82,6 +82,22 @@ export default function WelcomeFlowModal() {
   const [universitySearch, setUniversitySearch] = useState("");
   const [selectedUniversity, setSelectedUniversity] = useState<string>("");
 
+  // Yeni state'ler
+  const [companies, setCompanies] = useState<string[]>([]);
+  const [companySearch, setCompanySearch] = useState("");
+  const [selectedCompany, setSelectedCompany] = useState<string>("");
+  const [isCompanyDropdownOpen, setIsCompanyDropdownOpen] = useState(false);
+
+  // Supabase'den şirketleri çek
+  useEffect(() => {
+    const fetchCompanies = async () => {
+      const { data, error } = await supabase.from("companies").select("name");
+      if (error) console.error("Şirket verisi alınamadı:", error);
+      else setCompanies(data.map((c: { name: string }) => c.name));
+    };
+    fetchCompanies();
+  }, []);
+
   // İlk açılışta göster
   useEffect(() => {
     if (!localStorage.getItem("welcome-seen")) setOpen(true);
@@ -96,7 +112,7 @@ export default function WelcomeFlowModal() {
   // 2. form: mülakat paylaşım
   const interviewForm = useForm<InterviewFormValues>({
     resolver: zodResolver(interviewSchema),
-    defaultValues: { companyName: "", position: "", experience: "positive", difficulty: "medium", offer: "received", details: "", questions: [] },
+    defaultValues: { position: "", experience: "positive", difficulty: "medium", offer: "received", details: "", questions: [] },
   });
   const { fields, append, remove } = useFieldArray({
     control: interviewForm.control,
@@ -151,11 +167,41 @@ export default function WelcomeFlowModal() {
   };
 
   // mülakat formu gönderildiğinde
-  const onInterviewSubmit = (values: InterviewFormValues) => {
-    const payload = { ...userInfo!, ...values, type: "interview" };
-    console.log("Payload:", payload);
-    localStorage.setItem("welcome-seen", "true");
-    setOpen(false);
+  const onInterviewSubmit = async (values: InterviewFormValues) => {
+    try {
+      const { data: session } = await supabase.auth.getSession();
+      if (!session.session) {
+        alert("Giriş yapmadınız!");
+        return;
+      }
+  
+      const user = session.session.user;
+  
+      const payload = {
+        user_id: user?.id,
+        company_name: selectedCompany,
+        position: values.position,
+        experience: values.experience,
+        difficulty: values.difficulty,
+        offer: values.offer,
+        details: values.details,
+        questions: values.questions ?? [],
+        is_visible: true
+      };
+  
+      const { data, error } = await supabase.from("interviews").insert([payload]);
+      if (error) {
+        console.error("Mülakat gönderilemedi:", error);
+        alert("Gönderim sırasında hata oluştu.");
+      } else {
+        console.log("Mülakat başarıyla kaydedildi:", data);
+        localStorage.setItem("welcome-seen", "true");
+        setOpen(false);
+      }
+    } catch (error) {
+      console.error("Beklenmeyen bir hata:", error);
+      alert("Bir hata oluştu.");
+    }
   };
 
   const handleToggleAnswer = (idx: number) => {
@@ -335,16 +381,47 @@ export default function WelcomeFlowModal() {
   <form onSubmit={interviewForm.handleSubmit(onInterviewSubmit)} className="space-y-6 pt-4">
     {/* Firma ve Pozisyon */}
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-      <div>
-        <label className="block text-sm font-medium text-gray-700">Firma İsmi</label>
-        <input
-          type="text"
-          name="companyName"
-          required
-          placeholder="Örn: Trendyol"
-          className="mt-1 w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-        />
+    <div>
+  <label className="block text-sm font-medium text-gray-700 mb-1">Şirket</label>
+  <div className="relative">
+    <input
+      type="text"
+      placeholder="Bir şirket seçin..."
+      value={companySearch}
+      onChange={(e) => {
+        setCompanySearch(e.target.value);
+        setIsCompanyDropdownOpen(true);
+      }}
+      onFocus={() => setIsCompanyDropdownOpen(true)}
+      className="mt-1 w-full p-2 border border-gray-300 rounded-md"
+    />
+    {isCompanyDropdownOpen && (
+      <div className="absolute z-20 w-full bg-white border border-gray-200 rounded-md shadow-lg max-h-60 overflow-y-auto mt-1">
+        {companies
+          .filter((c) => c.toLowerCase().includes(companySearch.toLowerCase()))
+          .map((c) => (
+            <button
+              key={c}
+              type="button"
+              className="w-full text-left px-4 py-2 hover:bg-blue-50"
+              onClick={() => {
+                setSelectedCompany(c);
+                setCompanySearch(c);
+                setIsCompanyDropdownOpen(false);
+              }}
+            >
+              {c}
+            </button>
+          ))}
+        {companies.filter((c) =>
+          c.toLowerCase().includes(companySearch.toLowerCase())
+        ).length === 0 && (
+          <div className="px-4 py-2 text-sm text-gray-500">Şirket bulunamadı</div>
+        )}
       </div>
+    )}
+  </div>
+</div>
 
       <div>
         <label className="block text-sm font-medium text-gray-700">Pozisyon</label>
@@ -457,20 +534,20 @@ export default function WelcomeFlowModal() {
             </div>
           )}
 
-          <div className="flex gap-2 mt-3">
+          <div className="flex justify-between items-center mt-3">
             <button
               type="button"
-              className="text-blue-600 text-sm underline"
+              className="text-blue-600 text-sm underline hover:text-blue-800 transition"
               onClick={() => handleToggleAnswer(idx)}
             >
-              Cevap Gir
+              + Cevap Ekle
             </button>
             <button
               type="button"
-              className="text-red-600 text-sm underline"
+              className="text-red-500 text-sm hover:text-red-700 transition"
               onClick={() => remove(idx)}
             >
-              Sil
+              ✕ Sil
             </button>
           </div>
         </div>
@@ -490,7 +567,7 @@ export default function WelcomeFlowModal() {
       <button
         type="button"
         onClick={() => setStep(2)}
-        className="text-gray-600 hover:text-black underline text-sm"
+        className="flex items-center gap-2 text-sm text-gray-700 hover:text-white border border-gray-300 hover:border-blue-600 hover:bg-blue-600 font-medium px-3 py-1.5 rounded-md transition-colors duration-200"
       >
         ← Geri
       </button>
