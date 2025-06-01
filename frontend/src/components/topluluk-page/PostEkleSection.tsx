@@ -83,6 +83,7 @@ export default function PostEkleSection() {
             <select
               name='category_id'
               value={selectedCommunity}
+              onChange={(e) => setSelectedCommunity(e.target.value)}
               className="w-full border p-2 rounded text-sm"
               >
               <option value="">Topluluk Seçin</option>

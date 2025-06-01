@@ -1,11 +1,11 @@
-export interface CommunityPostType {
-  id: string;
-  communityName: string;
-  userTitle: string;
-  userAvatar: string;
-  timeAgo: string;
-  content: string;
-  likes: number;
-  comments: number;
-  shares: number;
+export type CommunityPostType = {
+  id: string
+  title: string
+  content: string
+  created_at: string
+  like_count: number
+  comment_count: number
+  forum_categories?: {
+    name: string
+  }
 }

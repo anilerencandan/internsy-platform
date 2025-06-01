@@ -11,6 +11,8 @@ export async function postCommunity(formData: FormData) {
   const content = formData.get('content') as string
   const category_id = formData.get('category_id') as string
 
+  console.log("title:", title , "content:" , content, "category_id:", category_id)
+
   if (!title || !content || !category_id) {
     console.error("Eksik alan!")
     redirect('/error')
