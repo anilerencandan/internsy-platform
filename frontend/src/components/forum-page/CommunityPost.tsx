@@ -142,7 +142,7 @@ export default function CommunityPost({ post }: { post: CommunityPostType }) {
       </div>
 
       {/* Modal */}
-      <ReadMoreModal open={open} onClose={() => setOpen(false)} title={post.title} content={post.content} />
+      <ReadMoreModal open={open} onClose={() => setOpen(false)} post={post} />
     </>
   )
 }

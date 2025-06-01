@@ -19,7 +19,7 @@ interface Props {
 
 export default function CommentModal({ open, onClose, post }: Props) {
   const [comment, setComment] = useState('')
-  const [comments, setComments] = useState([])
+  const [comments, setComments] = useState<CommunityPostComment[]>([])
 
   useEffect(() => {
     if (open) {
