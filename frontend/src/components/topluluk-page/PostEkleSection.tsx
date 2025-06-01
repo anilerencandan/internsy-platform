@@ -6,6 +6,10 @@ import { Button } from '../ui/button'
 import { MessagesSquare, Plus } from 'lucide-react'
 import { useNav } from '@/context/NavContext'
 import Link from "next/link"
+import { Users, Lock, Send, Shield } from "lucide-react"
+import { Badge } from "@/components/ui/badge"
+import { Label } from "@/components/ui/label"
+import PostEkle from "@/components/topluluk-page/PostEkle";
 
 import {
   Dialog,
@@ -47,6 +51,8 @@ export default function PostEkleSection() {
     fetcCategories()
   }, [])
 
+  
+
   return (
     <>
       <div className='lg:col-span-3 sm:col-span-4 hidden sm:flex flex-col gap-y-4 text-sm'>
@@ -72,36 +78,12 @@ export default function PostEkleSection() {
         </div>
       </div>
 
-      <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>Anonim Post Paylaş</DialogTitle>
-          </DialogHeader>
-          <p className='text-sm text-gray-600'>Paylaşımınız anonim olarak yapılacaktır.</p>
-          <form action={postCommunity} method='POST'>
-             <Input name="title" placeholder="Başlık" required />
-            <select
-              name='category_id'
-              value={selectedCommunity}
-              className="w-full border p-2 rounded text-sm"
-              >
-              <option value="">Topluluk Seçin</option>
-              {categories.map((category, index) => (
-                <option key={index} value={category.id}>{category.name}</option>
-              ))}
-            </select>
-            <Textarea
-              name='content'
-              placeholder="Ne paylaşmak istersin?"
-              value={content}
-              onChange={(e) => setContent(e.target.value)}
-              />
-            <DialogFooter>
-              <Button  type='submit'>Paylaş</Button>
-            </DialogFooter>
-            </form>
-        </DialogContent>
-      </Dialog>
+      <PostEkle
+        open={open}
+        setOpen={setOpen}
+        categories={categories} // Kendi veritabanından aldığın kategoriler
+        postCommunity={postCommunity} // Kendi server action'ın
+      />
     </>
   )
 }
