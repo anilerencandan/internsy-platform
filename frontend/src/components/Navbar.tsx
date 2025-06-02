@@ -36,10 +36,11 @@ export default function Navbar({ flag }: NavbarProps) {
         {/* Sağ Menü */}
         {flag ? (
           <div className="flex items-center text-gray-600">
-            <div className="hover:bg-gray-100 rounded-full p-2"><Search /></div>
-            <div className="hover:bg-gray-100 rounded-full p-2">
-              <Link href="/profil/bildirimler"><Bell /></Link>
-            </div>
+            {flag && (
+              <div className="hover:bg-gray-100 rounded-full p-2">
+                <Link href="/profil/bildirimler"><Bell /></Link>
+              </div>
+            )}
             <Link href="/profil" className="hover:bg-gray-100 rounded-full p-2">
               <CircleUserRound />
             </Link>
