@@ -115,6 +115,22 @@ const toggleFollow = async () => {
   {following ? "Takip Ediliyor" : "Topluluğu Takip Et"}
 </Button>
 
+    function handleShare(e: React.MouseEvent<HTMLButtonElement>) {
+      e.stopPropagation()
+    if (navigator.share) {
+      navigator.share({
+        title: post.title,
+        text: post.content,
+        url: `https://internsy.co/forum/${post.id}`,
+      })
+      .then(() => console.log('Paylaşıldı!'))
+      .catch((err) => console.error('Paylaşım iptal edildi', err));
+    } else {
+      alert("Tarayıcın paylaşım desteklemiyor.");
+    }
+  }
+
+
 
 
   return (
@@ -175,12 +191,10 @@ const toggleFollow = async () => {
           <div className='flex justify-between items-center text-xs font-semibold'>
             <div className='flex items-center gap-x-4 w-full  text-gray-700'>
               <div className='flex items-center justify-center'>
-                <span className='flex justify-center w-fit py-2 gap-x-2 items-center rounded-lg '>
-                  <button onClick={toggleLike}>
+                <button onClick={toggleLike} className='flex justify-center w-fit py-2 gap-x-2 items-center rounded-lg '>
                     <Heart className={`text-primary ${liked ? 'fill-primary' : 'fill-white'} hover:fill-primary duration-200`} size={20} />
-                  </button>
                   {likeCount}
-                </span>
+                </button>
               </div>
               <div className='flex items-center justify-center'>
                 <span className='flex justify-center gap-x-2 items-center group rounded-lg py-2 w-fit '>
@@ -188,9 +202,9 @@ const toggleFollow = async () => {
                 </span>
               </div>
               <div className='flex items-center w-full  justify-end'>
-                <span className='flex justify-center gap-x-2 items-center group rounded-lg py-2 w-fit '>
-                  <FaShare className='hover:fill-primary duration-200  hover:text-primary' size={20} /> Paylaş
-                </span>
+                <button onClick={handleShare} className='flex justify-center gap-x-2 items-center group rounded-lg py-2 w-fit '>
+                    <FaShare className='hover:fill-primary duration-200  hover:text-primary' size={20} /> Paylaş
+                </button>
               </div>
             </div>
           </div>
