@@ -16,7 +16,7 @@ import {
 import ReadMoreModal from '../topluluk-page/ReadMoreModal'
 import { formatDistanceToNow } from 'date-fns';
 import { tr } from 'date-fns/locale';
-import { getShortTimeAgo } from '@/utils/formatters'
+import { getShortTimeAgo, stringToPastelColor } from '@/utils/formatters'
 
 
 export default function CommunityPost({ post }: { post: CommunityPostType }) {
@@ -139,7 +139,7 @@ const toggleFollow = async () => {
           <div className='flex items-center justify-between '>
             <div className='flex items-center gap-x-2'>
               <span className='relative w-10 h-10 rounded-full  shrink-0'>
-                <AnonimAvatar icon={<User2 />} />
+                <AnonimAvatar color={stringToPastelColor(post.user_id)} icon={<User2/>} />
               </span>
               <div className='flex w-full flex-col'>
                 <h3 className='text-sm font-semibold'>{post.forum_categories?.name}</h3>

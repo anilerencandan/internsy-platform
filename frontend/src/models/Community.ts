@@ -1,8 +1,19 @@
-// src/models/CommunityCard.ts
-export interface CommunityCardType {
+export interface CommunityType {
   id: string
   name: string
-  description: string
-  icon: string
-  followers: string
+  description?: string
+  slug?: string
+  cover_image_url?: string
+}
+
+
+export interface followedCommunity {
+  category_id: string
+  communities?: {
+    id:string
+    name: string
+    description: string
+    slug: string
+    cover_image_url: string
+  }
 }

@@ -22,6 +22,7 @@ import { Input } from '../ui/input'
 import { Textarea } from '../ui/textarea'
 import { postCommunity } from '@/app/topluluk/postCommunity'
 import { createBrowserClient } from '@supabase/ssr'
+import { CommunityType } from '@/models/Community'
 
 type Category = {
   id: string, 
@@ -33,22 +34,28 @@ const supabase = createBrowserClient(
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
 )
 
-export default function PostEkleSection() {
+interface PostEkleSection {
+  communityCard: CommunityType[]
+}
+
+export default function PostEkleSection({ communityCard }: PostEkleSection) {
   const { show, height } = useNav()
   const stickyTop = show ? height : 0
   const [selectedCommunity, setSelectedCommunity] = useState("")
   const [content, setContent] = useState("")
   const [categories, setCategories] = useState<Category[]>([])
   const [open, setOpen] = useState(false)
+  const [myFollows, setMyFollows] = useState()
 
 
   useEffect(() => {
-    const fetcCategories = async () => {
-      const {data, error } = await supabase.from('forum_categories').select('id, name') 
-      if(!error && data) setCategories(data)
-    } 
+    const fetchCategories = async () => {
+      const {data, error } = await supabase.from('communities').select('*') 
 
-    fetcCategories()
+      if(!error && data) setCategories(data)
+
+    } 
+    fetchCategories()
   }, [])
 
   
@@ -69,6 +76,11 @@ export default function PostEkleSection() {
 
         <div className='flex flex-col gap-y-4'>
           <h3 className='text-xl font-bold'>Topluluklarım</h3>
+          {communityCard.map((item) => (
+            <div key={item.id}>{item.name}</div>
+          ))}
+
+
           <Link href="/topluluklari-kesfet">
             <Button className='flex items-center gap-x-2 px-4 py-2 border w-fit rounded-lg bg-white text-black hover:bg-black hover:text-white'>
               <MessagesSquare size={20} />

@@ -17,3 +17,17 @@ export function getShortTimeAgo(date: Date): string {
   if (diff < year) return `${Math.floor(diff / month)}a`;
   return `${Math.floor(diff / year)}y`;
 }
+
+export function stringToPastelColor(str: string): string {
+  let hash = 0;
+  for (let i = 0; i < str.length; i++) {
+    hash = str.charCodeAt(i) + ((hash << 5) - hash);
+  }
+
+  // RGB bileşenlerini pastel aralığa çevir (150–255)
+  const r = 150 + (hash % 106);          // 150–255
+  const g = 150 + ((hash >> 3) % 106);   // 150–255
+  const b = 150 + ((hash >> 6) % 106);   // 150–255
+
+  return `rgb(${r}, ${g}, ${b}, 0.3)`;
+}
