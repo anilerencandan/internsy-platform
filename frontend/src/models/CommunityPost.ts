@@ -7,7 +7,7 @@ export type CommunityPostType = {
   comment_count: number
   user_id: string
   category_id: string
-  forum_categories?: {
+  communities: {
     name: string
   }
 }

@@ -36,27 +36,16 @@ const supabase = createBrowserClient(
 
 interface PostEkleSection {
   communityCard: CommunityType[]
+  postCategories: Category[]
 }
 
-export default function PostEkleSection({ communityCard }: PostEkleSection) {
+export default function PostEkleSection({ communityCard, postCategories }: PostEkleSection) {
   const { show, height } = useNav()
   const stickyTop = show ? height : 0
   const [selectedCommunity, setSelectedCommunity] = useState("")
   const [content, setContent] = useState("")
-  const [categories, setCategories] = useState<Category[]>([])
   const [open, setOpen] = useState(false)
   const [myFollows, setMyFollows] = useState()
-
-
-  useEffect(() => {
-    const fetchCategories = async () => {
-      const {data, error } = await supabase.from('communities').select('*') 
-
-      if(!error && data) setCategories(data)
-
-    } 
-    fetchCategories()
-  }, [])
 
   
 
@@ -93,7 +82,7 @@ export default function PostEkleSection({ communityCard }: PostEkleSection) {
       <PostEkle
         open={open}
         setOpen={setOpen}
-        categories={categories} // Kendi veritabanından aldığın kategoriler
+        categories={postCategories} // Kendi veritabanından aldığın kategoriler
         postCommunity={postCommunity} // Kendi server action'ın
       />
     </>

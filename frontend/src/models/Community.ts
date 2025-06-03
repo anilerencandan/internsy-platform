@@ -4,6 +4,7 @@ export interface CommunityType {
   description?: string
   slug?: string
   cover_image_url?: string
+  follower_count: number
 }
 
 

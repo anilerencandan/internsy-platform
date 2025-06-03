@@ -17,6 +17,7 @@ import ReadMoreModal from '../topluluk-page/ReadMoreModal'
 import { formatDistanceToNow } from 'date-fns';
 import { tr } from 'date-fns/locale';
 import { getShortTimeAgo, stringToPastelColor } from '@/utils/formatters'
+import PostOptions from './PostOptions'
 
 
 export default function CommunityPost({ post }: { post: CommunityPostType }) {
@@ -111,9 +112,6 @@ const toggleFollow = async () => {
   if (result.following !== undefined) setFollowing(result.following)
 }
 
-<Button onClick={toggleFollow}>
-  {following ? "Takip Ediliyor" : "Topluluğu Takip Et"}
-</Button>
 
     function handleShare(e: React.MouseEvent<HTMLButtonElement>) {
       e.stopPropagation()
@@ -131,6 +129,9 @@ const toggleFollow = async () => {
   }
 
 
+  const handleReport = () => {
+    alert(`Şikayet edildi: ${post.id}`) // Buraya modal, API isteği, vs. eklersin
+  }
 
 
   return (
@@ -147,7 +148,7 @@ const toggleFollow = async () => {
                   e.stopPropagation()
                   toggleFollow()
                 }}
-                className='bg-[#f2f4f5] rounded-[8px] text-xs font-semibold py-1 px-2 text-black hover:text-white'
+                className={`${following ? `bg-[#f2f4f5] text-black` : 'bg-primary text-white'}  rounded-[8px] text-xs font-semibold py-1 px-2  hover:text-white`}
               >
                 {following ? "Takip Ediliyor" : "Topluluğu Takip Et"}
               </Button>
@@ -158,14 +159,16 @@ const toggleFollow = async () => {
                 <AnonimAvatar color={stringToPastelColor(post.user_id)} icon={<User2/>} />
               </span>
               <div className='flex w-full flex-col'>
-                <h3 className='text-sm font-semibold'>{post.forum_categories?.name}</h3>
+                <h3 className='text-sm font-semibold'>{post.communities?.name}</h3>
                 <h4 className='text-xs truncate whitespace-nowrap overflow-hidden text-gray-700'>{post.title}</h4>
               </div>
             </div>
             <div className='flex items-center gap-x-2 h-full'>
               <p className='text-xs flex'>{zaman}</p>
               <span className='hover:bg-gray-100 p-2 rounded-full'>
-                <Ellipsis size={20} />
+                <button onClick={(e) => e.stopPropagation()}>
+                  <PostOptions onReport={() => handleReport}/>
+                </button>
               </span>
             </div>
           </div>
