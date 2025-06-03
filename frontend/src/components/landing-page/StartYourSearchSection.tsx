@@ -20,8 +20,8 @@ export default function Component() {
           </div>
 
           {/* Communities Section */}
-          <div className="grid lg:grid-cols-2 gap-12 items-center mb-20">
-            <div className="space-y-6">
+          <div className="grid lg:grid-cols-2 gap-6 items-center mb-20">
+            <div className="space-y-4">
               <div className="flex items-center gap-3 mb-4">
                 <div className="p-3 bg-blue-100 rounded-full">
                   <Users className="h-6 w-6 text-blue-600" />
@@ -79,11 +79,12 @@ export default function Component() {
                   </div>
                 </CardContent>
               </Card>
+
             </div>
           </div>
 
           {/* Companies Section */}
-          <div className="grid lg:grid-cols-2 gap-12 items-center mb-20">
+          <div className="grid lg:grid-cols-2 gap-6 items-center mb-20">
             <div className="relative order-2 lg:order-1">
               <Card className="overflow-hidden shadow-xl border-0">
                 <CardContent className="p-0">
