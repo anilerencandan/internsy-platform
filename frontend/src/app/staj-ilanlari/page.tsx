@@ -3,6 +3,7 @@ import { Input } from "@/components/ui/input"
 import PopularCompanies from "@/components/mulakatlar-page/popular-companies"
 import CompanyJobsCard from "@/components/staj-ilanlari/CompanyJobsCard"
 import CompanyList from "@/components/mulakatlar-page/company-list"
+import Company from "@/models/Company"
 
 
 const popularCompanies = [
@@ -56,7 +57,11 @@ const popularCompanies = [
   },
 ]
 
-export default function StajIlanlariPage() {
+export default async function StajIlanlariPage() {
+
+  const companiesData = await fetch('http://localhost:3000/api/companies?limit=10')
+  const companies: Company[] = await companiesData.json()
+  
   return (
     <main className="page-content xl:px-0 px-4  sm:pt-4">
       <div className=" mx-auto py-6">
@@ -125,7 +130,7 @@ export default function StajIlanlariPage() {
             </select>
           </div>
         </div>
-        <CompanyList />
+        <CompanyList initialCompanies={companies} />
       </div>
     </main>
   )

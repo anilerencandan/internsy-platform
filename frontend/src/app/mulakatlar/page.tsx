@@ -3,8 +3,12 @@ import { Input } from "@/components/ui/input"
 import CompanyList from "@/components/mulakatlar-page/company-list"
 import PopularCompanies from "@/components/mulakatlar-page/popular-companies"
 import InterviewStats from "@/components/mulakatlar-page/interview-stats"
+import Company from "@/models/Company"
 
-export default function MulakatlarPage() {
+export default async function MulakatlarPage() {
+  const companiesData = await fetch('http://localhost:3000/api/companies?limit=10')
+  const companies: Company[] = await companiesData.json()
+  
   return (
     <main className="page-content xl:px-0 px-4  sm:pt-4">
       <div className="container mx-auto  py-6">
@@ -59,7 +63,7 @@ export default function MulakatlarPage() {
             </select>
           </div>
         </div>
-        <CompanyList />
+        <CompanyList initialCompanies={companies} />
       </div>
     </main>
   )

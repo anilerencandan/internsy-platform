@@ -1,100 +1,88 @@
-import { Star } from "lucide-react"
+'use client'
+import Company from "@/models/Company"
+import { Loader, Star } from "lucide-react"
 import Link from "next/link"
+import { useSearchParams } from "next/navigation"
+import { useEffect, useRef, useState } from "react"
 
-const companies = [
-  {
-    id: "google",
-    name: "Google",
-    logo: "G",
-    rating: 4.2,
-    reviews: 12453,
-    difficulty: 3.8,
-    color: "bg-blue-100 text-blue-600",
-  },
-  {
-    id: "microsoft",
-    name: "Microsoft",
-    logo: "M",
-    rating: 4.0,
-    reviews: 9876,
-    difficulty: 3.5,
-    color: "bg-green-100 text-green-600",
-  },
-  {
-    id: "amazon",
-    name: "Amazon",
-    logo: "A",
-    rating: 3.9,
-    reviews: 8765,
-    difficulty: 3.7,
-    color: "bg-yellow-100 text-yellow-600",
-  },
-  {
-    id: "apple",
-    name: "Apple",
-    logo: "A",
-    rating: 4.1,
-    reviews: 7654,
-    difficulty: 3.4,
-    color: "bg-gray-100 text-gray-600",
-  },
-  {
-    id: "meta",
-    name: "Meta",
-    logo: "M",
-    rating: 3.8,
-    reviews: 6543,
-    difficulty: 3.9,
-    color: "bg-blue-100 text-blue-600",
-  },
-  {
-    id: "netflix",
-    name: "Netflix",
-    logo: "N",
-    rating: 4.3,
-    reviews: 5432,
-    difficulty: 3.6,
-    color: "bg-red-100 text-red-600",
-  },
-  {
-    id: "uber",
-    name: "Uber",
-    logo: "U",
-    rating: 3.7,
-    reviews: 4321,
-    difficulty: 3.5,
-    color: "bg-black text-white",
-  },
-  {
-    id: "airbnb",
-    name: "Airbnb",
-    logo: "A",
-    rating: 4.2,
-    reviews: 3210,
-    difficulty: 3.3,
-    color: "bg-red-100 text-red-600",
-  },
-  {
-    id: "twitter",
-    name: "Twitter",
-    logo: "T",
-    rating: 3.9,
-    reviews: 2109,
-    difficulty: 3.4,
-    color: "bg-blue-100 text-blue-600",
-  },
-  {
-    id: "linkedin",
-    name: "LinkedIn",
-    logo: "L",
-    rating: 4.0,
-    reviews: 1987,
-    difficulty: 3.2,
-    color: "bg-blue-100 text-blue-600",
-  },
-]
+interface CompanyListProps {
+  initialCompanies: Company[]
+}
 
-export default function CompanyList() {
+export default function CompanyList({initialCompanies}: CompanyListProps) {
+  const [limit] = useState<number>(24)
+  const [offset, setOffset] = useState<number>(10)
+  const [companiesList, setCompaniesList] = useState<Company[]>(initialCompanies)
+  const [fetchMore, setFetchMore] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
+  const [hasMore, setHasMore] = useState(true)
+  const [refIsVisible, setRefIsVisible] = useState(false)
+  const loaderRef = useRef<HTMLDivElement | null>(null)
+  const searchParams = useSearchParams()
+  const q = searchParams.get("q")
+
+  const fetchCompanies = async () => {
+    if (isLoading) return
+    setIsLoading(true)
+
+    try {
+      // Arama durumu
+      if (q && q?.length > 0 ) {
+        const res = await fetch(`/api/companies?q=${encodeURIComponent(q)}`)
+        if (!res.ok) throw new Error("Şirket verisi alınamadı")
+        const newCompanies: Company[] = await res.json()
+        setCompaniesList(newCompanies)
+        setHasMore(false)
+        setRefIsVisible(false)
+      } else {
+        const res = await fetch(`/api/companies?limit=${limit}&offset=${offset}`)
+        if (!res.ok) throw new Error("Şirket verisi alınamadı")
+        const newCompanies: Company[] = await res.json()
+        setCompaniesList((prev) => [...prev, ...newCompanies])
+        setOffset((prev) => prev + limit)
+        setHasMore(newCompanies.length === limit)
+      }
+    } catch (err) {
+      console.error(err)
+    }
+
+    setIsLoading(false)
+  }
+
+  // Arama parametresi değişince
+  useEffect(() => {
+    if (q && q?.length > 0) {
+      setOffset(0)
+      setCompaniesList([])
+      fetchCompanies()
+    }
+  }, [q])
+
+  // "Daha fazla göster" veya scroll ile
+  useEffect(() => {
+    if (!fetchMore || isLoading || q) return
+    fetchCompanies()
+    setFetchMore(false)
+  }, [fetchMore, isLoading, q])
+
+  // Intersection Observer
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !isLoading && hasMore && !q) {
+          setFetchMore(true)
+        }
+      },
+      { threshold: 1 }
+    )
+
+    if (loaderRef.current) observer.observe(loaderRef.current)
+
+    return () => {
+      if (loaderRef.current) observer.unobserve(loaderRef.current)
+    }
+  }, [isLoading, hasMore, q])
+
   return (
     <>
       {/* Masaüstü görünüm (table) */}
@@ -108,12 +96,12 @@ export default function CompanyList() {
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
-            {companies.map((company) => (
+            {companiesList.map((company) => (
               <tr key={company.id} className="hover:bg-gray-50">
                 <td className="px-6 py-4 whitespace-nowrap">
                   <Link href={`/sirket/${company.id}`} className="flex items-center">
-                    <div className={`w-10 h-10 ${company.color} rounded-lg flex items-center justify-center text-lg font-bold mr-3`}>
-                      {company.logo}
+                    <div className={`w-10 h-10  rounded-lg flex items-center justify-center text-lg font-bold mr-3`}> {/* ${company.color} */}
+                      {company.name[0]}
                     </div>
                     <div className="font-medium">{company.name}</div>
                   </Link>
@@ -121,7 +109,7 @@ export default function CompanyList() {
                 <td className="px-6 py-4 whitespace-nowrap">
                   <div className="flex items-center">
                     <Star className="h-4 w-4 fill-yellow-400 text-yellow-400 mr-1" />
-                    <span>{company.rating}</span>
+                    <span>{company.average_rating}</span>
                   </div>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
@@ -129,10 +117,10 @@ export default function CompanyList() {
                     <div className="h-2 w-24 bg-gray-200 rounded-full overflow-hidden mr-2">
                       <div
                         className="h-full bg-yellow-400 rounded-full"
-                        style={{ width: `${(company.difficulty / 5) * 100}%` }}
+                        style={{ width: `${(3.8 / 5) * 100}%` }}
                       ></div>
                     </div>
-                    <span>{company.difficulty}/5</span>
+                    <span>3.8/5</span>
                   </div>
                 </td>
               </tr>
@@ -143,22 +131,22 @@ export default function CompanyList() {
 
       {/* Mobil görünüm (kart) */}
       <div className="sm:hidden flex flex-col gap-y-4">
-        {companies.map((company) => (
+        {companiesList.map((company) => (
           <Link
             href={`/sirket/${company.id}`}
             key={company.id}
             className="border border-gray-200 rounded-lg p-4 shadow-sm bg-white"
           >
             <div className="flex items-center gap-x-4 mb-2">
-              <div className={`w-10 h-10 ${company.color} rounded-lg flex items-center justify-center text-lg font-bold`}>
-                {company.logo}
+              <div className={`w-10 h-10  rounded-lg flex items-center justify-center text-lg font-bold`}>
+                {company.name[0]}
               </div>
               <div className="font-semibold text-lg">{company.name}</div>
             </div>
 
             <div className="flex items-center text-sm mb-1">
               <Star className="h-4 w-4 fill-yellow-400 text-yellow-400 mr-1" />
-              <span>{company.rating} değerlendirme</span>
+              <span>{company.average_rating} değerlendirme</span>
             </div>
 
             <div className="flex items-center text-sm p-2">
@@ -166,10 +154,10 @@ export default function CompanyList() {
               <div className="flex-1 h-2 bg-gray-200 rounded-full overflow-hidden">
                 <div
                   className="h-full bg-yellow-400 rounded-full"
-                  style={{ width: `${(company.difficulty / 5) * 100}%` }}
+                  style={{ width: `${(3.8 / 5) * 100}%` }}
                 ></div>
               </div>
-              <span className="ml-2">{company.difficulty}/5</span>
+              <span className="ml-2">{3.8}/5</span>
             </div>
           </Link>
         ))}
@@ -177,11 +165,19 @@ export default function CompanyList() {
 
       {/* Daha Fazla Göster Butonu (ortak) */}
       <div className="flex justify-center items-center my-4">
-        <Link href="/tum-ilanlar">
+        {!refIsVisible && (
+          <button onClick={() => {setFetchMore(true); setRefIsVisible(true); setHasMore(true)}}>
           <div className="w-fit px-4 py-2 rounded-md text-primary hover:text-primary-light font-medium">
             Daha Fazla Göster
           </div>
-        </Link>
+        </button>
+        )}
+        {refIsVisible && hasMore && !q && (
+          <>
+          <Loader className="w-6 h-6 animate-spin-slow text-primary"/>
+          <div ref={loaderRef} className="h-4"/>
+          </>
+        )}
       </div>
     </>
   )

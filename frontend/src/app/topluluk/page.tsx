@@ -48,7 +48,6 @@ export default async function ForumPage() {
     return <div className="p-4 text-red-600">Hata: {resultPosts.error.message}</div>;
   }
 
-  console.log("annen:", resultPosts.data)
   const posts = resultPosts.data as unknown as CommunityPostType[];
 
   // 4. Kullanıcının takip ettiği toplulukları çek (max 3)
@@ -67,7 +66,6 @@ export default async function ForumPage() {
     .eq("user_id", authUserId)
     .limit(3);
 
-    console.log('onur', followedCommunitiesResult)
 
   let followedCommunities: CommunityType[] = [];
   if (!followedCommunitiesResult.error && followedCommunitiesResult.data) {

@@ -1,23 +1,15 @@
 'use client'
 
-import { Ellipsis, Heart, MessageCircle, User2 } from 'lucide-react'
+import { Heart, MessageCircle, User2 } from 'lucide-react'
 import React, { useEffect, useState } from 'react'
 import { FaShare } from 'react-icons/fa'
 import { Button } from '../ui/button'
 import { CommunityPostType } from '@/models/CommunityPost'
 import { AnonimAvatar } from '../AnonimAvatar'
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogFooter,
-} from "@/components/ui/dialog"
 import ReadMoreModal from '../topluluk-page/ReadMoreModal'
-import { formatDistanceToNow } from 'date-fns';
-import { tr } from 'date-fns/locale';
 import { getShortTimeAgo, stringToPastelColor } from '@/utils/formatters'
 import PostOptions from './PostOptions'
+import Link from 'next/link'
 
 
 export default function CommunityPost({ post }: { post: CommunityPostType }) {
@@ -30,7 +22,11 @@ export default function CommunityPost({ post }: { post: CommunityPostType }) {
   const zaman = getShortTimeAgo(new Date(post.created_at));
   const [following, setFollowing] = useState(false)
 
-  console.log('ulaaa', post)
+  const [showPopup, setShowPopup] = useState(false);
+  const [copied, setCopied] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+
+  const shareUrl = `https://internsy.co/forum/${post.id}`;
 
 
   const handleOpen = () => setOpen(true)
@@ -113,20 +109,19 @@ const toggleFollow = async () => {
 }
 
 
-    function handleShare(e: React.MouseEvent<HTMLButtonElement>) {
-      e.stopPropagation()
-    if (navigator.share) {
-      navigator.share({
-        title: post.title,
-        text: post.content,
-        url: `https://internsy.co/forum/${post.id}`,
-      })
-      .then(() => console.log('Paylaşıldı!'))
-      .catch((err) => console.error('Paylaşım iptal edildi', err));
-    } else {
-      alert("Tarayıcın paylaşım desteklemiyor.");
-    }
-  }
+     const handleCopy = async () => {
+    await navigator.clipboard.writeText(shareUrl);
+    setCopied(true);
+    setTimeout(() => {
+      setCopied(false);
+      setShowPopup(false); // isteğe bağlı otomatik kapansın
+    }, 2000);
+  };
+
+  const handleShareClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
+    setShowPopup(!showPopup);
+  };
 
 
   const handleReport = () => {
@@ -159,7 +154,9 @@ const toggleFollow = async () => {
                 <AnonimAvatar color={stringToPastelColor(post.user_id)} icon={<User2/>} />
               </span>
               <div className='flex w-full flex-col'>
-                <h3 className='text-sm font-semibold'>{post.communities?.name}</h3>
+                <Link onClick={(e) => {e.stopPropagation()}} href={'http://localhost:3000/topluluk/design-systems'}>
+                  <h3 className='text-sm font-semibold hover:text-primary'>{post.communities?.name}</h3>
+                </Link>
                 <h4 className='text-xs truncate whitespace-nowrap overflow-hidden text-gray-700'>{post.title}</h4>
               </div>
             </div>
@@ -205,9 +202,38 @@ const toggleFollow = async () => {
                 </span>
               </div>
               <div className='flex items-center w-full  justify-end'>
-                <button onClick={handleShare} className='flex justify-center gap-x-2 items-center group rounded-lg py-2 w-fit '>
+                <button onClick={(e) => {
+                  e.stopPropagation()
+                  setIsOpen(true)}
+                } className='flex justify-center gap-x-2 items-center group rounded-lg py-2 w-fit '>
                     <FaShare className='hover:fill-primary duration-200  hover:text-primary' size={20} /> Paylaş
                 </button>
+                {isOpen && (
+                  <div onClick={(e) => e.stopPropagation()} className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
+                    <div className="bg-white rounded-xl shadow-lg p-6 w-full max-w-md mx-auto text-center relative">
+                      <h2 className="text-lg font-semibold text-gray-800 mb-4">Bağlantıyı Paylaş</h2>
+
+                      <p className="text-sm text-gray-600 break-all border px-4 py-2 rounded bg-gray-50">
+                        {shareUrl}
+                      </p>
+
+                      <button
+                        onClick={handleCopy}
+                        className="mt-4 text-sm px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 w-full"
+                      >
+                        {copied ? "Kopyalandı ✅" : "Linki Kopyala"}
+                      </button>
+
+                      {/* Kapat Butonu */}
+                      <button
+                        onClick={() => setIsOpen(false)}
+                        className="absolute top-2 right-3 text-gray-500 hover:text-black text-xl font-bold"
+                      >
+                        ×
+                      </button>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           </div>

@@ -32,6 +32,5 @@ export async function GET(req: NextRequest) {
     console.error("error:", error)
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
-  console.log('is following', data)
   return NextResponse.json({ following: !!data });
 }

@@ -85,6 +85,9 @@ const config: Config = {
       },
       animation: {
         'fade-in': 'fadeIn 0.3s ease-out',
+        'spin-slow':'spin 2s linear infinite',
+        'splin-slower': "spin 4s linear infinite"
+
       },
       keyframes: {
         fadeIn: {
