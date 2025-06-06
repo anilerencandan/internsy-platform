@@ -490,7 +490,7 @@ function CommunityRequestModal({ isOpen, onClose }: { isOpen: boolean; onClose: 
             </div>
 
             <div className="flex gap-3 pt-4">
-              <Button type="button" variant="outline" onClick={onClose} className="flex-1" disabled={isSubmitting}>
+              <Button type="button" variant="outline" onClick={onClose} className="flex-1 border-gray-300" disabled={isSubmitting}>
                 İptal
               </Button>
               <Button type="submit" className="flex-1" disabled={isSubmitting}>
