@@ -15,7 +15,7 @@ export async function GET(req:NextRequest) {
     let query = supabase.from('companies').select('*')
 
     if (search) {
-        query = query.ilike('name', `%${search}%`).limit(10)
+        query = query.ilike('name', `${search}%`).limit(10)
     }
 
     if(!search) query = query.range(from, to)

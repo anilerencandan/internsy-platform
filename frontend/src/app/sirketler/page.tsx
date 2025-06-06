@@ -5,11 +5,20 @@ import { Input } from "@/components/ui/input"
 import PopularCompanies from "@/components/mulakatlar-page/popular-companies"
 import Company from '@/models/Company'
 import CompaanySearchBar from '@/components/CompanySearchBar'
+import { headers } from 'next/headers'
 
 export default async function sirketlerPage() {
   const companiesData = await fetch('http://localhost:3000/api/companies?limit=10')
   const companies: Company[] = await companiesData.json()
-    
+
+  const headersList = await headers()
+  const url = headersList.get("x-url") // Eğer middleware ile geçilirse
+  const fullUrl = url ?? "http://localhost:3000" // fallback
+
+  const searchParams = new URL(fullUrl).searchParams
+  const q = searchParams.get("q")?.trim() || ""
+
+  const isEmptySearch = q === ""
 
   return (
     <main className="page-content xl:px-0 px-4  sm:pt-4">
@@ -44,12 +53,14 @@ export default async function sirketlerPage() {
         </div>
 
         {/* Popüler Şirketler */}
-        
-        
-        <div className="mb-10 mt-10 ">
-          <h2 className="text-xl font-semibold mb-4">Popüler Şirketler</h2>
-          <PopularCompanies />
-        </div>
+        {isEmptySearch && (
+          <div className="mb-10 mt-10 ">
+            <h2 className="text-xl font-semibold mb-4">Popüler Şirketler</h2>
+            <PopularCompanies />
+          </div>
+        )}
+
+
       </div>
       <div>
         <div className="flex justify-between items-center mb-4">

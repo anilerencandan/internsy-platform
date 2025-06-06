@@ -30,5 +30,8 @@ export async function updateSession(request: NextRequest) {
   // refreshing the auth token
   await supabase.auth.getUser()
 
+  supabaseResponse.headers.set("x-url", request.nextUrl.toString())
+  
+
   return supabaseResponse
 }

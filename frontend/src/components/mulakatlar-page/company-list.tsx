@@ -1,6 +1,7 @@
 'use client'
 import Company from "@/models/Company"
 import { Loader, Star } from "lucide-react"
+import Image from "next/image"
 import Link from "next/link"
 import { useSearchParams } from "next/navigation"
 import { useEffect, useRef, useState } from "react"
@@ -9,67 +10,68 @@ interface CompanyListProps {
   initialCompanies: Company[]
 }
 
-export default function CompanyList({initialCompanies}: CompanyListProps) {
-  const [limit] = useState<number>(24)
-  const [offset, setOffset] = useState<number>(10)
+export default function CompanyList({ initialCompanies }: CompanyListProps) {
+  const [limit] = useState(24)
+  const [offset, setOffset] = useState(initialCompanies.length)
   const [companiesList, setCompaniesList] = useState<Company[]>(initialCompanies)
   const [fetchMore, setFetchMore] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
-  const [hasMore, setHasMore] = useState(true)
-  const [refIsVisible, setRefIsVisible] = useState(false)
+  const [hasMore, setHasMore] = useState(false)
   const loaderRef = useRef<HTMLDivElement | null>(null)
+  const [infiniteScrollEnabled, setInfiniteScrollEnabled] = useState(false)
   const searchParams = useSearchParams()
-  const q = searchParams.get("q")
+  const q = searchParams.get("q")?.trim() || ""
+  const isSearching = q.length > 0
 
   const fetchCompanies = async () => {
     if (isLoading) return
     setIsLoading(true)
 
     try {
-      // Arama durumu
-      if (q && q?.length > 0 ) {
+      if (isSearching) {
         const res = await fetch(`/api/companies?q=${encodeURIComponent(q)}`)
-        if (!res.ok) throw new Error("Şirket verisi alınamadı")
         const newCompanies: Company[] = await res.json()
         setCompaniesList(newCompanies)
         setHasMore(false)
-        setRefIsVisible(false)
       } else {
         const res = await fetch(`/api/companies?limit=${limit}&offset=${offset}`)
-        if (!res.ok) throw new Error("Şirket verisi alınamadı")
         const newCompanies: Company[] = await res.json()
-        setCompaniesList((prev) => [...prev, ...newCompanies])
-        setOffset((prev) => prev + limit)
+        setCompaniesList(prev => [...prev, ...newCompanies])
+        setOffset(prev => prev + limit)
         setHasMore(newCompanies.length === limit)
       }
-    } catch (err) {
-      console.error(err)
+    } catch (error) {
+      console.error("Şirket verisi alınamadı", error)
     }
 
     setIsLoading(false)
   }
 
-  // Arama parametresi değişince
+  // Arama değişince tetiklenir
   useEffect(() => {
-    if (q && q?.length > 0) {
+    if (isSearching) {
       setOffset(0)
-      setCompaniesList([])
+      setHasMore(false)
       fetchCompanies()
+    } else {
+      setCompaniesList(initialCompanies)
+      setOffset(initialCompanies.length)
+      setHasMore(true)
     }
   }, [q])
 
-  // "Daha fazla göster" veya scroll ile
+  // Scroll'da fetch tetikleme
   useEffect(() => {
-    if (!fetchMore || isLoading || q) return
+    if (!fetchMore || isLoading || isSearching) return
     fetchCompanies()
     setFetchMore(false)
-  }, [fetchMore, isLoading, q])
+  }, [fetchMore, isLoading, isSearching])
 
-  // Intersection Observer
   useEffect(() => {
+    if(!infiniteScrollEnabled) return
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting && !isLoading && hasMore && !q) {
+        if (entry.isIntersecting && hasMore && !isLoading && !isSearching) {
           setFetchMore(true)
         }
       },
@@ -77,16 +79,13 @@ export default function CompanyList({initialCompanies}: CompanyListProps) {
     )
 
     if (loaderRef.current) observer.observe(loaderRef.current)
-
-    return () => {
-      if (loaderRef.current) observer.unobserve(loaderRef.current)
-    }
-  }, [isLoading, hasMore, q])
+    return () => loaderRef.current && observer.unobserve(loaderRef.current)
+  }, [hasMore, isLoading, isSearching, infiniteScrollEnabled])
 
   return (
     <>
-      {/* Masaüstü görünüm (table) */}
-      <div className="bg-white rounded-lg border border-gray-200 overflow-x-auto hidden sm:block">
+      {/* Masaüstü görünüm */}
+      <div className="hidden sm:block bg-white rounded-lg border border-gray-200 overflow-x-auto">
         <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-gray-50">
             <tr>
@@ -96,12 +95,12 @@ export default function CompanyList({initialCompanies}: CompanyListProps) {
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
-            {companiesList.map((company) => (
+            {companiesList.map(company => (
               <tr key={company.id} className="hover:bg-gray-50">
                 <td className="px-6 py-4 whitespace-nowrap">
                   <Link href={`/sirket/${company.id}`} className="flex items-center">
-                    <div className={`w-10 h-10  rounded-lg flex items-center justify-center text-lg font-bold mr-3`}> {/* ${company.color} */}
-                      {company.name[0]}
+                    <div className="w-12 h-12 rounded-lg flex items-center justify-center text-lg font-bold mr-3 relative">
+                      <Image src={company.company_image} alt={company.name + " logo"} fill className="object-cover"/>
                     </div>
                     <div className="font-medium">{company.name}</div>
                   </Link>
@@ -115,10 +114,7 @@ export default function CompanyList({initialCompanies}: CompanyListProps) {
                 <td className="px-6 py-4 whitespace-nowrap">
                   <div className="flex items-center">
                     <div className="h-2 w-24 bg-gray-200 rounded-full overflow-hidden mr-2">
-                      <div
-                        className="h-full bg-yellow-400 rounded-full"
-                        style={{ width: `${(3.8 / 5) * 100}%` }}
-                      ></div>
+                      <div className="h-full bg-yellow-400 rounded-full" style={{ width: `${(3.8 / 5) * 100}%` }} />
                     </div>
                     <span>3.8/5</span>
                   </div>
@@ -129,53 +125,46 @@ export default function CompanyList({initialCompanies}: CompanyListProps) {
         </table>
       </div>
 
-      {/* Mobil görünüm (kart) */}
+      {/* Mobil görünüm */}
       <div className="sm:hidden flex flex-col gap-y-4">
-        {companiesList.map((company) => (
-          <Link
-            href={`/sirket/${company.id}`}
-            key={company.id}
-            className="border border-gray-200 rounded-lg p-4 shadow-sm bg-white"
-          >
+        {companiesList.map(company => (
+          <Link key={company.id} href={`/sirket/${company.id}`} className="border border-gray-200 rounded-lg p-4 shadow-sm bg-white">
             <div className="flex items-center gap-x-4 mb-2">
-              <div className={`w-10 h-10  rounded-lg flex items-center justify-center text-lg font-bold`}>
-                {company.name[0]}
+              <div className="w-10 h-10 rounded-lg flex items-center justify-center text-lg font-bold relative">
+                <Image src={company.company_image} alt={company.name + " logo"} fill className="object-cover"/>
               </div>
               <div className="font-semibold text-lg">{company.name}</div>
             </div>
-
             <div className="flex items-center text-sm mb-1">
               <Star className="h-4 w-4 fill-yellow-400 text-yellow-400 mr-1" />
               <span>{company.average_rating} değerlendirme</span>
             </div>
-
             <div className="flex items-center text-sm p-2">
               <span className="mr-2">Mülakat Zorluğu</span>
               <div className="flex-1 h-2 bg-gray-200 rounded-full overflow-hidden">
-                <div
-                  className="h-full bg-yellow-400 rounded-full"
-                  style={{ width: `${(3.8 / 5) * 100}%` }}
-                ></div>
+                <div className="h-full bg-yellow-400 rounded-full" style={{ width: `${(3.8 / 5) * 100}%` }} />
               </div>
-              <span className="ml-2">{3.8}/5</span>
+              <span className="ml-2">3.8/5</span>
             </div>
           </Link>
         ))}
       </div>
 
-      {/* Daha Fazla Göster Butonu (ortak) */}
+      {/* Yükleniyor veya Daha Fazla Butonu */}
       <div className="flex justify-center items-center my-4">
-        {!refIsVisible && (
-          <button onClick={() => {setFetchMore(true); setRefIsVisible(true); setHasMore(true)}}>
-          <div className="w-fit px-4 py-2 rounded-md text-primary hover:text-primary-light font-medium">
+        {!infiniteScrollEnabled && hasMore && !isSearching && (
+          <button
+            className="text-primary font-medium border px-4 py-2 rounded-md hover:bg-gray-100 transition"
+            onClick={() => setInfiniteScrollEnabled(true)}
+          >
             Daha Fazla Göster
-          </div>
-        </button>
+          </button>
         )}
-        {refIsVisible && hasMore && !q && (
+
+        {infiniteScrollEnabled && (
           <>
-          <Loader className="w-6 h-6 animate-spin-slow text-primary"/>
-          <div ref={loaderRef} className="h-4"/>
+            <div ref={loaderRef} className="h-4" />
+            {isLoading && <Loader className="w-6 h-6 animate-spin-slow text-primary ml-2" />}
           </>
         )}
       </div>
