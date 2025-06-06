@@ -1,3 +1,4 @@
+import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -37,6 +38,13 @@ export function CommunityRequestsPage() {
       requestDate: "2024-01-13",
     },
   ]
+  const [statuses, setStatuses] = useState<Record<number, string>>(
+    () =>
+      requests.reduce((acc, r) => {
+        acc[r.id] = "Beklemede"
+        return acc
+      }, {} as Record<number, string>)
+  )
 
   return (
     <div className="space-y-6">
@@ -47,18 +55,31 @@ export function CommunityRequestsPage() {
 
       <div className="space-y-4">
         {requests.map((request) => (
-          <Card key={request.id}>
+          <Card key={request.id} className="relative border-gray-200 shadow-lg">
             <CardHeader>
               <div className="flex items-start justify-between">
                 <div>
                   <CardTitle className="text-lg">{request.name}</CardTitle>
                   <div className="flex items-center gap-2 mt-2">
-                    <Badge variant="secondary">{request.category}</Badge>
+                    <Badge className="border border-gray-300 bg-slate-200" variant="secondary">{request.category}</Badge>
                     {request.university && <Badge variant="outline">{request.university}</Badge>}
                   </div>
                 </div>
               </div>
             </CardHeader>
+            <div
+              className={`absolute top-2 right-2 text-sm font-semibold border border-gray-300 p-2 shadow rounded-lg ${
+                statuses[request.id] === "Beklemede"
+                  ? "bg-gray-200 text-gray-800"
+                  : statuses[request.id] === "Silindi"
+                  ? "bg-red-200 text-red-800"
+                  : statuses[request.id] === "Onaylandı"
+                  ? "bg-green-200 text-green-800"
+                  : ""
+              }`}
+            >
+              {statuses[request.id]}
+            </div>
             <CardContent>
               <div className="space-y-4">
                 <div>
@@ -82,12 +103,26 @@ export function CommunityRequestsPage() {
                 <div className="text-sm text-gray-500">Talep Tarihi: {request.requestDate}</div>
 
                 <div className="flex gap-3 pt-2">
-                  <Button variant="default" size="sm" className="flex items-center gap-2">
-                    <Check className="w-4 h-4" />
+                  <Button
+                    variant="default"
+                    size="sm"
+                    className="flex items-center gap-2"
+                    onClick={() =>
+                      setStatuses((prev) => ({ ...prev, [request.id]: "Onaylandı" }))
+                    }
+                  >
+                    <Check className="w-4 h-4 text-green-400" />
                     Onayla
                   </Button>
-                  <Button variant="destructive" size="sm" className="flex items-center gap-2">
-                    <X className="w-4 h-4" />
+                  <Button
+                    variant="destructive"
+                    size="sm"
+                    className="flex items-center gap-2 bg-gray-200 hover:bg-gray-400"
+                    onClick={() =>
+                      setStatuses((prev) => ({ ...prev, [request.id]: "Silindi" }))
+                    }
+                  >
+                    <X className="w-4 h-4 text-red-600" />
                     Sil
                   </Button>
                 </div>
