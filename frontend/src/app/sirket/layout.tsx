@@ -95,9 +95,9 @@ export default function SirketLayout({ children }: { children: React.ReactNode }
     </div>
 
         </div>
-        <div className="border border-gray-300 rounded-lg p-4">
-          <StajIlanlarCard />
-        </div>
+        <div className="relative border border-gray-300 rounded-lg p-4 overflow-hidden">
+        <StajIlanlarCard />
+      </div>
 
         {/* Yeni Eklenen Kart */}
         

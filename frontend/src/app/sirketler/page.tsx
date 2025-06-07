@@ -67,7 +67,7 @@ export default async function sirketlerPage() {
           <h2 className="text-xl font-semibold">Tüm Şirketler</h2>
           <div className="flex items-center gap-2">
             <span className="text-sm text-gray-500">Sırala:</span>
-            <select className="text-sm border rounded-md px-2 py-1">
+            <select className="text-sm border border-gray-300 rounded-md px-2 py-1">
               <option>Popülerlik</option>
               <option>Puan (Yüksek-Düşük)</option>
               <option>Puan (Düşük-Yüksek)</option>

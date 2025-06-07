@@ -28,13 +28,13 @@ export default function CompanySearchBar() {
   }, [debouncedSearch])
 
   return (
-    <div className="relative max-w-xl mx-auto">
-      <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
+    <div className="relative max-w-xl mx-auto rounded-lg">
+      <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5"/>
       <Input
         value={search}
         onChange={(e) => setSearch(e.target.value)}
         placeholder="Şirket adı ara (örn. Google, Microsoft, Amazon...)"
-        className="pl-10 py-6 text-lg rounded-lg shadow-sm"
+        className="pl-10 py-6 text-base md:pl-10 md:py-6 md:text-lg  rounded-lg shadow-lg border border-gray-200"
       />
     </div>
   )

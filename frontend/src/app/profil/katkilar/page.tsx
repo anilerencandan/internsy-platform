@@ -4,6 +4,7 @@ import SubMenu from '@/components/profil-page/SubMenu'
 import TabsSection from '@/components/profil-page/TabsSection'
 import { Banknote, BriefcaseBusiness, ChevronLeft, Star } from 'lucide-react'
 import React, { useState } from 'react'
+import { Menu } from "lucide-react"
 
 
 
@@ -17,7 +18,7 @@ export default function Page() {
             
             <div className='flex flex-col'>
               <div className='flex items-center sm:justify-start justify-center relative'>
-                          <ChevronLeft
+                          <Menu
             size={24}
             className="absolute left-4 cursor-pointer sm:hidden block text-primary "
             onClick={() => setIsSidebarOpen(true)}

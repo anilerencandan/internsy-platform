@@ -1,6 +1,6 @@
 'use client';
 
-import { ChevronLeft, Edit, X } from 'lucide-react';
+import { Menu, Edit, X } from 'lucide-react';
 import React, { useState } from 'react';
 import Link from 'next/link';
 import SubMenu from './SubMenu';
@@ -26,7 +26,7 @@ export default function UserInformationSection({
       <div className="flex flex-col gap-y-4 sm:border border-gray-300 rounded-lg py-6 px-4">
         <div className="flex items-center relative justify-center">
           <h1 className="text-2xl font-bold text-primary">Profil</h1>
-          <ChevronLeft
+          <Menu
             size={24}
             className="absolute left-0 cursor-pointer sm:hidden block text-primary"
             onClick={() => setIsSidebarOpen(true)}

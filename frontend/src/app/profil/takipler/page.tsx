@@ -6,7 +6,7 @@ import { Separator } from "@/components/ui/separator"
 import SubMenu from "@/components/profil-page/SubMenu"
 import { useState } from "react"
 import { ChevronLeft } from "lucide-react"
-
+import { Menu } from "lucide-react"
 // Verileri doğrudan sayfa içinde tanımlıyoruz
 const companies = [
   {
@@ -240,7 +240,7 @@ export default function SocialPage() {
       
       <div className="flex flex-col gap-y-4 pt-6">
         <div className="flex items-center sm:justify-start justify-center relative px-4">
-          <ChevronLeft
+          <Menu
             size={24}
             className="absolute left-4 cursor-pointer sm:hidden block text-primary"
             onClick={() => setIsSidebarOpen(true)}

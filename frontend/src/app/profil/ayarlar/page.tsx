@@ -1,7 +1,7 @@
 'use client'
 import EmailPasswordDialog from '@/components/profil-page/EditMailDialog'
 import SubMenu from '@/components/profil-page/SubMenu';
-import { ChevronLeft } from 'lucide-react';
+import { Menu } from "lucide-react"
 import React, { useState } from 'react'
 import { FaGoogle } from 'react-icons/fa'
 
@@ -16,7 +16,7 @@ export default function Page() {
                 
                 <div className='flex flex-col '>
                     <div className='flex items-center sm:justify-start justify-center relative'>
-                        <ChevronLeft
+                        <Menu
                             size={24}
                             className="absolute left-4 cursor-pointer sm:hidden block text-primary"
                             onClick={() => setIsSidebarOpen(true)}

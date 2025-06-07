@@ -6,6 +6,7 @@ import { Card, CardContent, CardDescription, CardTitle } from "@/components/ui/c
 import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import SubMenu from "./SubMenu"
+import { Menu } from "lucide-react"
 
 export default function NotificationCards() {
   const [activeTab, setActiveTab] = useState("all")
@@ -67,7 +68,7 @@ export default function NotificationCards() {
   return (
     <div className="w-full mx-auto">
       <div className="flex items-center justify-between mb-4">
-                  <ChevronLeft
+                  <Menu
             size={24}
             className=" left-0 cursor-pointer sm:hidden block text-primary"
             onClick={() => setIsSidebarOpen(true)}
@@ -75,17 +76,35 @@ export default function NotificationCards() {
 
         
         <h2 className="text-2xl font-bold text-primary w-full text-center">Bildirimler</h2>
-        <Badge variant="outline" className="bg-blue-50 text-blue-500 hover:bg-blue-100 rounded-full">
-          {notifications.filter((n) => !n.read).length} Yeni
+        <Badge
+          variant="outline"
+          className="inline-flex items-center gap-1 bg-blue-50 text-blue-500 hover:bg-blue-100 rounded-full px-4 py-1"
+        >
+          <span>{notifications.filter((n) => !n.read).length}</span>
+          <span>Yeni</span>
         </Badge>
       </div>
 
       <Tabs defaultValue="all" className="w-full" onValueChange={setActiveTab}>
-        <TabsList className="grid grid-cols-4 mb-4">
-          <TabsTrigger value="all">Tümü</TabsTrigger>
-          <TabsTrigger value="application">Başvurular</TabsTrigger>
-          <TabsTrigger value="message">Mesajlar</TabsTrigger>
-          <TabsTrigger value="interview">Mülakatlar</TabsTrigger>
+        <TabsList className="grid grid-cols-3 mb-4">
+          <TabsTrigger
+            value="all"
+            className="data-[state=active]:text-primary"
+          >
+            Tümü
+          </TabsTrigger>
+          <TabsTrigger
+            value="replies"
+            className="data-[state=active]:text-primary"
+          >
+            Yanıtlar
+          </TabsTrigger>
+          <TabsTrigger
+            value="community"
+            className="data-[state=active]:text-primary"
+          >
+            Topluluk
+          </TabsTrigger>
         </TabsList>
 
         <TabsContent value={activeTab} className="mt-0">
