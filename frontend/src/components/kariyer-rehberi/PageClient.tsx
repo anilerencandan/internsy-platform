@@ -66,7 +66,7 @@ export default function BlogPage({ initialPosts }: Props) {
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 px-4 sm:px-0">
           {filtered.map((post) => (
-            <Link href={`/kariyer-rehberi/blog/${post.id}`} key={post.id}>
+            <Link href={`/kariyer-rehberi/bloglar/${post.id}`} key={post.id}>
               <ContentCard
                 key={post.id}
                 title={post.title}

@@ -1,4 +1,5 @@
 import { supabase } from "@/lib/supabase";
+import { quartersInYear } from "date-fns/constants";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req:NextRequest) {
@@ -8,6 +9,7 @@ export async function GET(req:NextRequest) {
     const offsetParam = searchParams.get('offset') 
     const offset = offsetParam ? parseInt(offsetParam) : 0
     const search = searchParams.get('q')
+    const id = searchParams.get('id')
 
     const category = searchParams.get('category')
 
@@ -16,6 +18,35 @@ export async function GET(req:NextRequest) {
 
     let query = supabase.from('career_guides').select('*')
 
+    if (id) {
+        // 1. blog + yazar
+        const { data: blog, error: blogError } = await supabase
+        .from("career_guides")
+        .select("*, users:author(fullname)")
+        .eq("id", id)
+        .single();
+
+        if (blogError || !blog) {
+        return NextResponse.json({ error: blogError || "Blog bulunamadı" }, { status: 404 });
+        }
+
+        // 2. bloga ait yorumlar + yorum sahibinin adı
+        const { data: comments, error: commentsError } = await supabase
+        .from("career_guide_comments")
+        .select("*, users:user_id(fullname)")
+        .eq("guide_id", id)
+        .order("created_at", { ascending: false });
+
+        if (commentsError) {
+        return NextResponse.json({ error: commentsError }, { status: 500 });
+        }
+
+        return NextResponse.json({
+        ...blog,
+        comments: comments || [],
+        });
+    }
+    
     if(search){
         category ? query = query.ilike('title', `${search}%`).eq('content_type', category).limit(10) : query = query.ilike('title', `${search}%`).limit(10)
     }
