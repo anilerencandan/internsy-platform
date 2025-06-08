@@ -35,7 +35,7 @@ export default function AnonymousPostForm({ categories, postCommunity, setOpen }
           name="category_id"
           value={selectedCommunity}
           onChange={(e) => setSelectedCommunity(e.target.value)}
-          className="w-full border-2 p-2 rounded text-sm h-11 hover:border-blue-300 focus:border-blue-500 transition-colors"
+          className="w-full border border-gray-300 p-2 rounded text-sm h-11 hover:border-blue-400 focus:border-blue-500 transition-colors"
           required
         >
           <option value="">Topluluk Seçin</option>
@@ -48,7 +48,7 @@ export default function AnonymousPostForm({ categories, postCommunity, setOpen }
       </div>
 
       {/* Başlık */}
-      <div className="space-y-2">
+{/*       <div className="space-y-2">
         <Label htmlFor="title" className="text-sm font-medium">
           Başlık
         </Label>
@@ -59,7 +59,7 @@ export default function AnonymousPostForm({ categories, postCommunity, setOpen }
           required
           className="h-11 border-2 hover:border-blue-300 focus:border-blue-500 transition-colors"
         />
-      </div>
+      </div> */}
 
       {/* İçerik */}
       <div className="space-y-2">
@@ -72,7 +72,7 @@ export default function AnonymousPostForm({ categories, postCommunity, setOpen }
           placeholder="Ne paylaşmak istersiniz?"
           value={content}
           onChange={(e) => setContent(e.target.value)}
-          className="min-h-[100px] border-2 hover:border-blue-300 focus:border-blue-500 transition-colors resize-none"
+          className="min-h-[100px] border-2 border-gray-300 hover:border-blue-300 focus:border-blue-500 transition-colors resize-none"
           required
         />
       </div>
@@ -88,9 +88,9 @@ export default function AnonymousPostForm({ categories, postCommunity, setOpen }
       </div>
 
       {/* Butonlar */}
-      <div className="flex justify-end gap-3 pt-2">
+      <div className="flex justify-between pt-2">
         {setOpen && (
-          <Button type="button" variant="outline" onClick={() => setOpen(false)} className="px-6">
+          <Button type="button" variant="outline" onClick={() => setOpen(false)} className="px-6 border-gray-300">
             İptal
           </Button>
         )}
