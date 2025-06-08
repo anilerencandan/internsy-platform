@@ -98,7 +98,7 @@ export default function CompanyList({ initialCompanies }: CompanyListProps) {
             {companiesList.map(company => (
               <tr key={company.id} className="hover:bg-gray-50">
                 <td className="px-6 py-4 whitespace-nowrap">
-                  <Link href={`/sirket/${company.id}/mulakatlar`} className="flex items-center">
+                  <Link href={`/sirket/${company.id}/staj-ilanlari`} className="flex items-center">
                     <div className="w-12 h-12 rounded-lg flex items-center justify-center text-lg font-bold mr-3 relative">
                       <Image src={company.company_image} alt={company.name + " logo"} fill className="object-cover"/>
                     </div>
@@ -128,7 +128,7 @@ export default function CompanyList({ initialCompanies }: CompanyListProps) {
       {/* Mobil görünüm */}
       <div className="sm:hidden flex flex-col gap-y-4">
         {companiesList.map(company => (
-          <Link key={company.id} href={`/sirket/${company.id}/mulakatlar`} className="border border-gray-200 rounded-lg p-4 shadow-sm bg-white">
+          <Link key={company.id} href={`/sirket/${company.id}/staj-ilanlari`} className="border border-gray-200 rounded-lg p-4 shadow-sm bg-white">
             <div className="flex items-center gap-x-4 mb-2">
               <div className="w-10 h-10 rounded-lg flex items-center justify-center text-lg font-bold relative">
                 <Image src={company.company_image} alt={company.name + " logo"} fill className="object-cover"/>

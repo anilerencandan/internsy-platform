@@ -1,6 +1,6 @@
 import React from 'react'
 import { Search } from "lucide-react"
-import CompanyList from "@/components/mulakatlar-page/company-list"
+import CompanyList from "@/components/sirketler-page/company-list"
 import { Input } from "@/components/ui/input"
 import PopularCompanies from "@/components/mulakatlar-page/popular-companies"
 import Company from '@/models/Company'
