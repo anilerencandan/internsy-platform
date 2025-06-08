@@ -7,7 +7,7 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import type { CommunityPostType } from "@/models/CommunityPost"
 import { useState, useEffect } from "react"
-import { MoreHorizontal, Flag, ChevronDown, Send, User, ThumbsUp, MessageSquare, Share2, X } from "lucide-react"
+import { MoreHorizontal, Flag, ChevronDown, User, Heart, MessageCircle, Share, X, Menu } from "lucide-react"
 
 interface CommunityPostComment {
   id: string
@@ -29,7 +29,7 @@ interface Props {
 export default function CommentModal({ open, onClose, post, commented }: Props) {
   const [comment, setComment] = useState("")
   const [comments, setComments] = useState<CommunityPostComment[]>([])
-  const [sortBy, setSortBy] = useState<"newest" | "popular">("newest")
+  const [sortBy, setSortBy] = useState<"newest" | "popular">("popular")
   const [showAllComments, setShowAllComments] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [replyingTo, setReplyingTo] = useState<string | null>(null)
@@ -108,217 +108,262 @@ export default function CommentModal({ open, onClose, post, commented }: Props) 
   })
 
   const displayedComments = showAllComments ? sortedComments : sortedComments.slice(0, 5)
-  const formattedDate = new Date().toLocaleString("tr-TR", {
-    hour: "2-digit",
-    minute: "2-digit",
-    day: "numeric",
-    month: "long",
-  })
 
   return (
     <Dialog open={open} onOpenChange={onClose}>
-      <DialogContent className="max-w-2xl max-h-[90vh] p-0 overflow-hidden bg-[#18191a] border-0 shadow-2xl text-gray-200">
-        {/* Fixed Header with Close Button */}
-        <div className="sticky top-0 z-10 flex items-center justify-between p-4 bg-[#18191a] border-b border-gray-700">
-          <h3 className="text-lg font-semibold text-gray-100">BGY : Stonks</h3>
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={onClose}
-            className="h-8 w-8 p-0 rounded-full hover:bg-gray-700 text-gray-400"
-          >
-            <X className="h-5 w-5" />
-          </Button>
+      <DialogContent className="max-w-2xl max-h-[90vh] p-0 overflow-hidden bg-white border shadow-lg text-gray-900 rounded-lg">
+        {/* Header */}
+        <div className="relative p-6">
+          <h1 className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 text-lg font-semibold text-primary">
+            Frontend Developers
+          </h1>
         </div>
 
         {/* Scrollable Content */}
         <div className="overflow-y-auto" style={{ maxHeight: "calc(90vh - 140px)" }}>
-          {/* Post Header */}
-          <div className="p-4 border-b border-gray-700">
-            <div className="flex items-center gap-3">
-              <Avatar className="h-12 w-12 border border-gray-700">
-                <AvatarFallback className="bg-gray-800 text-gray-300">
+          {/* Post */}
+          <div className="p-6 border-b border-gray-100">
+            <div className="flex items-start gap-3 mb-4">
+              <Avatar className="h-8 w-8">
+                <AvatarFallback className="bg-blue-100 text-blue-600">
                   <User className="h-6 w-6" />
                 </AvatarFallback>
               </Avatar>
               <div className="flex-1">
                 <div className="flex items-center justify-between">
                   <div>
-                    <h2 className="text-lg font-semibold text-gray-100">{post.title || "BGY : Stonks"}</h2>
-                    <p className="text-sm text-gray-400">
-                      Anonim · {formattedDate} · <span className="text-gray-500">🌐</span>
-                    </p>
+                    <h2 className="font-semibold text-gray-900">{post.title}</h2>
+                    <p className="text-sm text-gray-500">Anonim</p>
                   </div>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    className="h-8 w-8 p-0 rounded-full hover:bg-gray-700 text-gray-400"
-                  >
-                    <MoreHorizontal className="h-5 w-5" />
+                  <div className="flex items-center gap-2">
+                    <span className="text-sm text-gray-500">1d</span>
+                    <Button variant="ghost" size="sm" className="h-6 w-6 p-0 rounded hover:bg-gray-100">
+                      <MoreHorizontal className="h-4 w-4 text-gray-500" />
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="mb-4">
+              <p className="text-gray-900 leading-relaxed whitespace-pre-line">{post.content}</p>
+            </div>
+
+            {/* Post Actions */}
+            <div className="flex items-center justify-between pt-3 border-t border-gray-100">
+              <div className="flex items-center gap-6">
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="flex items-center gap-2 text-gray-600 hover:text-gray-900 p-0"
+                >
+                  <Heart className="h-5 w-5" />
+                  <span className="text-sm">Beğen</span>
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="flex items-center gap-2 text-gray-600 hover:text-gray-900 p-0"
+                >
+                  <MessageCircle className="h-5 w-5" />
+                  <span className="text-sm">{comments.length} Yorum</span>
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="flex items-center gap-2 text-gray-600 hover:text-gray-900 p-0"
+                >
+                  <Share className="h-5 w-5" />
+                  <span className="text-sm">Paylaş</span>
+                </Button>
+              </div>
+              <div className="flex items-center gap-1">
+                <div className="bg-green-500 rounded-full h-5 w-5 flex items-center justify-center">
+                  <span className="text-white text-xs">6</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Comment Input */}
+          <div className="p-6 border-b border-gray-100">
+            <div className="flex gap-3">
+              <Avatar className="h-10 w-10">
+                <AvatarFallback className="bg-gray-100 text-gray-600">
+                  <User className="h-5 w-5" />
+                </AvatarFallback>
+              </Avatar>
+              <div className="flex-1">
+                <Textarea
+                  placeholder="Bir yorum yazın..."
+                  value={comment}
+                  onChange={(e) => setComment(e.target.value)}
+                  className="min-h-[80px] resize-none border border-gray-300 rounded-lg p-3 text-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                />
+                <div className="flex items-center justify-between mt-3">
+                  <Button variant="ghost" size="sm" className="text-gray-500 hover:text-gray-700 p-0">
+                    <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+                      />
+                    </svg>
                   </Button>
+                  <div className="flex gap-2">
+                    <Button variant="outline" size="sm" className="text-gray-600 border-gray-300 hover:bg-gray-50">
+                      İptal
+                    </Button>
+                    <Button
+                      onClick={handleSubmit}
+                      disabled={!comment.trim() || isSubmitting}
+                      size="sm"
+                      className="bg-blue-600 hover:bg-blue-700 text-white px-4"
+                    >
+                      {isSubmitting ? "Gönderiliyor..." : "Yorum"}
+                    </Button>
+                  </div>
                 </div>
               </div>
             </div>
-
-            {/* Post Content */}
-            <div className="mt-3 text-gray-100 whitespace-pre-line">{post.content}</div>
-          </div>
-
-          {/* Reactions Summary */}
-          <div className="px-4 py-2 flex items-center justify-between border-b border-gray-700">
-            <div className="flex items-center gap-1">
-              <div className="flex">
-                <div className="bg-blue-500 rounded-full h-5 w-5 flex items-center justify-center">
-                  <ThumbsUp className="h-3 w-3 text-white" />
-                </div>
-                <div className="bg-red-500 rounded-full h-5 w-5 flex items-center justify-center -ml-1">
-                  <span className="text-white text-xs">❤️</span>
-                </div>
-              </div>
-              <span className="text-sm text-gray-400">33</span>
-            </div>
-            <div className="text-sm text-gray-400">{comments.length} yorum</div>
-          </div>
-
-          {/* Action Buttons */}
-          <div className="flex items-center justify-between px-4 py-1 border-b border-gray-700">
-            <Button variant="ghost" className="flex-1 h-10 text-gray-300 hover:bg-gray-800 rounded-md">
-              <ThumbsUp className="h-5 w-5 mr-2" />
-              Beğen
-            </Button>
-            <Button variant="ghost" className="flex-1 h-10 text-gray-300 hover:bg-gray-800 rounded-md">
-              <MessageSquare className="h-5 w-5 mr-2" />
-              Yorum Yap
-            </Button>
-            <Button variant="ghost" className="flex-1 h-10 text-gray-300 hover:bg-gray-800 rounded-md">
-              <Share2 className="h-5 w-5 mr-2" />
-              Gönder
-            </Button>
           </div>
 
           {/* Sort Controls */}
-          <div className="flex items-center justify-between px-4 py-2 border-b border-gray-700">
-            <div className="flex items-center gap-2">
-              <span className="text-sm font-medium text-gray-300">Yorumlar</span>
-            </div>
-            <div className="flex gap-2">
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={() => setSortBy("newest")}
-                className={`h-8 px-3 text-xs rounded-md ${
-                  sortBy === "newest" ? "text-blue-400" : "text-gray-400 hover:bg-gray-800"
-                }`}
-              >
-                En alakalı
-              </Button>
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={() => setSortBy("popular")}
-                className={`h-8 px-3 text-xs rounded-md ${
-                  sortBy === "popular" ? "text-blue-400" : "text-gray-400 hover:bg-gray-800"
-                }`}
-              >
-                En yeni
-              </Button>
-            </div>
+          <div className="flex items-center justify-end px-6 py-3 border-b border-gray-100">
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" size="sm" className="flex items-center gap-2 text-gray-700 hover:bg-gray-100">
+                  <Menu className="h-4 w-4" />
+                  <span className="text-sm font-medium">{sortBy === "popular" ? "Popüler" : "En Yeni"}</span>
+                  <ChevronDown className="h-4 w-4" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-40">
+                <DropdownMenuItem onClick={() => setSortBy("popular")} className="text-sm">
+                  Popüler
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => setSortBy("newest")} className="text-sm">
+                  En Yeni
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
 
-          {/* Comments List */}
-          <div className="px-4 py-2">
-            <div className="space-y-4">
+          {/* Comments */}
+          <div className="px-6 py-4">
+            <div className="space-y-6">
               {displayedComments.map((c) => (
                 <div key={c.id} className="group">
-                  {/* Main Comment */}
-                  <div className="flex gap-3">
-                    <Avatar className="h-10 w-10 mt-1">
-                      <AvatarFallback className="bg-gray-800 text-gray-300">
+                  <div className="flex items-start gap-3">
+                    <Avatar className="h-10 w-10">
+                      <AvatarFallback className="bg-gray-100 text-gray-600">
                         <User className="h-5 w-5" />
                       </AvatarFallback>
                     </Avatar>
-
                     <div className="flex-1">
-                      <div className="bg-gray-800 rounded-lg px-3 py-2">
-                        <div className="flex justify-between items-start">
-                          <div>
-                            <span className="font-semibold text-sm text-gray-200">{c.user_name || "Anonim"}</span>
-                            {c.user_name && (
-                              <span className="ml-2 text-xs px-1 bg-gray-700 text-gray-300 rounded">
-                                Yıldız katkıda bulunan
-                              </span>
-                            )}
+                      <div className="bg-gray-50 rounded-lg p-4">
+                        <div className="flex items-center justify-between mb-2">
+                          <h3 className="font-semibold text-gray-900">{c.user_name || "Claims Specialist 1"}</h3>
+                          <div className="flex items-center gap-2">
+                            <span className="text-sm text-gray-500">1d</span>
+                            <DropdownMenu>
+                              <DropdownMenuTrigger asChild>
+                                <Button
+                                  variant="ghost"
+                                  size="sm"
+                                  className="h-6 w-6 p-0 opacity-0 group-hover:opacity-100 transition-opacity rounded hover:bg-gray-200"
+                                >
+                                  <MoreHorizontal className="h-4 w-4 text-gray-500" />
+                                </Button>
+                              </DropdownMenuTrigger>
+                              <DropdownMenuContent align="end">
+                                <DropdownMenuItem className="text-red-600">
+                                  <Flag className="h-4 w-4 mr-2" />
+                                  Şikayet Et
+                                </DropdownMenuItem>
+                              </DropdownMenuContent>
+                            </DropdownMenu>
                           </div>
-                          <DropdownMenu>
-                            <DropdownMenuTrigger asChild>
-                              <Button
-                                variant="ghost"
-                                size="sm"
-                                className="h-6 w-6 p-0 opacity-0 group-hover:opacity-100 transition-all duration-200 hover:bg-gray-700 rounded-full"
-                              >
-                                <MoreHorizontal className="h-4 w-4 text-gray-400" />
-                              </Button>
-                            </DropdownMenuTrigger>
-                            <DropdownMenuContent align="end" className="bg-gray-800 border-gray-700 text-gray-200">
-                              <DropdownMenuItem className="text-red-400 hover:bg-gray-700 focus:bg-gray-700">
-                                <Flag className="h-4 w-4 mr-2" />
-                                Şikayet Et
-                              </DropdownMenuItem>
-                            </DropdownMenuContent>
-                          </DropdownMenu>
                         </div>
-
-                        <p className="text-sm text-gray-200 mt-1">{c.content}</p>
+                        <p className="text-gray-900 leading-relaxed">{c.content}</p>
                       </div>
 
-                      {/* Action Buttons */}
-                      <div className="flex items-center gap-3 mt-1 ml-1">
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          onClick={() => handleLikeComment(c.id)}
-                          className={`h-6 px-2 text-xs font-medium rounded hover:bg-transparent ${
-                            c.is_liked ? "text-blue-400" : "text-gray-400"
-                          }`}
-                        >
-                          Beğen
-                        </Button>
-
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          onClick={() => setReplyingTo(replyingTo === c.id ? null : c.id)}
-                          className="h-6 px-2 text-xs font-medium text-gray-400 hover:bg-transparent"
-                        >
-                          Yanıtla
-                        </Button>
-
-                        <span className="text-xs text-gray-500">23s</span>
+                      {/* Comment Actions */}
+                      <div className="flex items-center justify-between mt-3">
+                        <div className="flex items-center gap-6">
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={() => handleLikeComment(c.id)}
+                            className={`flex items-center gap-2 p-0 ${
+                              c.is_liked ? "text-blue-600" : "text-gray-600 hover:text-gray-900"
+                            }`}
+                          >
+                            <Heart className={`h-4 w-4 ${c.is_liked ? "fill-current" : ""}`} />
+                            <span className="text-sm">Beğen</span>
+                          </Button>
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={() => setReplyingTo(replyingTo === c.id ? null : c.id)}
+                            className="flex items-center gap-2 text-gray-600 hover:text-gray-900 p-0"
+                          >
+                            <MessageCircle className="h-4 w-4" />
+                            <span className="text-sm">Yanıtla</span>
+                          </Button>
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            className="flex items-center gap-2 text-gray-600 hover:text-gray-900 p-0"
+                          >
+                            <Share className="h-4 w-4" />
+                            <span className="text-sm">Paylaş</span>
+                          </Button>
+                        </div>
+                        {c.likes_count && c.likes_count > 0 && (
+                          <div className="flex items-center gap-1">
+                            <div className="bg-green-500 rounded-full h-5 w-5 flex items-center justify-center">
+                              <span className="text-white text-xs">{c.likes_count}</span>
+                            </div>
+                          </div>
+                        )}
                       </div>
 
                       {/* Reply Input */}
                       {replyingTo === c.id && (
-                        <div className="mt-2 flex gap-2">
-                          <Avatar className="h-8 w-8 mt-1">
-                            <AvatarFallback className="bg-gray-800 text-gray-300">
+                        <div className="mt-4 flex gap-3">
+                          <Avatar className="h-8 w-8">
+                            <AvatarFallback className="bg-gray-100 text-gray-600">
                               <User className="h-4 w-4" />
                             </AvatarFallback>
                           </Avatar>
-                          <div className="flex-1 flex gap-2">
+                          <div className="flex-1">
                             <Textarea
                               placeholder="Yanıtınızı yazın..."
                               value={replyText}
                               onChange={(e) => setReplyText(e.target.value)}
-                              className="min-h-[60px] text-sm resize-none bg-gray-800 border-gray-700 text-gray-200 focus:border-gray-600 rounded-lg"
+                              className="min-h-[60px] resize-none border border-gray-300 rounded-lg p-3 text-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                             />
-                            <div className="flex flex-col gap-1">
+                            <div className="flex justify-end gap-2 mt-2">
                               <Button
+                                variant="outline"
                                 size="sm"
+                                onClick={() => {
+                                  setReplyingTo(null)
+                                  setReplyText("")
+                                }}
+                                className="text-gray-600 border-gray-300 hover:bg-gray-50"
+                              >
+                                İptal
+                              </Button>
+                              <Button
                                 onClick={() => handleReply(c.id)}
                                 disabled={!replyText.trim()}
-                                className="h-8 w-8 p-0 rounded-full bg-blue-600 hover:bg-blue-700"
+                                size="sm"
+                                className="bg-blue-600 hover:bg-blue-700 text-white px-4"
                               >
-                                <Send className="h-3 w-3" />
+                                Yanıtla
                               </Button>
                             </div>
                           </div>
@@ -327,70 +372,69 @@ export default function CommentModal({ open, onClose, post, commented }: Props) 
 
                       {/* Replies */}
                       {c.replies && c.replies.length > 0 && (
-                        <div className="mt-2 ml-6 space-y-3">
+                        <div className="mt-4 space-y-4">
                           {c.replies.map((reply) => (
-                            <div key={reply.id} className="flex gap-2 group/reply">
-                              <Avatar className="h-8 w-8 mt-1">
-                                <AvatarFallback className="bg-gray-800 text-gray-300">
+                            <div key={reply.id} className="flex items-start gap-3 group/reply">
+                              <Avatar className="h-8 w-8">
+                                <AvatarFallback className="bg-gray-100 text-gray-600">
                                   <User className="h-4 w-4" />
                                 </AvatarFallback>
                               </Avatar>
                               <div className="flex-1">
-                                <div className="bg-gray-800 rounded-lg px-3 py-2">
-                                  <div className="flex justify-between items-start">
-                                    <div>
-                                      <span className="font-semibold text-sm text-gray-200">
-                                        {reply.user_name || "Anonim"}
-                                      </span>
-                                      {reply.user_name && (
-                                        <span className="ml-2 text-xs px-1 bg-gray-700 text-gray-300 rounded">
-                                          En çok katkıda bulunan
-                                        </span>
-                                      )}
+                                <div className="bg-gray-50 rounded-lg p-3">
+                                  <div className="flex items-center justify-between mb-1">
+                                    <h4 className="font-semibold text-sm text-gray-900">
+                                      {reply.user_name || "Nursing Instructor 1"}
+                                    </h4>
+                                    <div className="flex items-center gap-2">
+                                      <span className="text-xs text-gray-500">1d</span>
+                                      <DropdownMenu>
+                                        <DropdownMenuTrigger asChild>
+                                          <Button
+                                            variant="ghost"
+                                            size="sm"
+                                            className="h-5 w-5 p-0 opacity-0 group-hover/reply:opacity-100 transition-opacity rounded hover:bg-gray-200"
+                                          >
+                                            <MoreHorizontal className="h-3 w-3 text-gray-500" />
+                                          </Button>
+                                        </DropdownMenuTrigger>
+                                        <DropdownMenuContent align="end">
+                                          <DropdownMenuItem className="text-red-600">
+                                            <Flag className="h-3 w-3 mr-2" />
+                                            Şikayet Et
+                                          </DropdownMenuItem>
+                                        </DropdownMenuContent>
+                                      </DropdownMenu>
                                     </div>
-                                    <DropdownMenu>
-                                      <DropdownMenuTrigger asChild>
-                                        <Button
-                                          variant="ghost"
-                                          size="sm"
-                                          className="h-5 w-5 p-0 opacity-0 group-hover/reply:opacity-100 transition-all duration-200 hover:bg-gray-700 rounded-full"
-                                        >
-                                          <MoreHorizontal className="h-3 w-3 text-gray-400" />
-                                        </Button>
-                                      </DropdownMenuTrigger>
-                                      <DropdownMenuContent
-                                        align="end"
-                                        className="bg-gray-800 border-gray-700 text-gray-200"
-                                      >
-                                        <DropdownMenuItem className="text-red-400 hover:bg-gray-700 focus:bg-gray-700">
-                                          <Flag className="h-3 w-3 mr-2" />
-                                          Şikayet Et
-                                        </DropdownMenuItem>
-                                      </DropdownMenuContent>
-                                    </DropdownMenu>
                                   </div>
-                                  <p className="text-sm text-gray-200 mt-1">{reply.content}</p>
+                                  <p className="text-sm text-gray-900 leading-relaxed">{reply.content}</p>
                                 </div>
 
-                                {/* Reply Action Buttons */}
-                                <div className="flex items-center gap-3 mt-1 ml-1">
+                                <div className="flex items-center gap-6 mt-2">
                                   <Button
                                     variant="ghost"
                                     size="sm"
-                                    className="h-6 px-2 text-xs font-medium rounded hover:bg-transparent text-gray-400"
+                                    className="flex items-center gap-2 text-gray-600 hover:text-gray-900 p-0"
                                   >
-                                    Beğen
+                                    <Heart className="h-3 w-3" />
+                                    <span className="text-xs">Beğen</span>
                                   </Button>
-
                                   <Button
                                     variant="ghost"
                                     size="sm"
-                                    className="h-6 px-2 text-xs font-medium text-gray-400 hover:bg-transparent"
+                                    className="flex items-center gap-2 text-gray-600 hover:text-gray-900 p-0"
                                   >
-                                    Yanıtla
+                                    <MessageCircle className="h-3 w-3" />
+                                    <span className="text-xs">Yanıtla</span>
                                   </Button>
-
-                                  <span className="text-xs text-gray-500">13s</span>
+                                  <Button
+                                    variant="ghost"
+                                    size="sm"
+                                    className="flex items-center gap-2 text-gray-600 hover:text-gray-900 p-0"
+                                  >
+                                    <Share className="h-3 w-3" />
+                                    <span className="text-xs">Paylaş</span>
+                                  </Button>
                                 </div>
                               </div>
                             </div>
@@ -406,38 +450,40 @@ export default function CommentModal({ open, onClose, post, commented }: Props) 
                 <Button
                   variant="ghost"
                   onClick={() => setShowAllComments(true)}
-                  className="w-full h-10 text-blue-400 hover:bg-gray-800 rounded-md"
+                  className="w-full h-10 text-blue-600 hover:bg-blue-50 rounded-md"
                 >
-                  <ChevronDown className="h-4 w-4 mr-2" />
-                  <span className="font-medium">Daha fazla yorum görüntüle</span>
+                  Daha fazla yorum görüntüle
                 </Button>
               )}
             </div>
           </div>
-        </div>
 
-        {/* Fixed Comment Input */}
-        <div className="sticky bottom-0 p-4 border-t border-gray-700 bg-[#18191a]">
-          <div className="flex gap-3">
-            <Avatar className="h-10 w-10 mt-1">
-              <AvatarFallback className="bg-gray-800 text-gray-300">
-                <User className="h-5 w-5" />
-              </AvatarFallback>
-            </Avatar>
-            <div className="flex-1 relative">
-              <Textarea
-                placeholder="Wex Flex adıyla cevap ver..."
-                value={comment}
-                onChange={(e) => setComment(e.target.value)}
-                className="min-h-[60px] resize-none bg-gray-800 border-gray-700 text-gray-200 focus:border-gray-600 rounded-lg pr-12"
-              />
-              <Button
-                onClick={handleSubmit}
-                disabled={!comment.trim() || isSubmitting}
-                className="absolute right-2 bottom-2 h-8 w-8 p-0 rounded-full bg-blue-600 hover:bg-blue-700 disabled:bg-gray-700"
-              >
-                <Send className="h-4 w-4" />
-              </Button>
+          {/* Other posts section */}
+          <div className="px-6 py-4 border-t border-gray-100">
+            <h3 className="text-lg font-semibold text-gray-900 mb-4">Beğenebileceğiniz diğer gönderiler</h3>
+            <div className="flex items-start gap-3 p-4 hover:bg-gray-50 rounded-lg cursor-pointer">
+              <Avatar className="h-10 w-10">
+                <AvatarFallback className="bg-blue-100 text-blue-600">
+                  <User className="h-5 w-5" />
+                </AvatarFallback>
+              </Avatar>
+              <div className="flex-1">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <h4 className="font-semibold text-gray-900">DENEME TOPLULUK</h4>
+                    <p className="text-sm text-gray-500">LPN</p>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-sm text-gray-500">3w</span>
+                    <Button variant="ghost" size="sm" className="h-6 w-6 p-0 rounded hover:bg-gray-100">
+                      <MoreHorizontal className="h-4 w-4 text-gray-500" />
+                    </Button>
+                  </div>
+                </div>
+                <p className="text-sm text-gray-700 mt-1 line-clamp-2">
+                  I'm the only Black woman on my unit, and it's been isolating in ways I didn't...
+                </p>
+              </div>
             </div>
           </div>
         </div>

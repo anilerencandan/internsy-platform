@@ -4,7 +4,13 @@ import React, { useEffect, useState } from 'react'
 import { Input } from './ui/input'
 import { useRouter } from 'next/navigation'
 
-export default function CompanySearchBar() {
+interface CompanySearchBarProps {
+  basePath?: string
+}
+
+export default function CompanySearchBar({
+  basePath = "/sirketler"
+}: CompanySearchBarProps) {
   const [search, setSearch] = useState<string>('')
   const [debouncedSearch, setDebouncedSearch] = useState<string>('')
   const router = useRouter()
@@ -20,12 +26,12 @@ export default function CompanySearchBar() {
 
   // search değiştiğinde router.push
   useEffect(() => {
-    const query = debouncedSearch
-      ? `/sirketler?q=${encodeURIComponent(debouncedSearch)}`
-      : `/sirketler`
+    const target = debouncedSearch
+      ? `${basePath}?q=${encodeURIComponent(debouncedSearch)}`
+      : basePath
 
-    router.push(query)
-  }, [debouncedSearch])
+    router.push(target)
+  }, [debouncedSearch, basePath])
 
   return (
     <div className="relative max-w-xl mx-auto rounded-lg">
