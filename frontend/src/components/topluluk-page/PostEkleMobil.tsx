@@ -24,12 +24,12 @@ export default function PostEkleMobil({
   return (
     <>
       {/* Mobilde görünecek yuvarlak buton */}
-      <button
+      {/* <button
         onClick={() => setOpen(true)}
         className="flex items-center gap-x-2 fixed bottom-6 right-6 z-50 sm:hidden bg-blue-600 text-white px-4 py-3 rounded-full shadow-lg hover:bg-blue-700 transition-all"
       >
         <Plus className="w-5 h-5" />Post Paylaş
-      </button>
+      </button> */}
 
       {/* Anonim Post Ekle Modalı */}
       <AnonymousPostDialog

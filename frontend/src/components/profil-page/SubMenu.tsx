@@ -1,4 +1,3 @@
-
 import { LogOut, X, ChevronDown } from 'lucide-react';
 import React from 'react';
 import Link from 'next/link';
@@ -63,7 +62,16 @@ export default function SlideOver({
             </Link>
           ))}
         </nav>
-        
+        <div className="px-6 pb-6 mt-auto">
+          <Link
+            href="/logout"
+            onClick={onClose}
+            className="flex items-center px-4 py-2 rounded-lg text-red-600 hover:bg-red-50 transition gap-x-2"
+          >
+            <LogOut size={18} />
+            <span className="font-medium">Çıkış Yap</span>
+          </Link>
+        </div>
       </aside>
     </>
   );

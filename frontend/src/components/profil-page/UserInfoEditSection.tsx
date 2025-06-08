@@ -20,12 +20,20 @@ export default function EditProfilePage({onToggleEditMode}: {onToggleEditMode: (
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-12">
         <div className="flex flex-col gap-y-2 ">
-          <Label>Ad Soyad</Label>
+          <Label>Ad Soyad (Opsiyonel)</Label>
           <Input placeholder="Ad Soyad" />
         </div>
 
-        <div className="flex flex-col gap-y-2 ">
-          <Label>Profil Başlığı (Title)</Label>
+        <div className="flex flex-col gap-y-2 relative">
+          <div className="flex items-center gap-x-2">
+            <Label>Profil Başlığı (Örn: Frontend Developer)</Label>
+            <div className="group relative cursor-pointer">
+              <span className="text-blue-500 text-sm">ℹ️</span>
+              <div className="absolute left-6 top-0 z-10 w-64 max-w-[80vw] bg-white text-sm text-gray-700 border border-gray-300 rounded-lg shadow-md px-4 py-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                Profil başlığı, diğer kullanıcıların seni tanımasını kolaylaştırır. Örneğin: Frontend Developer, Veri Analisti, UI/UX Designer gibi. Eğer kullanmak istemezsen otomatik olarak okuduğunuz üniversite yazacaktır. Örnek: "Boğaziçi Üniversitesi Öğrencisi" gibi.
+              </div>
+            </div>
+          </div>
           <Input placeholder="Örn: Frontend Developer" />
         </div>
 
@@ -35,11 +43,11 @@ export default function EditProfilePage({onToggleEditMode}: {onToggleEditMode: (
           />
         </div>
 
-        <div className="flex flex-col gap-y-2 ">
+{/*         <div className="flex flex-col gap-y-2 ">
           <Label>Şehir</Label>
           <SelectPopover
           />
-        </div>
+        </div> */}
 
         <div className="flex flex-col gap-y-2 ">
           <Label>Bölüm</Label>
@@ -47,7 +55,7 @@ export default function EditProfilePage({onToggleEditMode}: {onToggleEditMode: (
           />
         </div>
 
-        <div className="flex flex-col gap-y-2 ">
+        {/* <div className="flex flex-col gap-y-2 ">
           <Label>CV Yükle</Label>
           <input
             type="file"
@@ -56,7 +64,7 @@ export default function EditProfilePage({onToggleEditMode}: {onToggleEditMode: (
             className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:bg-primary file:text-white hover:file:bg-primary/90"
           />
           {cvFile && <p className="text-sm mt-1">Seçilen dosya: {cvFile.name}</p>}
-        </div>
+        </div> */}
 
         <div className="pt-4">
           <Button type="submit" className="px-4 py-2 text-sm ">Profili Kaydet</Button>

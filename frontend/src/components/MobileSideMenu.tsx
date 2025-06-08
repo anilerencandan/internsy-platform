@@ -1,61 +1,30 @@
 'use client';
 
-import { Sheet, SheetContent, SheetTrigger, SheetClose } from "@/components/ui/sheet";
-import { LogOut, Menu } from "lucide-react";
+import { Home, Search, Send, LogOut, GraduationCap, CirclePlus } from "lucide-react";
 import Link from "next/link";
-import { Separator } from "@/components/ui/separator";
 import UserAvatar from "./UserAvatar";
 
 export default function MobileSidebar() {
   return (
-    <Sheet>
-      <SheetTrigger className="lg:hidden p-2">
-        <Menu className="w-6 h-6" />
-      </SheetTrigger>
-
-      <SheetContent side="right" className="w-[60%] py-12"> {/* ← burayı w-[50%] yapabilirsin */}
-        <div className="flex flex-col">
-          <div className="flex items-center gap-x-4 p-4">
-            <span className='relative w-12 h-12 rounded-full shrink-0'>
-              <UserAvatar name={"Onur Er"} />
-            </span>
-            <div className="flex flex-col">
-              <h3 className="text-lg font-semibold">Onur Er</h3>
-              <p className="text-sm">Kocaeli Üniversitesinde Okuyor</p>
-            </div>
-          </div>
-        </div>
-
-        <Separator />
-
-        <nav className="flex flex-col gap-4 pt-4">
-          <SheetClose asChild>
-            <Link className="px-4" href="/topluluk">Topluluk</Link>
-          </SheetClose>
-          <Separator />
-          <SheetClose asChild>
-            <Link className="px-4" href="/sirketler">Şirketler</Link>
-          </SheetClose>
-          <Separator />
-          <SheetClose asChild>
-            <Link className="px-4" href="/mulakatlar">Mülakatlar</Link>
-          </SheetClose>
-          <Separator />
-          <SheetClose asChild>
-            <Link className="px-4" href="/staj-ilanlari">Staj İlanları</Link>
-          </SheetClose>
-          <Separator />
-          <SheetClose asChild>
-            <Link className="px-4" href="/kariyer-rehberi">Kariyer Rehberi</Link>
-          </SheetClose>
-          <Separator />
-          <SheetClose asChild>
-            <Link className="px-4 flex items-center gap-x-4 text-red-600" href="/logout">
-              Çıkış Yap <LogOut />
-            </Link>
-          </SheetClose>
-        </nav>
-      </SheetContent>
-    </Sheet>
+    <div className="fixed bottom-2 left-4 right-4 z-50 bg-white border border-gray-300 rounded-xl px-6 py-3 flex justify-between items-center shadow-md sm:hidden">
+      <Link href="/topluluk">
+        <Home className="w-6 h-6 text-primary" />
+      </Link>
+      <Link href="/sirketler">
+        <Search className="w-6 h-6 text-primary" />
+      </Link>
+      <Link href="/staj-ilanlari">
+        <CirclePlus className="w-6 h-6 text-primary" />
+      </Link>
+      <Link href="/kariyer-rehberi">
+        <GraduationCap className="w-6 h-6 text-primary" />
+      </Link>
+      <Link href="/profil" className="relative">
+        <span className="block w-6 h-6 rounded-full overflow-hidden border border-gray-300">
+          <UserAvatar name="Onur Er" />
+        </span>
+        <span className="absolute bottom-0 right-0 w-2 h-2 bg-red-500 rounded-full border-2 border-black"></span>
+      </Link>
+    </div>
   );
 }
