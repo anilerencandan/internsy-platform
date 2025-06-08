@@ -62,13 +62,13 @@ export default function UserInformationSection({
                 <p className=' text-gray-600'>Bachelors</p>
             </div>
 
-            <div className="border-t-[1px] border-gray-300"></div>
+            {/* <div className="border-t-[1px] border-gray-300"></div>
 
             <h3 className='text-lg font-semibold'>Resume</h3>
 
             <p>prefill job application when you add a resume and use easy apply</p>
             
-            <p>Your resume can be visible to hiring eemployers or you can keep it hidden. See the <a href="" className='text-primary underline'>privacy policiy</a> for mor info</p>
+            <p>Your resume can be visible to hiring eemployers or you can keep it hidden. See the <a href="" className='text-primary underline'>privacy policiy</a> for mor info</p> */}
       </div>
       
 
