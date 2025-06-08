@@ -7,7 +7,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
-import { Blog } from "@/models/Blogs"
+import { BlogCommentsDTO, BlogDTO } from "@/models/Blogs"
 import { htmlToText } from 'html-to-text';
 import CommentCard from "@/components/kariyer-rehberi/CommentCard"
 import RelatedArticleCard from "@/components/kariyer-rehberi/RelatedArticleCard"
@@ -17,7 +17,7 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
   const  {slug} = params 
 
   const blogData = await fetch(`http://localhost:3000/api/career-guides?id=${slug}`)
-  const blogRaw: Blog = await blogData.json()
+  const blogRaw: BlogDTO = await blogData.json()
   const blog = blogRaw
 
   console.log("blog:", blog)
@@ -51,7 +51,7 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
               <AvatarFallback>OE</AvatarFallback>
             </Avatar>
             <div>
-              <div className="font-medium">{blog.author}</div>
+              <div className="font-medium">{blog.users?.fullname ?? 'Anonim Kullanici'}</div>
               <div className="text-sm text-gray-500">May 15, 2025 • 8 dakika okuma süresi</div>
             </div>
           </div>
@@ -85,7 +85,7 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
       </article>
 
       {/* Engagement Section */}
-      <ArticleCommentSection/>
+      <ArticleCommentSection guide_id={slug}/>
           </div>
   )
 }
