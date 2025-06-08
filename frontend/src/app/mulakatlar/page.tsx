@@ -5,6 +5,7 @@ import PopularCompanies from "@/components/mulakatlar-page/popular-companies"
 import InterviewStats from "@/components/mulakatlar-page/interview-stats"
 import Company from "@/models/Company"
 
+
 export default async function MulakatlarPage() {
   const companiesData = await fetch('http://localhost:3000/api/companies?limit=10')
   const companies: Company[] = await companiesData.json()
