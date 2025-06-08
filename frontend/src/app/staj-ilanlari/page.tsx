@@ -4,6 +4,8 @@ import PopularCompanies from "@/components/mulakatlar-page/popular-companies"
 import CompanyJobsCard from "@/components/staj-ilanlari/CompanyJobsCard"
 import CompanyList from "@/components/mulakatlar-page/company-list"
 import Company from "@/models/Company"
+import CompaanySearchBar from '@/components/CompanySearchBar'
+
 
 
 const popularCompanies = [
@@ -80,14 +82,8 @@ export default async function StajIlanlariPage() {
             <h1 className="text-3xl font-bold mb-4 text-primary">Staj İlanları</h1>
             <p className="text-gray-600 mb-6">
             Şirketlerin sunduğu güncel staj fırsatlarını keşfet, başvuru koşullarını ve detaylarını kolayca öğren.            </p>
-            <div className="relative max-w-xl mx-auto">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
-              <Input
-                placeholder="Şirket adı ara (örn. Google, Microsoft, Amazon...)"
-                className="pl-10 py-6 text-lg rounded-lg shadow-sm"
-              />
+            <CompaanySearchBar basePath="/staj-ilanlari" />          
             </div>
-          </div>
 
           {/* Sağ Görsel */}
           <div className="hidden md:block w-full md:w-1/3 px-2">
@@ -122,7 +118,7 @@ export default async function StajIlanlariPage() {
           <h2 className="text-xl font-semibold">Tüm Şirketler</h2>
           <div className="flex items-center gap-2">
             <span className="text-sm text-gray-500">Sırala:</span>
-            <select className="text-sm border rounded-md px-2 py-1">
+            <select className="text-sm border border-gray-300 rounded-md px-2 py-1">
               <option>Popülerlik</option>
               <option>Puan (Yüksek-Düşük)</option>
               <option>Puan (Düşük-Yüksek)</option>

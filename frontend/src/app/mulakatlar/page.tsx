@@ -4,6 +4,7 @@ import CompanyList from "@/components/mulakatlar-page/company-list"
 import PopularCompanies from "@/components/mulakatlar-page/popular-companies"
 import InterviewStats from "@/components/mulakatlar-page/interview-stats"
 import Company from "@/models/Company"
+import CompaanySearchBar from '@/components/CompanySearchBar'
 
 
 export default async function MulakatlarPage() {
@@ -25,14 +26,8 @@ export default async function MulakatlarPage() {
             <p className="text-gray-600 mb-6">
             Gerçek mülakat soruları, aday yorumları ve süreç bilgileriyle mülakatlara daha hazırlıklı gir.
             </p>
-            <div className="relative max-w-xl mx-auto ">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
-              <Input
-                placeholder="Şirket adı ara (örn. Google, Microsoft, Amazon...)"
-                className="pl-10 py-6 rounded-lg shadow-sm text-sm"
-              />
+            <CompaanySearchBar basePath="/mulakatlar" />
             </div>
-          </div>
 
           {/* Sağ görsel */}
           <div className="hidden md:block w-full md:w-1/3 py-4 ">
@@ -56,7 +51,7 @@ export default async function MulakatlarPage() {
           <h2 className="text-xl font-semibold">Tüm Şirketler</h2>
           <div className="flex items-center gap-2">
             <span className="text-sm text-gray-500">Sırala:</span>
-            <select className="text-sm border rounded-md px-2 py-1">
+            <select className="text-sm border border-gray-300 rounded-md px-2 py-1">
               <option>Popülerlik</option>
               <option>Puan (Yüksek-Düşük)</option>
               <option>Puan (Düşük-Yüksek)</option>
