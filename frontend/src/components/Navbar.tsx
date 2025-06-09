@@ -1,8 +1,9 @@
-
 import { Bell, CircleUserRound, LogIn, Search } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import MobileSidebar from "./MobileSideMenu"
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs"
+import jwt from "jsonwebtoken"
 
 interface NavbarProps {
   flag: boolean
@@ -20,7 +21,7 @@ export default function Navbar({ flag }: NavbarProps) {
     >
       <div className="flex items-center justify-between h-16 max-w-[1280px] mx-auto px-4">
         {/* Logo */}
-        <Link href="/">
+        <Link href={'/topluluk'}  className="cursor-pointer">
           <Image src="/images/internsy-logo.svg" alt="internsy-logo" width={120} height={30} />
         </Link>
         
