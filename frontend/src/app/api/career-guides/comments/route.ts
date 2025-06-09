@@ -15,12 +15,16 @@ export async function GET(req:NextRequest) {
     
     const {data, error} = await supabase
     .from('career_guide_comments')
-    .select('*')
+    .select('*, responses:career_comments_responses(*, users(role))')
     .eq('guide_id', guide_id)
     .order('created_at', {ascending: true})
 
+
+
     if(error) NextResponse.json({error: error.message}, {status: 500})
     
+    console.log('commentsdata:', data)
+
     return NextResponse.json(data)
 }
 

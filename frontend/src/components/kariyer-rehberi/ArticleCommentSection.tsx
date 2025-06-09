@@ -114,23 +114,36 @@ export default function ArticleCommentSection({ guide_id }: Props) {
     }
   };
 
-  const handleReplySubmit = async (commentId: string, content: string) => {
-    const res = await fetch(`/api/career-guides/comments/reply`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ comment_id: commentId, content: content }),
-    });
+const handleReplySubmit = async (commentId: string, content: string) => {
+  const res = await fetch(`/api/career-guides/comments/reply`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ comment_id: commentId, content: content }),
+  });
 
-    const result = await res.json();
+  const result = await res.json();
 
-    if (res.ok) {
-      // İsteğe bağlı olarak commentsList içindeki yanıt sayısını artırabilirsin
-      alert("Yanıt eklendi");
-      setShowReplyForCommentId(null);
-    } else {
-      alert(result.error || "Yanıt eklenemedi");
-    }
-  };
+  if (res.ok) {
+    // 🎯 Yeni yanıtı ilgili yorumun "responses" dizisine ekle
+    setComments((prev) =>
+      prev.map((comment) =>
+        comment.id === commentId
+          ? {
+              ...comment,
+              responses: comment.responses
+                ? [...comment.responses, result]
+                : [result],
+            }
+          : comment
+      )
+    );
+
+    setShowReplyForCommentId(null);
+    setNewComment(""); // veya yanıt inputunu da sıfırlayabilirsin
+  } else {
+    alert(result.error || "Yanıt eklenemedi");
+  }
+};
   
 
   return (
@@ -191,8 +204,7 @@ export default function ArticleCommentSection({ guide_id }: Props) {
             onLike={handleCommentLike}
             onReplyToggle={setShowReplyForCommentId}
             showReplyInput={showReplyForCommentId === comment.id}
-            onReplySubmit={handleReplySubmit}
-          />
+            onReplySubmit={handleReplySubmit} liked={liked}          />
         ))}
         </div>
       </div>

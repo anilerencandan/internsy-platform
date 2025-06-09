@@ -21,9 +21,6 @@ export interface BlogDTO {
   content: string;
   like_count: number;
   comment_count: number;
-  users?: {
-    fullname: string;
-  };
   comments: BlogCommentsDTO[]
     
 }
@@ -37,6 +34,17 @@ export interface BlogCommentsDTO {
     like_count:number
     comment_count:number
     users: {
-      fullname:string
+      role:string
+    }
+    responses: {
+      id:string
+      content: string
+      created_at: Date
+      comment_id:string
+      user_id:string
+      like_count:number
+      users:{
+        role: string
+      }
     }[]
 }

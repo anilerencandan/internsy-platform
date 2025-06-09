@@ -16,7 +16,7 @@ export default function CompanyJobsCard({company}: CompanyCardProps) {
   return (
         <Link
           key={company.id}
-          href={`/mulakatlar/${company.id}`}
+          href={`/sirket/staj-ilanlari`}
           className="bg-white rounded-lg border border-gray-200 p-4 hover:shadow-md transition-shadow flex flex-col gap-4"
         >
           <div className="flex items-center gap-3">

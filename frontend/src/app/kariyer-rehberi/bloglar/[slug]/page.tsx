@@ -51,7 +51,7 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
               <AvatarFallback>OE</AvatarFallback>
             </Avatar>
             <div>
-              <div className="font-medium">{blog.users?.fullname ?? 'Anonim Kullanici'}</div>
+              <div className="font-medium">Internsy Orijinal İçerik</div>
               <div className="text-sm text-gray-500">May 15, 2025 • 8 dakika okuma süresi</div>
             </div>
           </div>

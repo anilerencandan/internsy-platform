@@ -16,36 +16,45 @@ export async function GET(req:NextRequest) {
     const from = offset
     const to = offset + limit - 1
 
-    let query = supabase.from('career_guides').select('*')
+    let query = supabase.from('career_guides').select('*, users(role)')
 
     if (id) {
-        // 1. blog + yazar
-        const { data: blog, error: blogError } = await supabase
+    // JOIN syntax'ı foreign key ismine göre
+    const { data: blog, error: blogError } = await supabase
         .from("career_guides")
-        .select("*, users:author(fullname)")
+        .select(`
+            *,
+            author_info:public_user_profiles!career_guides_author_fkey(
+                role, 
+                auth_id
+            )
+        `)
         .eq("id", id)
         .single();
 
+        // Eğer yukarıdaki hata verirse, farklı referans isimleri deneyin:
+        const { data: joinTest2, error: joinError2 } = await supabase
+            .from("career_guide_comments")
+            .select(`
+                *,
+                author_info:public_user_profiles(role, auth_id)
+            `)
+            .eq("user_id", "89a49d68-006f-4de0-8456-5eb3d3ab0839") // İlk yorumun user_id'si
+            .limit(1);
+
+        console.log("JOIN test2 result:", joinTest2);
+        console.log("JOIN test2 error:", joinError2);
+            
+
         if (blogError || !blog) {
-        return NextResponse.json({ error: blogError || "Blog bulunamadı" }, { status: 404 });
+            return NextResponse.json({ error: blogError || "Blog bulunamadı" }, { status: 404 });
         }
 
-        // 2. bloga ait yorumlar + yorum sahibinin adı
-        const { data: comments, error: commentsError } = await supabase
-        .from("career_guide_comments")
-        .select("*, users:user_id(fullname)")
-        .eq("guide_id", id)
-        .order("created_at", { ascending: false });
-
-        if (commentsError) {
-        return NextResponse.json({ error: commentsError }, { status: 500 });
-        }
 
         return NextResponse.json({
-        ...blog,
-        comments: comments || [],
+            ...blog,
         });
-    }
+        }
     
     if(search){
         category ? query = query.ilike('title', `${search}%`).eq('content_type', category).limit(10) : query = query.ilike('title', `${search}%`).limit(10)
